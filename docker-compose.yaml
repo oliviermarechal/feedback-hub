@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: feedbackhub
+      POSTGRES_PASSWORD: feedbackhub
+      POSTGRES_DB: feedbackhub
+    volumes:
+      - ./var/db/:/var/lib/postgresql/data/
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 80:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: o.marechal@icloud.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - database
+    volumes:
+      - ./var/pgadmin/:/var/lib/pgadmin/
