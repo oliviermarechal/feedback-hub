@@ -1,1 +1,2 @@
-export default function initializeApp(containerId: string): void;
+export * from './sdk';
+export * from './App';
