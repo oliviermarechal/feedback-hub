@@ -5,7 +5,7 @@
     function handleSubmit() {
         console.log('COUCOU')
         onSubmit(feedback);
-        feedback = ''; // Réinitialiser le champ après la soumission
+        feedback = '';
     }
 </script>
 

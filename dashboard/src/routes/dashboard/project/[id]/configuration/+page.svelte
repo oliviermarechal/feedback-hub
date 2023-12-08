@@ -3,11 +3,8 @@
     import apiClient from '../../../../../api';
     import { project } from '../../../../../stores/project.store';
     import { page } from '$app/stores';
-    import { CodeBlock, Table, tableMapperValues } from '@skeletonlabs/skeleton';
-    import type { TableSource } from '@skeletonlabs/skeleton';
-    import { feedbacks } from '../../../../../stores/feedback.store';
-    import { get } from 'svelte/store';
-    import { humanizeType } from '../../../../../stores/interfaces/feedback';
+    import { CodeBlock } from '@skeletonlabs/skeleton';
+    import { getCodeBlockConfigurationContent } from './code-block-content';
 
     const id = $page.params.id;
 
@@ -25,19 +22,9 @@
     {#if $project}
         <h2 class='h3'>Installation</h2>
         <span class="p-4">
-            <h3 class='h5'>Iframe</h3>
+            <h3 class='h5'>Snippet HTML</h3>
             <p>copy this part of code and paste it where you want to display the form</p>
-            <CodeBlock language="html" code={`<iframe frameBorder="0" height="100%" width="100%" src='http://localhost:5174/${$project.publicId}/feedback'></iframe>`}></CodeBlock>
+            <CodeBlock language="html" code={getCodeBlockConfigurationContent($project.publicId)}></CodeBlock>
         </span>
     {/if}
-    <div class='iframe-exemple'>
-        <iframe frameBorder="0" height="100%" width='100%' src='http://localhost:5174/XXX/feedback?disabled=true'></iframe>
-    </div>
 </section>
-
-<style>
-    .iframe-exemple {
-        height: 300px;
-        width: 600px;
-    }
-</style>

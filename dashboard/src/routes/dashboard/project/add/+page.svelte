@@ -36,7 +36,7 @@
     }
 
     const handleCreateProject = async () => {
-        const response = await apiClient.post('/project', {name, domainNames});
+        const response = await apiClient.post('/project', {name, domainNames: $domainNames});
         if (response.status === 201) {
             await goto('/dashboard')
             return;

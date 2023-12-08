@@ -56,4 +56,4 @@ CREATE TABLE feedbacks_tags (
     CONSTRAINT fk_feedback_tag_feedback
         FOREIGN KEY (feedback_id)
             REFERENCES feedbacks(id)
-)
+);

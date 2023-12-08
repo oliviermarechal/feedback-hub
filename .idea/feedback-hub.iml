@@ -5,5 +5,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="feedback-app" level="application" />
+    <orderEntry type="library" name="feedback-hub" level="application" />
+    <orderEntry type="library" name="bundle" level="application" />
   </component>
 </module>

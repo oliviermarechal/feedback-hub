@@ -34,6 +34,6 @@
     </div>
     <div class='px-10 pb-5'>
         <button on:click={() => handleLogin()} type="button" class="btn variant-filled">Submit</button>
-        No account yet? click <a class="anchor" href="/auth/registration">ici</a>
+        No account yet? click <a class="anchor" href="/auth/registration">here</a>
     </div>
 </div>

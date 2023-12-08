@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "declaration": true,
+    "types": ["svelte", "node"],
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.svelte"],
+  "exclude": ["node_modules"],
+  "lib": ["es2015"]
+}

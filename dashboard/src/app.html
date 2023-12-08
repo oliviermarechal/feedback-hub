@@ -4,14 +4,15 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover" data-theme="rocket">
 		<div style="display: contents" class="h-full overflow-hidden">%sveltekit.body%</div>
+		<link rel="stylesheet" type="text/css" href="http://localhost:8081/bundle.css">
+		<script src="http://localhost:8081/bundle.js"></script>
+		<script type='module'>
+			feedbackHubSDK.setUpFeedbackContainer({project: "c3ad40a6152aa6631c52712db883ca26"});
+		</script>
 	</body>
-	<div id='feedback_container_id'></div>
-
-	<script defer src="../../embed/dist/feedback-hub.min.js">
-		initializeApp('feedback_container_id');
-	</script>
 </html>
