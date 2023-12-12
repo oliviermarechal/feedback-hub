@@ -1,9 +1,15 @@
-import { IsDefined, IsEmail, IsEnum, IsString } from 'class-validator';
+import {
+    IsDefined,
+    IsEmail,
+    IsEnum,
+    IsOptional,
+    IsString,
+} from 'class-validator';
 import { FeedbackType } from '../../../../model';
 
 export class CreateFeedbackDto {
     @IsString()
-    @IsDefined()
+    @IsOptional()
     projectId: string;
 
     @IsString()
@@ -23,4 +29,8 @@ export class CreateFeedbackDto {
     @IsString()
     @IsDefined()
     language: string;
+
+    @IsString()
+    @IsOptional()
+    url: string;
 }

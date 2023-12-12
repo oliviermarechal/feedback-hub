@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     Inject,
     Param,
@@ -14,6 +15,8 @@ import {
     CreateFeedbackCommand,
     CreateFeedbackDto,
     CreateFeedbackUseCase,
+    RemoveTagCommand,
+    RemoveTagUseCase,
 } from '../../../hexagon/use-cases/command';
 import { ListFeedbackQuery } from '../../../hexagon/use-cases/query';
 import { JwtGuard } from '../../secondary';
@@ -29,6 +32,8 @@ export class FeedbackController {
         private readonly listFeedback: ListFeedbackQuery,
         @Inject(AddTagUseCase)
         private readonly addTag: AddTagUseCase,
+        @Inject(RemoveTagUseCase)
+        private readonly removeTag: RemoveTagUseCase,
     ) {}
 
     @Post()
@@ -53,6 +58,16 @@ export class FeedbackController {
         @CurrentUser() user: User,
     ): Promise<Feedback> {
         return this.addTag.handle(new AddTagCommand(user.id, id, dto.label));
+    }
+
+    @Delete(':id/tag/:tagId')
+    @UseGuards(JwtGuard)
+    async removeTagToFeedback(
+        @Param('id') id: string,
+        @Param('tagId') tagId: string,
+        @CurrentUser() user: User,
+    ): Promise<Feedback> {
+        return this.removeTag.handle(new RemoveTagCommand(user.id, id, tagId));
     }
 
     @Get(':projectId')

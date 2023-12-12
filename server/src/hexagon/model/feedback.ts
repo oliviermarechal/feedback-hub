@@ -26,6 +26,7 @@ export interface FeedbackProps {
     engine?: string;
     language?: string;
     browser?: string;
+    url?: string;
 }
 
 export interface FeedbackDatabaseProps {
@@ -36,10 +37,12 @@ export interface FeedbackDatabaseProps {
     status: FeedbackStatus;
     project?: Project;
     email: string;
+    createdAt: Date;
     os?: string;
     engine?: string;
     language?: string;
     browser?: string;
+    url?: string;
     tags?: TagDatabaseProps[];
 }
 
@@ -53,8 +56,10 @@ export class Feedback {
     email: string;
     os?: string;
     engine: string;
+    createdAt: Date;
     language?: string;
     browser?: string;
+    url?: string;
     tags?: Tag[];
 
     static create(props: FeedbackProps): Feedback {
@@ -69,6 +74,7 @@ export class Feedback {
             engine: props.engine,
             language: props.language,
             browser: props.browser,
+            url: props.url,
         });
     }
 
@@ -85,6 +91,8 @@ export class Feedback {
             engine: dbProps.engine,
             language: dbProps.language,
             browser: dbProps.browser,
+            url: dbProps.url,
+            createdAt: dbProps.createdAt,
             tags:
                 dbProps.tags?.length > 0
                     ? dbProps.tags.map((tag) => Tag.hydrateFromDb(tag))

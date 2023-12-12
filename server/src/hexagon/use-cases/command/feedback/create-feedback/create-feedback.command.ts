@@ -10,5 +10,6 @@ export class CreateFeedbackCommand {
         public readonly os?: string,
         public readonly engine?: string,
         public readonly browser?: string,
+        public readonly url?: string,
     ) {}
 }

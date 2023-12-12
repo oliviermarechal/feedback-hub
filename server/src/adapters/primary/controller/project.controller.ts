@@ -12,9 +12,9 @@ import {
     CreateProjectDto,
     CreateProjectUseCase,
 } from '../../../hexagon/use-cases/command';
-import { ProjectGuard, JwtGuard } from '../../secondary';
-import { CurrentProject, CurrentUser } from '../../secondary/decorator';
-import { Project, User } from '../../../hexagon/model';
+import { JwtGuard } from '../../secondary';
+import { CurrentUser } from '../../secondary/decorator';
+import { User } from '../../../hexagon/model';
 import {
     ListUserProjectQuery,
     GetProjectQuery,

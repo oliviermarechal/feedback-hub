@@ -26,11 +26,13 @@ CREATE TABLE feedbacks (
     type VARCHAR ( 50 ) NOT NULL,
     project_id uuid NOT NULL,
     email VARCHAR ( 100 ) NULL,
+    url TEXT NULL,
     os VARCHAR ( 50 ) NULL,
     engine VARCHAR ( 50 ) NULL,
     language VARCHAR ( 50 ) NULL,
     browser VARCHAR ( 50 ) NULL,
     status VARCHAR ( 50 ) NOT NULL,
+    created_at TIMESTAMPTZ SET DEFAULT NOW();
     PRIMARY KEY(id),
     CONSTRAINT fk_project_feedback
         FOREIGN KEY (project_id)

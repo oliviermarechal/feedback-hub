@@ -2,8 +2,8 @@ import type { Project } from './project';
 import type { Tag } from './tag';
 
 export enum FeedbackType {
-    Bug = 'Bug',
-    Enhance = 'Enhance',
+    Bug = 'bug',
+    Enhance = 'enhance',
 }
 
 export enum FeedbackStatus {
@@ -22,6 +22,7 @@ export interface Feedback {
     projectId: string;
     project: Project;
     status: FeedbackStatus;
+    createdAt: Date;
     tags: Tag[];
 }
 

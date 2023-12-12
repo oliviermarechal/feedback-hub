@@ -29,7 +29,8 @@ export class ProjectGuard implements CanActivate {
             throw new UnauthorizedException();
         }
 
-        if (!project.domainNames.includes(request.headers.origin)) {
+        const domain = new URL(request.headers.origin).host;
+        if (!project.domainNames.includes(domain)) {
             throw new ForbiddenException();
         }
 

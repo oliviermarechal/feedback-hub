@@ -42,4 +42,10 @@ export class FeedbackRepository implements FeedbackRepositoryInterface {
             '*',
         );
     }
+
+    async removeFeedbackTag(feedbackId: string, tagId: string): Promise<void> {
+        await this.dbProvider('feedbacks_tags')
+            .where({ tagId: tagId, feedbackId: feedbackId })
+            .del();
+    }
 }

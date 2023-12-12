@@ -46,6 +46,7 @@ export class ExternalController {
                 parser.getOS().name,
                 parser.getEngine().name,
                 parser.getBrowser().name,
+                dto.url,
             ),
         );
     }

@@ -6,7 +6,6 @@ export default class FeedbackHubSDK {
     addFeedback(data: {
         content: string;
         type: 'bug' | 'enhance';
-        language: string;
         email: string;
     }): Promise<void>;
 }

@@ -24,9 +24,11 @@ export class ListFeedbackQuery {
             .where({ 'feedbacks.projectId': projectId })
             .select<FeedbackDatabaseProps[]>(
                 DbProvider.raw(`feedbacks.*, json_agg(tags) as tags`),
-            );
+            )
+            .orderBy('feedbacks.createdAt', 'DESC');
 
         return rows.map((dbProps) => {
+            dbProps.tags = dbProps.tags.filter((t) => !!t);
             return Feedback.hydrateFromDb(dbProps);
         });
     }

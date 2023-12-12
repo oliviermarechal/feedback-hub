@@ -12,25 +12,26 @@ export default class FeedbackHubSDK {
     async addFeedback(data: {
         content: string,
         type: 'bug' | 'enhance',
-        language: string,
         email: string,
     }): Promise<void> {
         const feedbackContentData = {
-            // projectId: this.projectId,
             content: data.content,
             type: data.type,
-            language: data.language,
+            url: window.location.href,
+            language: Intl.DateTimeFormat().resolvedOptions().locale,
             email: data.email,
         }
-
 
         const result = await fetch(
             `${this.apiUrl}/external/feedback`,
             {
                 method: 'POST',
+                body: JSON.stringify(feedbackContentData),
                 headers: {
-                    Authorization: `Bearer ${this.projectPublicId}`
-                }
+                    Authorization: `Bearer ${this.projectPublicId}`,
+                    Accept: 'application.json',
+                    'Content-Type': 'application/json'
+                },
             }
         );
 
