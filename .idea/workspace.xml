@@ -4,51 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21c438c7-35d3-41ca-bd89-42493ffbb9d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/dashboard/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/component/common/modal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/common/modal.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/component/feedback/edit-feedback.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/feedback/edit-feedback.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/feedbacks/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/feedbacks/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/feedback.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/feedback.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/interfaces/feedback.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/interfaces/feedback.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/interfaces/tag.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/interfaces/tag.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/schema/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/schema/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/.npmrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/postcss.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/app.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/app.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/app.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/components/feedback-form.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/lib/feedback-form.svelte.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/lib/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/routes/+layout.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/routes/[public_id]/feedback/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/store.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/utils/check-domain.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/src/utils/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/static/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/svelte.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/tailwind.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/vite.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/iframe/yarn.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/bundle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/bundle.esm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/bundle.esm.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/global-config.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/main.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/package/src/main.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/package/src/sdk.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/sdk.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/src/sdk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/sdk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" afterDir="false" />
-    </list>
+    <list default="true" id="21c438c7-35d3-41ca-bd89-42493ffbb9d3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,25 +38,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/oliviermarechal/www/feedback-hub/server/src/hexagon/use-cases/command/feedback&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/oliviermarechal/www/feedback-hub/dashboard/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/oliviermarechal/www/feedback-hub/server/src/hexagon/use-cases/command/feedback",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "/Users/oliviermarechal/Applications/PhpStorm 2023.2.3.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback" />
@@ -137,7 +93,7 @@
       <workItem from="1701935039414" duration="7967000" />
       <workItem from="1702022519673" duration="5907000" />
       <workItem from="1702031519137" duration="15835000" />
-      <workItem from="1702286291539" duration="3609000" />
+      <workItem from="1702286291539" duration="3801000" />
     </task>
     <servers />
   </component>
