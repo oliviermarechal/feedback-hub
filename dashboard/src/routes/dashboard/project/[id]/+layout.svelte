@@ -3,19 +3,6 @@
 	import { authUser } from '../../stores/user.store';
 	import { goto } from '$app/navigation';
 	import apiClient from '../../api';
-	import xml from 'highlight.js/lib/languages/xml';
-	import hljs from 'highlight.js/lib/core';
-	import javascript from 'highlight.js/lib/languages/javascript';
-	import typescript from 'highlight.js/lib/languages/typescript';
-	import 'highlight.js/styles/github-dark.css';
-	import { storeHighlightJs } from '@skeletonlabs/skeleton';
-
-
-	hljs.registerLanguage('xml', xml);
-	hljs.registerLanguage('javascript', javascript);
-	hljs.registerLanguage('typescript', typescript);
-
-	storeHighlightJs.set(hljs);
 
 	if (!$authUser) {
 		if (typeof localStorage !== 'undefined') {
@@ -42,7 +29,7 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<a href='/dashboard'><strong class="text-xl uppercase">Feedback hub</strong></a>
+				<a href='/dashboard'><strong class="text-xl uppercase">Insight hunt</strong></a>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
