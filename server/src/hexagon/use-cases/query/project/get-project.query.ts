@@ -1,11 +1,13 @@
-import DbProvider from '../../../../adapters/primary/providers/db-provider';
+import { DbKysely } from '../../../../adapters/primary/providers/db-provider';
 import { Project } from '../../../model';
 
 export class GetProjectQuery {
     async handle(projectId: string, userId: string) {
-        const project = await DbProvider('projects')
-            .where({ id: projectId, user_id: userId })
-            .first();
+        const project = await DbKysely.selectFrom('projects')
+            .selectAll()
+            .where('id', '=', projectId)
+            .where('userId', '=', userId)
+            .executeTakeFirst();
 
         return Project.fromDbProps(project);
     }

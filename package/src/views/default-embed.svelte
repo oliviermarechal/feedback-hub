@@ -1,72 +1,89 @@
 <script lang='ts'>
     import { fly } from 'svelte/transition';
     import FeedbackForm from './feedback-form.svelte';
-    import FeedbackHubSDK from '../sdk.js';
+    import UpvoteEmbed from './upvote-embed.svelte';
     import { getHomepage } from '../../../global-config';
+    import InsightHuntSDK from '../sdk';
 
-    const homepageUrl = getHomepage();
-    export let sdk: FeedbackHubSDK;
+    const homepageUrl = getHomepage(process.env.NODE_ENV ? process.env.NODE_ENV : 'production');
+    export let sdk: InsightHuntSDK;
     let embedContainerOpen = false;
     let feedbackModalOpen = false;
+    let upvoteModalOpen = false;
 
-    function toggleEmbedContainer() {
+    const toggleEmbedContainer = () => {
         embedContainerOpen = !embedContainerOpen;
     }
 
-    function toggleFeedbackModal() {
+    const toggleFeedbackModal = () => {
         feedbackModalOpen = !feedbackModalOpen;
     }
 
-    const addFeedback = (data: any) => {
-        sdk.addFeedback(data);
+    const toggleUpvoteModal = () => {
+        upvoteModalOpen = !upvoteModalOpen;
+    }
+
+    const addFeedback = async (data: any) => {
+        // TODO manage error
+        await sdk.addFeedback({
+            ...data,
+            url: window.location.href,
+            language: Intl.DateTimeFormat().resolvedOptions().locale,
+        });
+        toggleFeedbackModal();
     }
 </script>
 
-<div class="fbh-container">
-    <button class="fbh-button-container" on:click={toggleEmbedContainer}>
-        <span class="fbh-button-text">FEEDBACK</span>
+<div class="ih-container">
+    <button class="ih-button-container" on:click={toggleEmbedContainer}>
+        <span class="ih-button-text">FEEDBACK</span>
     </button>
 
     {#if embedContainerOpen}
-        <div class='fbh-action-container' in:fly={{ x: 100, duration: 500 }}>
-            <button on:click={toggleFeedbackModal} type="button" class="fbh-action-button">Add feedback</button>
-            <button on:click={toggleFeedbackModal} type="button" class="fbh-action-button">Add survey</button>
-            <button on:click={toggleFeedbackModal} type="button" class="fbh-action-button">show backlogs</button>
-            <small>Powered by <a href='{homepageUrl}'><u>Feedback hub</u></a></small>
+        <div class='ih-action-container' in:fly={{ x: 100, duration: 500 }}>
+            <button on:click={toggleFeedbackModal} type="button" class="ih-item ih-action-button">Add feedback</button>
+            <button on:click={toggleUpvoteModal} type="button" class="ih-item ih-action-button">show backlogs</button>
+            <div  class="ih-item">Powered by <a href='{homepageUrl}'><u>Insight hunt</u></a></div>
         </div>
     {/if}
 </div>
 {#if feedbackModalOpen}
-    <FeedbackForm onSubmit={addFeedback} open={feedbackModalOpen} onClose={toggleFeedbackModal} />
+    <FeedbackForm onSubmit={addFeedback} open={feedbackModalOpen} onClose={toggleFeedbackModal} email={sdk.getLoggedUser()?.email} />
+{/if}
+{#if upvoteModalOpen}
+    <UpvoteEmbed sdk={sdk} open={upvoteModalOpen} onClose={toggleUpvoteModal} />
 {/if}
 
 <style>
-    .fbh-container {
-        @apply absolute top-1/2 right-0 bg-white shadow-md z-40 flex flex-row ring-white/50 ring-inset;
-        box-shadow: 0 0 0 0 #fff, inset 0 0 0 calc(1px + 0px) rgb(250 250 250 / 0.05), 0 0 #0000;
-        background-color: #373845;
+    .ih-container {
+        @apply absolute top-1/2 right-0 bg-white shadow-md z-40 flex flex-row ring-inset;
+        background-color: #e8eaf1;
     }
 
-    .fbh-button-container {
-        @apply right-0 p-4 cursor-pointer flex flex-col items-end z-50 ring-white/50 ring-inset;
-        box-shadow: 0 0 0 0 #fff, inset 0 0 0 calc(1px + 0px) rgb(250 250 250 / 0.05), 0 0 #0000;
+    .ih-button-container {
+        @apply right-0 p-4 cursor-pointer flex flex-col items-end z-50 ring-inset;
     }
 
-    .fbh-button-text {
+    .ih-button-text {
         @apply mb-2 block;
         writing-mode: vertical-rl;
         text-orientation: upright;
     }
 
-    .fbh-action-button {
-        @apply py-2 px-4 border-2 border-cyan-500 bg-transparent mt-4 mx-4;
+    .ih-item {
+        @apply py-2 px-4 mt-4 mx-4;
     }
 
-    .fbh-action-container > small {
-        margin: 5px;
+    .ih-action-button {
+        @apply border-2 bg-transparent;
+        border-color: #a8bdf1;
     }
 
-    .fbh-action-container {
+    .ih-action-button-disabled {
+        @apply border-2 border-slate-700 bg-transparent cursor-not-allowed;
+    }
+
+    .ih-action-container {
         @apply flex flex-col;
     }
 </style>

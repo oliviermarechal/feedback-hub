@@ -22,7 +22,7 @@
 <div class="container h-full mx-auto">
 	<a href='/dashboard/project/add' class="btn variant-ringed-primary mt-5">New project</a>
 	<h2 class="h4 mt-5 text-center">My projects</h2>
-	<nav class="list-nav bg-surface-800 p-5 mt-5">
+	<nav class="list-nav bg-primary-50 p-5 mt-5">
 		<ul>
 			{#each $projects as project}
 				<ProjectRow project={project} />

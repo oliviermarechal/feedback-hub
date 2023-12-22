@@ -2,33 +2,42 @@ import {
     Body,
     Controller,
     Get,
-    Inject,
+    Param,
     Post,
     Req,
     UseGuards,
+    UsePipes,
+    ValidationPipe,
 } from '@nestjs/common';
 import { ProjectGuard } from '../../secondary';
 import {
     CreateFeedbackCommand,
     CreateFeedbackDto,
     CreateFeedbackUseCase,
+    UpvoteCommand,
+    UpvoteUseCase,
+    UpvoteDto,
 } from '../../../hexagon/use-cases/command';
 import { CurrentProject } from '../../secondary/decorator';
 import { Project } from '../../../hexagon/model';
-import { GetProjectQuery } from '../../../hexagon/use-cases/query';
+import {
+    GetProjectQuery,
+    ListVotingFeedbacksProjectQuery,
+} from '../../../hexagon/use-cases/query';
 import { UAParser } from 'ua-parser-js';
 
 @Controller('external')
 export class ExternalController {
     constructor(
-        @Inject(CreateFeedbackUseCase)
         private readonly createFeedback: CreateFeedbackUseCase,
-        @Inject(GetProjectQuery)
         private readonly getProjectQuery: GetProjectQuery,
+        private readonly listVotingFeedbacksProjectQuery: ListVotingFeedbacksProjectQuery,
+        private readonly upvote: UpvoteUseCase,
     ) {}
 
     @Post('feedback')
     @UseGuards(ProjectGuard)
+    @UsePipes(new ValidationPipe({ groups: ['external'] }))
     async externalCreation(
         @Body() dto: CreateFeedbackDto,
         @Req() request: Request,
@@ -41,14 +50,37 @@ export class ExternalController {
                 project.id,
                 dto.type,
                 dto.content,
-                dto.email,
                 dto.language,
+                dto.author,
                 parser.getOS().name,
                 parser.getEngine().name,
                 parser.getBrowser().name,
                 dto.url,
             ),
         );
+    }
+
+    @Post('feedback/:id/upvote')
+    @UseGuards(ProjectGuard)
+    async upvoteFeedback(
+        @CurrentProject() project: Project,
+        @Param('id') id: string,
+        @Body() dto: UpvoteDto,
+    ) {
+        await this.upvote.handle(
+            new UpvoteCommand(id, project.id, {
+                id: dto.projectCustomerId,
+                email: dto.projectCustomerEmail,
+                ipAddress: dto.projectCustomerIpAddress,
+                logoUrl: dto.projectCustomerLogoUrl,
+            }),
+        );
+    }
+
+    @Get('feedback')
+    @UseGuards(ProjectGuard)
+    async listFeedbacksProject(@CurrentProject() project: Project) {
+        return this.listVotingFeedbacksProjectQuery.handle(project);
     }
 
     @Get('project')

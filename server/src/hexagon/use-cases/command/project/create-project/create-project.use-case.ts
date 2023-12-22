@@ -31,7 +31,7 @@ export class CreateProjectUseCase {
             id: generateUuid(),
             name: command.name,
             userId: command.userId,
-            publicId: crypto.randomBytes(16).toString('hex'),
+            apiKey: crypto.randomBytes(16).toString('hex'),
             domainNames: command.domainNames,
         });
 

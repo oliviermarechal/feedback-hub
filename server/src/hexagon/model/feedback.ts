@@ -1,5 +1,6 @@
 import { Project } from './project';
 import { Tag, TagDatabaseProps } from './tag';
+import { ProjectCustomer, ProjectCustomerProps } from './project-customer';
 
 export enum FeedbackType {
     Bug = 'bug',
@@ -8,10 +9,7 @@ export enum FeedbackType {
 
 export enum FeedbackStatus {
     New = 'new',
-    InWaiting = 'in_waiting',
-    InProgress = 'in_progress',
-    InTesting = 'in_testing',
-    Done = 'done',
+    Voting = 'voting',
     Archived = 'archived',
 }
 
@@ -20,8 +18,8 @@ export interface FeedbackProps {
     type: FeedbackType;
     content: string;
     projectId: string;
-    email: string;
-    status: FeedbackStatus;
+    authorId?: string;
+    status?: FeedbackStatus;
     os?: string;
     engine?: string;
     language?: string;
@@ -36,7 +34,10 @@ export interface FeedbackDatabaseProps {
     projectId: string;
     status: FeedbackStatus;
     project?: Project;
-    email: string;
+    authorId: string;
+    author?: ProjectCustomerProps;
+    vote: number;
+    customersVote?: ProjectCustomerProps[];
     createdAt: Date;
     os?: string;
     engine?: string;
@@ -53,7 +54,9 @@ export class Feedback {
     projectId: string;
     project: Project;
     status: FeedbackStatus;
-    email: string;
+    authorId: string;
+    author?: ProjectCustomer;
+    vote: number;
     os?: string;
     engine: string;
     createdAt: Date;
@@ -69,7 +72,7 @@ export class Feedback {
             content: props.content,
             projectId: props.projectId,
             status: props.status,
-            email: props.email,
+            authorId: props.authorId,
             os: props.os,
             engine: props.engine,
             language: props.language,
@@ -86,11 +89,16 @@ export class Feedback {
             projectId: dbProps.projectId,
             project: dbProps.project,
             status: dbProps.status,
-            email: dbProps.email,
+            authorId: dbProps.authorId,
+            author: dbProps.author
+                ? ProjectCustomer.create(dbProps.author)
+                : {},
+            vote: dbProps.vote,
             os: dbProps.os,
             engine: dbProps.engine,
             language: dbProps.language,
             browser: dbProps.browser,
+            customersVote: dbProps.customersVote,
             url: dbProps.url,
             createdAt: dbProps.createdAt,
             tags:

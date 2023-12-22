@@ -8,21 +8,32 @@ export enum FeedbackType {
 
 export enum FeedbackStatus {
     New = 'new',
-    InWaiting = 'in_waiting',
-    InProgress = 'in_progress',
-    InTesting = 'in_testing',
-    Done = 'done',
+    Voting = 'voting',
     Archived = 'archived',
+}
+
+export interface Author {
+    id: string;
+    externalId: string;
+    email: string;
+    logoUrl?: string;
 }
 
 export interface Feedback {
     id: string;
+    author: Author;
     type: FeedbackType;
     content: string;
     projectId: string;
     project: Project;
     status: FeedbackStatus;
     createdAt: Date;
+    url?: string;
+    os?: string;
+    engine?: string;
+    language?: string;
+    browser?: string;
+    vote: number;
     tags: Tag[];
 }
 
@@ -31,7 +42,7 @@ export function humanizeType(type: FeedbackType) {
         return 'Bug';
     }
 
-    return 'Amélioration';
+    return 'Enhance';
 }
 
 export function humanizeStatus(status: FeedbackStatus) {
@@ -40,13 +51,7 @@ export function humanizeStatus(status: FeedbackStatus) {
             return 'Archived';
         case FeedbackStatus.New:
             return 'New';
-        case FeedbackStatus.InProgress:
-            return 'In progress';
-        case FeedbackStatus.InTesting:
-            return 'In testing';
-        case FeedbackStatus.InWaiting:
-            return 'In waiting';
-        case FeedbackStatus.Done:
-            return 'Done';
+        case FeedbackStatus.Voting:
+            return 'In vote';
     }
 }

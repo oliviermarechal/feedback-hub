@@ -1,5 +1,14 @@
 import { getFeedbackPackageDomainUrl } from '../../../../../../../global-config';
 
-// TODO manage node env
-const packageUrl = getFeedbackPackageDomainUrl();
-export const getCodeBlockConfigurationContent = (projectId: string) =>  `<link rel="stylesheet" type="text/css" href="${packageUrl}/bundle.css">\n<script src="${packageUrl}/bundle.js"></script>\n<script type='module'>\n    feedbackHubSDK.setUpFeedbackContainer({project: "${projectId}"});\n</script>`
+const packageUrl = getFeedbackPackageDomainUrl(process.env.NODE_ENV ? process.env.NODE_ENV : 'production');
+export const getCodeBlockConfigurationContent = (apiKey: string) =>  `
+<link rel="stylesheet" type="text/css" href="${packageUrl}/bundle.css">
+<script src="${packageUrl}/bundle.js"></script>
+<script>
+    async function init() {
+        await InsightHunt.init({projectApiKey: "${apiKey}"});
+        InsightHunt.setUpFeedbackContainer();
+    }
+
+    init();
+</script>`

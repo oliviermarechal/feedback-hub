@@ -9,7 +9,7 @@
 
 <li>
     <div class='flex flex-row justify-between'>
-        <a href="/dashboard/project/{project.id}/feedbacks" class="w-full mr-5">
+        <a href="/dashboard/project/{project.id}" class="w-full mr-5">
             <span class="badge bg-primary-500">(icon)</span>
             <span class="flex-auto">{project.name}</span>
         </a>

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import {
     LoginCommand,
     LoginDto,
@@ -15,11 +15,8 @@ import { MeQuery } from '../../../hexagon/use-cases/query';
 @Controller()
 export class UserController {
     constructor(
-        @Inject(RegistrationUseCase)
         private readonly registrationUseCase: RegistrationUseCase,
-        @Inject(LoginUseCase)
         private readonly loginUseCase: LoginUseCase,
-        @Inject(MeQuery)
         private readonly me: MeQuery,
     ) {}
 

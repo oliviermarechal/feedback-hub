@@ -22,6 +22,9 @@ export default {
 						name: 'rocket',
 						enhancements: true,
 					},
+					{
+						name: 'hamlindigo',
+					}
 				],
 			},
 		}),

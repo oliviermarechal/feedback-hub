@@ -1,26 +1,24 @@
-import FeedbackHubSDK from './sdk';
+import InsightHuntSDK, {IHUser} from './sdk';
 import DefaultEmbed from './views/default-embed.svelte';
 
 export * from './sdk';
 
-export interface FeedbackSdkConfiguration {
-    projectPublicId: string,
+let sdk: InsightHuntSDK;
+
+export interface IHSdkConfiguration {
+    projectApiKey: string,
 }
 
-export function initSDK(config: FeedbackSdkConfiguration) {
-    const sdk = new FeedbackHubSDK(config);
-
-    return sdk;
+export async function init(config: IHSdkConfiguration) {
+    sdk = new InsightHuntSDK(config);
+    await sdk.initCheck();
 }
 
-export function setUpFeedbackContainer(config: {
-    project: string,
-}) {
+export function setUpFeedbackContainer() {
     const container = document.createElement('div')
-    container.setAttribute('id', 'feedback-hub-container')
+    container.setAttribute('id', 'insight-hunt-container')
 
     document.body.append(container)
-    const sdk = initSDK({projectPublicId: config.project});
 
     new DefaultEmbed({
         target: container,
@@ -28,4 +26,12 @@ export function setUpFeedbackContainer(config: {
             sdk,
         }
     });
+}
+
+export async function userLogged(user: IHUser) {
+    sdk.setAuthUser(user);
+}
+
+export async function disconnectUser() {
+    sdk.logoutUser();
 }

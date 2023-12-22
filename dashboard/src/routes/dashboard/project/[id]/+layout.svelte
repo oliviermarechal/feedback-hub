@@ -1,38 +1,23 @@
 <script lang="ts">
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import { authUser } from '../../stores/user.store';
-	import { goto } from '$app/navigation';
-	import apiClient from '../../api';
+	import {AppShell, AppBar} from '@skeletonlabs/skeleton';
+	import {page} from '$app/stores';
+	import Icon from '@iconify/svelte';
 
-	if (!$authUser) {
-		if (typeof localStorage !== 'undefined') {
-			const token = localStorage.getItem('token');
-			if (!token) {
-				goto('/auth/login')
-			} else {
-				apiClient.get('/me').then(result => {
-					if (result.status === 200) {
-						authUser.set(result.data);
-					} else {
-						localStorage.removeItem('token');
-						goto('/auth/login');
-					}
-				})
-			}
-		}
-	}
+	const id = $page.params.id;
 </script>
 
-<!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">
-		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<a href='/dashboard'><strong class="text-xl uppercase">Insight hunt</strong></a>
 			</svelte:fragment>
+			<svelte:fragment slot="trail">
+				{#if $page.url.pathname !== `/dashboard/project/${id}/settings`}
+					<a class="btn btn-sm" href="/dashboard/project/{id}/settings"><Icon icon="clarity:settings-solid" style="font-size: 24px;" /></a>
+				{/if}
+			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<!-- Page Route Content -->
 	<slot />
 </AppShell>

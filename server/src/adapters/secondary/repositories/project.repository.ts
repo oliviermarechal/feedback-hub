@@ -5,9 +5,9 @@ import DbProvider from '../../primary/providers/db-provider';
 export class ProjectRepository implements ProjectRepositoryInterface {
     private dbProvider = DbProvider;
 
-    async findByPublicId(publicId: string): Promise<Project | null> {
+    async findByApiKey(apiKey: string): Promise<Project | null> {
         const projectRow = (
-            await this.dbProvider('projects').where('public_id', publicId)
+            await this.dbProvider('projects').where({apiKey: apiKey})
         )[0];
 
         return projectRow ? Project.fromDbProps(projectRow) : null;

@@ -30,6 +30,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "knex": "^3.0.1",
+    "kysely": "^0.26.3",
     "objection": "^3.1.2",
     "passport-jwt": "^4.0.1",
     "pg": "^8.11.3",

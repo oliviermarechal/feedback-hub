@@ -1,16 +1,17 @@
 import {
     Body,
     Controller,
-    Get,
-    Inject,
+    Get, HttpCode,
     Param,
-    Post,
+    Post, Put,
     UseGuards,
 } from '@nestjs/common';
 import {
     CreateProjectCommand,
     CreateProjectDto,
     CreateProjectUseCase,
+    UpdateProjectCommand, UpdateProjectDto,
+    UpdateProjectUseCase,
 } from '../../../hexagon/use-cases/command';
 import { JwtGuard } from '../../secondary';
 import { CurrentUser } from '../../secondary/decorator';
@@ -23,11 +24,9 @@ import {
 @Controller('project')
 export class ProjectController {
     constructor(
-        @Inject(CreateProjectUseCase)
         private readonly createProject: CreateProjectUseCase,
-        @Inject(ListUserProjectQuery)
+        private readonly updateProject: UpdateProjectUseCase,
         private readonly listUserProject: ListUserProjectQuery,
-        @Inject(GetProjectQuery)
         private readonly getProjectQuery: GetProjectQuery,
     ) {}
 
@@ -39,6 +38,19 @@ export class ProjectController {
     ) {
         return this.createProject.handle(
             new CreateProjectCommand(user.id, dto.name, dto.domainNames),
+        );
+    }
+
+    @Put(':id')
+    @UseGuards(JwtGuard)
+    @HttpCode(200)
+    async update(
+        @Body() dto: UpdateProjectDto,
+        @Param('id') projectId: string,
+        @CurrentUser() user: User,
+    ) {
+        return this.updateProject.handle(
+            new UpdateProjectCommand(projectId, user.id, dto.name, dto.domainNames),
         );
     }
 

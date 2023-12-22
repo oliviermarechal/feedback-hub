@@ -2,6 +2,9 @@
     import apiClient from '../../../../api';
     import { goto } from '$app/navigation';
     import { writable } from 'svelte/store';
+    import {AppBar, AppShell} from '@skeletonlabs/skeleton';
+    import Icon from '@iconify/svelte';
+    import {project} from '../../../../stores/project.store';
 
     let name: string;
     let domainNames = writable<string[]>([]);
@@ -21,7 +24,7 @@
             domainName = '';
         } catch (e) {
             domainError.set('Invalid url');
-            setInterval(() => {
+            setTimeout(() => {
                 domainError.set('');
             }, 1000)
         }
@@ -45,35 +48,47 @@
     }
 </script>
 
-<div class="h-full mx-auto flex justify-center items-center">
-    <div class="space-y-10 flex flex-col items-center">
-        <h2 class="h2 text-center">Nouveau projet</h2>
-        <div class="card variant-glass p-4">
-            <div class='px-8 py-5'>
-                <label class="label">
-                    <span>Nom</span>
-                    <input class="input" bind:value={name} type="text" />
-                </label>
-            </div>
-            <div class='px-10 py-5'>
-                <label class="label">
-                    <span>Nom de domaine</span>
-                    <div class='flex items-stretch'>
-                        <input class="input{$domainError.length > 0 ? '-error' : ''}" bind:value={domainName} type="text" />
-                        <span><button on:click={() => handleAddDomain()} type='button' class="btn-icon variant-filled-secondary ml-2">+</button></span>
-                    </div>
-                    <ul class="list">
-                        {#each $domainNames as domain}
-                            <li class='flex justify-between'><span>{domain}</span><span on:click={() => removeDomain(domain)}>X</span></li>
-                        {/each}
-                    </ul>
-                </label>
-            </div>
-            <div class='px-10 pb-5 text-center'>
-                <button on:click={() => handleCreateProject()} type="button" class="btn variant-ringed-secondary mr-5">Valider</button>
-                <button on:click={() => goto('/dashboard')} type="button" class="btn variant-ringed-warning">Retour</button>
+<AppShell>
+    <svelte:fragment slot="header">
+        <AppBar>
+            <svelte:fragment slot="lead">
+                <a href='/dashboard'><strong class="text-xl uppercase">Insight hunt</strong></a>
+            </svelte:fragment>
+        </AppBar>
+    </svelte:fragment>
+    <div class="h-full mx-auto flex justify-center items-center">
+        <div class="space-y-10 flex flex-col items-center">
+            <h2 class="h2 text-center">Nouveau projet</h2>
+            <div class="card variant-glass p-4">
+                <div class='px-6 py-5'>
+                    <label class="label">
+                        <span>Nom</span>
+                        <input class="input" bind:value={name} type="text" />
+                    </label>
+                </div>
+                <div class='px-6'>
+                    <label class="label">
+                        <span>Sites autorisés</span>
+                        <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] input{$domainError.length > 0 ? '-error' : ''}">
+                            <input bind:value={domainName} type="text" placeholder="https://domain.fr"  />
+                            <button class="variant-filled-secondary" on:click={() => handleAddDomain()}><Icon icon="material-symbols:add" width="24" height="24" /></button>
+                        </div>
+                        <ol class="list">
+                            {#each $domainNames as domain}
+                                <li class='flex justify-between'>
+                                    <span>{domain}</span>
+                                    <button on:click={() => removeDomain(domain)}><Icon icon="mdi:trash" width="24" height="24" /></button>
+                                </li>
+                            {/each}
+                        </ol>
+                    </label>
+                </div>
+                <div class='px-6 pt-5 pb-5 text-center'>
+                    <button on:click={() => handleCreateProject()} type="button" class="btn variant-ringed-secondary mr-5">Valider</button>
+                    <button on:click={() => goto('/dashboard')} type="button" class="btn variant-ringed-warning">Retour</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</AppShell>
 

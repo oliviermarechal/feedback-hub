@@ -1,14 +1,16 @@
 <script lang="ts">
     import Modal from '../common/modal.svelte';
-    import type { Feedback } from '../../stores/interfaces/feedback';
+    import type {Feedback} from '../../stores/interfaces/feedback';
+    import {FeedbackType} from '../../stores/interfaces/feedback';
     import apiClient from '../../api';
-    import { FeedbackStatus, humanizeStatus } from '../../stores/interfaces/feedback';
-    import { updateFeedback } from '../../stores/feedback.store';
+    import {updateFeedback} from '../../stores/feedback.store';
+    import Icon from '@iconify/svelte';
 
     export let feedback: Feedback;
     export let open: boolean = false;
     export let onClose: () => any;
 
+    let editContent: boolean = false;
     let tagTerm: string = '';
     let autocompleteResult: { id: string, label: string, projectId: string }[] = [];
 
@@ -21,18 +23,18 @@
         }
 
         const feedbackResult = await apiClient.post(`feedback/${feedback.id}/tag`, {label: tag.label});
-        updateFeedback(feedback);
         feedback.tags = [
             ...feedbackResult.data.tags,
         ];
+        updateFeedback(feedback);
     }
 
     const removeTag = async (id: string) => {
         const feedbackResult = await apiClient.delete(`feedback/${feedback.id}/tag/${id}`);
-        updateFeedback(feedback);
         feedback.tags = [
             ...feedbackResult.data.tags,
         ];
+        updateFeedback(feedback);
     }
 
     const handleTagKeydown = (e: any) => {
@@ -51,12 +53,44 @@
             autocompleteResult = [];
         }
     }
+
+    $: handleKeypressContentInput = async (e: any) => {
+        if (e.keyCode === 13) {
+            editContent = false;
+            const result = await apiClient.post(
+                `/feedback/${feedback.id}/content`,
+                { content: feedback.content }
+            );
+
+            if (result.status === 200) {
+                updateFeedback(feedback);
+            }
+        }
+    }
 </script>
 
 {#if feedback}
     <Modal open={open} close={onClose}>
         <span class='w-full text-center' slot='header'><h3 class='h3'>Feedback</h3></span>
         <div slot='body' class='p-5'>
+            <div>From: {#if feedback.author} {feedback.author?.email}{:else} unknown {/if}</div>
+            {#if feedback.type === FeedbackType.Bug}
+                <div>url: {feedback.url}</div>
+                <div>os: {feedback.os}</div>
+                <div>engine: {feedback.engine}</div>
+                <div>language: {feedback.language}</div>
+                <div>browser: {feedback.browser}</div>
+            {/if}
+            <div class='mt-2 flex flex-row'>
+                {#if editContent}
+                    <textarea class="input w-full" bind:value={feedback.content} on:keypress={handleKeypressContentInput}></textarea>
+                {:else}
+                    <div>Content: {feedback.content}</div>
+                    <button on:click={() => editContent = true}>
+                        <Icon class="ml-4 cursor-pointer" icon="carbon:edit" />
+                    </button>
+                {/if}
+            </div>
             <label class="label">
 	            <span>Tags</span>
                 <input class="input" bind:value={tagTerm} on:input={handleChangeTagInput} on:keydown={handleTagKeydown} autocomplete={'true'} />
@@ -79,13 +113,6 @@
                         </button>
                     {/each}
                 {/if}
-            </div>
-
-            <hr class='border-secondary-500-400-token my-3 divider' />
-            <div class='mt-2'>
-                <h3 class='h3'>Validation</h3>
-                <button type='button' class='btn btn-sm variant-filled-surface'>Send to board</button>
-                <button type='button' class='btn btn-sm variant-filled-surface'>Archive</button>
             </div>
         </div>
         <span class='w-full' slot='footer'>

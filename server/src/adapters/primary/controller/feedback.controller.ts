@@ -3,7 +3,7 @@ import {
     Controller,
     Delete,
     Get,
-    Inject,
+    HttpCode,
     Param,
     Post,
     UseGuards,
@@ -15,8 +15,13 @@ import {
     CreateFeedbackCommand,
     CreateFeedbackDto,
     CreateFeedbackUseCase,
+    FeedbackToUpvoteCommand,
+    FeedbackToUpvoteUseCase,
     RemoveTagCommand,
     RemoveTagUseCase,
+    UpdateFeedbackContentCommand,
+    UpdateFeedbackContentDto,
+    UpdateFeedbackContentUseCase,
 } from '../../../hexagon/use-cases/command';
 import { ListFeedbackQuery } from '../../../hexagon/use-cases/query';
 import { JwtGuard } from '../../secondary';
@@ -26,14 +31,12 @@ import { Feedback, User } from '../../../hexagon/model';
 @Controller('feedback')
 export class FeedbackController {
     constructor(
-        @Inject(CreateFeedbackUseCase)
         private readonly createFeedback: CreateFeedbackUseCase,
-        @Inject(ListFeedbackQuery)
         private readonly listFeedback: ListFeedbackQuery,
-        @Inject(AddTagUseCase)
         private readonly addTag: AddTagUseCase,
-        @Inject(RemoveTagUseCase)
         private readonly removeTag: RemoveTagUseCase,
+        private readonly feedbackToUpvote: FeedbackToUpvoteUseCase,
+        private readonly updateFeedbackContent: UpdateFeedbackContentUseCase,
     ) {}
 
     @Post()
@@ -44,8 +47,8 @@ export class FeedbackController {
                 dto.projectId,
                 dto.type,
                 dto.content,
-                dto.email,
                 dto.language,
+                dto.author,
             ),
         );
     }
@@ -68,6 +71,25 @@ export class FeedbackController {
         @CurrentUser() user: User,
     ): Promise<Feedback> {
         return this.removeTag.handle(new RemoveTagCommand(user.id, id, tagId));
+    }
+
+    @UseGuards(JwtGuard)
+    @Post(':id/to-upvote')
+    @HttpCode(200)
+    async toUpvote(@Param('id') id: string): Promise<Feedback> {
+        return this.feedbackToUpvote.handle(new FeedbackToUpvoteCommand(id));
+    }
+
+    @UseGuards(JwtGuard)
+    @Post(':id/content')
+    @HttpCode(200)
+    async updateContent(
+        @Param('id') id: string,
+        @Body() dto: UpdateFeedbackContentDto,
+    ): Promise<Feedback> {
+        return this.updateFeedbackContent.handle(
+            new UpdateFeedbackContentCommand(id, dto.content),
+        );
     }
 
     @Get(':projectId')

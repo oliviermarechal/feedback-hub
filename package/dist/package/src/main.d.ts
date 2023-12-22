@@ -1,9 +1,9 @@
-import FeedbackHubSDK from './sdk';
+import { IHUser } from './sdk';
 export * from './sdk';
-export interface FeedbackSdkConfiguration {
-    projectPublicId: string;
+export interface IHSdkConfiguration {
+    projectApiKey: string;
 }
-export declare function initSDK(config: FeedbackSdkConfiguration): FeedbackHubSDK;
-export declare function setUpFeedbackContainer(config: {
-    project: string;
-}): void;
+export declare function init(config: IHSdkConfiguration): Promise<void>;
+export declare function setUpFeedbackContainer(): void;
+export declare function userLogged(user: IHUser): Promise<void>;
+export declare function disconnectUser(): Promise<void>;

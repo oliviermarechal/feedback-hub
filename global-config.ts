@@ -1,14 +1,14 @@
-export const getFeedbackPackageDomainUrl = () => {
-    if (process.env.NODE_ENV === 'production') {
+export const getFeedbackPackageDomainUrl = (env: string) => {
+    if (env === 'production') {
         throw new Error('Dont forget to set production URL');
-        return 'http://raw.github...';
+        return 'https://raw.githubusercontent.com/oliviermarechal/feedback-hub/main/package/dist';
     }
 
     return 'http://localhost:8081';
 }
 
-export const getApiUrl = () => {
-    if (process.env.NODE_ENV === 'production') {
+export const getApiUrl = (env: string) => {
+    if (env === 'production') {
         throw new Error('Dont forget to set production URL');
         return '';
     }
@@ -16,8 +16,8 @@ export const getApiUrl = () => {
     return 'http://localhost:3005';
 }
 
-export const getHomepage = () => {
-    if (process.env.NODE_ENV === 'production') {
+export const getHomepage = (env: string) => {
+    if (env === 'production') {
         throw new Error('Dont forget to set production URL');
         return 'https://google.fr';
     }

@@ -24,7 +24,7 @@
         <span class="p-4">
             <h3 class='h5'>Snippet HTML</h3>
             <p>copy this part of code and paste it where you want to display the form</p>
-            <CodeBlock language="html" code={getCodeBlockConfigurationContent($project.publicId)}></CodeBlock>
+            <CodeBlock language="html" code={getCodeBlockConfigurationContent($project.apiKey)}></CodeBlock>
         </span>
     {/if}
 </section>

@@ -3,21 +3,37 @@ import { CreateFeedbackUseCase } from './create-feedback';
 import { AddTagUseCase } from './add-tag';
 import {
     FeedbackRepositoryInterface,
+    ProjectCustomerRepositoryInterface,
     ProjectRepositoryInterface,
     TagRepositoryInterface,
 } from '../../../gateways/repository';
 import { RemoveTagUseCase } from './remove-tag';
+import { FeedbackToUpvoteUseCase } from './feedback-to-upvote';
+import { UpdateFeedbackContentUseCase } from './update-feedback-content';
+import { UpvoteUseCase } from './upvote';
 
 export * from './create-feedback';
 export * from './add-tag';
 export * from './remove-tag';
+export * from './feedback-to-upvote';
+export * from './update-feedback-content';
+export * from './upvote';
 
 export const FeedbackCommandUseCases: Provider[] = [
     {
-        inject: [FeedbackRepositoryInterface],
+        inject: [
+            FeedbackRepositoryInterface,
+            ProjectCustomerRepositoryInterface,
+        ],
         provide: CreateFeedbackUseCase,
-        useFactory: (feedbackRepository: FeedbackRepositoryInterface) => {
-            return new CreateFeedbackUseCase(feedbackRepository);
+        useFactory: (
+            feedbackRepository: FeedbackRepositoryInterface,
+            projectCustomerRepository: ProjectCustomerRepositoryInterface,
+        ) => {
+            return new CreateFeedbackUseCase(
+                feedbackRepository,
+                projectCustomerRepository,
+            );
         },
     },
     {
@@ -55,6 +71,36 @@ export const FeedbackCommandUseCases: Provider[] = [
                 feedbackRepository,
                 tagRepository,
                 projectRepository,
+            );
+        },
+    },
+    {
+        inject: [FeedbackRepositoryInterface],
+        provide: FeedbackToUpvoteUseCase,
+        useFactory: (feedbackRepository: FeedbackRepositoryInterface) => {
+            return new FeedbackToUpvoteUseCase(feedbackRepository);
+        },
+    },
+    {
+        inject: [FeedbackRepositoryInterface],
+        provide: UpdateFeedbackContentUseCase,
+        useFactory: (feedbackRepository: FeedbackRepositoryInterface) => {
+            return new UpdateFeedbackContentUseCase(feedbackRepository);
+        },
+    },
+    {
+        inject: [
+            FeedbackRepositoryInterface,
+            ProjectCustomerRepositoryInterface,
+        ],
+        provide: UpvoteUseCase,
+        useFactory: (
+            feedbackRepository: FeedbackRepositoryInterface,
+            projectCustomerRepository: ProjectCustomerRepositoryInterface,
+        ) => {
+            return new UpvoteUseCase(
+                feedbackRepository,
+                projectCustomerRepository,
             );
         },
     },

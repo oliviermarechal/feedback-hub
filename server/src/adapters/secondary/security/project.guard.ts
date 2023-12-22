@@ -18,12 +18,16 @@ export class ProjectGuard implements CanActivate {
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request);
-        if (!token) {
+        let apiKey = this.extractApiKeyFromHeader(request);
+        if (!apiKey) {
+            apiKey = this.extractApiKeyFromUrl(request);
+        }
+
+        if (!apiKey) {
             throw new UnauthorizedException();
         }
 
-        const project = await this.projectRepository.findByPublicId(token);
+        const project = await this.projectRepository.findByApiKey(apiKey);
 
         if (!project) {
             throw new UnauthorizedException();
@@ -38,8 +42,24 @@ export class ProjectGuard implements CanActivate {
         return true;
     }
 
-    private extractTokenFromHeader(request: Request): string | undefined {
-        const [type, token] = request.headers.authorization?.split(' ') ?? [];
-        return type === 'Bearer' ? token : undefined;
+    private extractApiKeyFromHeader(request: Request): string | undefined {
+        if (request.headers.hasOwnProperty('x-insight-hunt-api-key')) {
+            return request.headers['x-insight-hunt-api-key'] as string;
+        }
+    }
+
+    private extractApiKeyFromUrl(request: Request): string | undefined {
+        try {
+            const [, paramString] = request.url.split('?');
+            const params = new URLSearchParams(paramString);
+
+            if (params.has('api_key')) {
+                return params.get('api_key');
+            }
+        } catch (err) {
+            return undefined;
+        }
+
+        return undefined;
     }
 }

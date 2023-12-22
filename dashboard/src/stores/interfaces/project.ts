@@ -1,6 +1,6 @@
 export interface Project {
     id: string;
     name: string;
-    publicId: string;
+    apiKey: string;
     domainNames: string[];
 }

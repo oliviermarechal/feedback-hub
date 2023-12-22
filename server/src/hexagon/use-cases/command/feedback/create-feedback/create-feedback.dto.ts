@@ -3,9 +3,28 @@ import {
     IsEmail,
     IsEnum,
     IsOptional,
-    IsString,
+    IsString, ValidateNested,
 } from 'class-validator';
-import { FeedbackType } from '../../../../model';
+import {FeedbackType} from '../../../../model';
+import {Type} from 'class-transformer';
+
+export class authorDto {
+    @IsString()
+    @IsOptional()
+    externalId: string;
+
+    @IsString()
+    @IsDefined()
+    email: string;
+
+    @IsString()
+    @IsDefined()
+    ipAddress: string;
+
+    @IsString()
+    @IsOptional()
+    logoUrl?: string;
+}
 
 export class CreateFeedbackDto {
     @IsString()
@@ -21,10 +40,11 @@ export class CreateFeedbackDto {
     @IsDefined()
     content: string;
 
-    @IsEmail()
-    @IsString()
-    @IsDefined()
-    email: string;
+    @ValidateNested({
+        groups: ['external']
+    })
+    @Type(() => authorDto)
+    author?: authorDto;
 
     @IsString()
     @IsDefined()

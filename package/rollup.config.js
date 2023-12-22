@@ -18,7 +18,7 @@ export default {
             sourcemap: true,
             format: 'iife',
             file: 'dist/bundle.js',
-            name: 'feedbackHubSDK'
+            name: 'InsightHunt'
         },
         {
             sourcemap: true,
