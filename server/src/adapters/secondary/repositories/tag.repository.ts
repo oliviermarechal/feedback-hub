@@ -1,55 +1,48 @@
 import { TagRepositoryInterface } from '../../../hexagon/gateways/repository';
-import DbProvider from '../../primary/providers/db-provider';
-import { Tag, TagDatabaseProps } from '../../../hexagon/model/tag';
+import { DbProvider } from '../../primary/providers/db-provider';
+import { Tag } from '../../../hexagon/model/tag';
 
 export class TagRepository implements TagRepositoryInterface {
-    private dbProvider = DbProvider;
-
     async findByLabel(projectId: string, label: string): Promise<Tag | null> {
-        const tagRow = (
-            await this.dbProvider('tags')
-                .where({ projectId })
-                .andWhere({ label })
-        )[0];
+        const tagRow = await DbProvider.selectFrom('tags')
+            .where('projectId', '=', projectId)
+            .where('label', '=', label)
+            .selectAll()
+            .executeTakeFirst();
 
         return tagRow ? Tag.hydrateFromDb(tagRow) : null;
     }
 
     async getByFeedback(feedbackId: string): Promise<Tag[]> {
-        const tagFeedbacks = await this.dbProvider('feedbacks_tags').where({
-            feedbackId: feedbackId,
-        });
-
-        const tagIds = tagFeedbacks.map((tf) => tf.tagId);
-        const tags = await this.dbProvider<TagDatabaseProps>('tags').whereIn(
-            'id',
-            tagIds,
-        );
+        const tags = await DbProvider.selectFrom('tags')
+            .innerJoin('feedbacksTags', 'feedbacksTags.tagId', 'tags.id')
+            .where('feedbacksTags.feedbackId', '=', feedbackId)
+            .select(['tags.id', 'tags.label', 'tags.projectId'])
+            .execute();
 
         return tags.map((t) => Tag.hydrateFromDb(t));
     }
 
     async save(tag: Tag): Promise<Tag> {
-        const count = (
-            await this.dbProvider.raw(
-                'SELECT COUNT(id) as count FROM tags WHERE id = ?',
-                [tag.id],
-            )
-        ).rows[0].count;
+        const result = await DbProvider.selectFrom('tags')
+            .select('id')
+            .where('id', '=', tag.id)
+            .executeTakeFirst();
 
-        if (count > 0) {
-            const tagRow = (
-                await this.dbProvider('tags')
-                    .where({ id: tag.id })
-                    .update({ ...tag }, '*')
-            )[0];
+        if (result) {
+            const tagRow = await DbProvider.updateTable('tags')
+                .where('id', '=', tag.id)
+                .set({ ...tag })
+                .returningAll()
+                .executeTakeFirst();
 
             return Tag.create(tagRow);
         }
 
-        const tagRow = (
-            await this.dbProvider('tags').insert({ ...tag }, '*')
-        )[0];
+        const tagRow = await DbProvider.insertInto('tags')
+            .values({ ...tag })
+            .returningAll()
+            .executeTakeFirst();
 
         return Tag.create(tagRow);
     }

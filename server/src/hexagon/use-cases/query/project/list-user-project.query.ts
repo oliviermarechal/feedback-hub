@@ -1,13 +1,14 @@
-import DbProvider from '../../../../adapters/primary/providers/db-provider';
+import { DbProvider } from '../../../../adapters/primary/providers/db-provider';
 import { Project } from '../../../model';
 
 export class ListUserProjectQuery {
     async handle(userId: string) {
-        const rows = await DbProvider.select('*')
-            .from('projects')
-            .where('user_id', userId);
+        const userProjects = await DbProvider.selectFrom('projects')
+            .where('userId', '=', userId)
+            .selectAll()
+            .execute();
 
-        return rows.map((dbProps) => {
+        return userProjects.map((dbProps) => {
             return Project.fromDbProps(dbProps);
         });
     }

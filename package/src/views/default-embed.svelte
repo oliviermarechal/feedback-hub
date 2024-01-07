@@ -3,9 +3,12 @@
     import FeedbackForm from './feedback-form.svelte';
     import UpvoteEmbed from './upvote-embed.svelte';
     import { getHomepage } from '../../../global-config';
-    import InsightHuntSDK from '../sdk';
-
     const homepageUrl = getHomepage(process.env.NODE_ENV ? process.env.NODE_ENV : 'production');
+    import InsightHuntSDK from '../sdk';
+    import { Button } from "$lib/components/ui/button";
+    import * as Card from "$lib/components/ui/card";
+    import '../app.pcss';
+
     export let sdk: InsightHuntSDK;
     let embedContainerOpen = false;
     let feedbackModalOpen = false;
@@ -35,17 +38,25 @@
 </script>
 
 <div class="ih-container">
-    <button class="ih-button-container" on:click={toggleEmbedContainer}>
+    <Button variant="outline" class="ih-button-container h-auto" on:click={toggleEmbedContainer}>
         <span class="ih-button-text">FEEDBACK</span>
-    </button>
+    </Button>
 
-    {#if embedContainerOpen}
-        <div class='ih-action-container' in:fly={{ x: 100, duration: 500 }}>
-            <button on:click={toggleFeedbackModal} type="button" class="ih-item ih-action-button">Add feedback</button>
-            <button on:click={toggleUpvoteModal} type="button" class="ih-item ih-action-button">show backlogs</button>
-            <div  class="ih-item">Powered by <a href='{homepageUrl}'><u>Insight hunt</u></a></div>
-        </div>
-    {/if}
+    <div>
+        <Card.Root>
+            {#if embedContainerOpen}
+                <div in:fly={{ x: 100, duration: 500 }}>
+                    <Card.Content class="flex-col flex p-4">
+                        <Button on:click={toggleFeedbackModal} type="button" class="py-2 px-4 mt-4 mx-4">Add feedback</Button>
+                        <Button on:click={toggleUpvoteModal} type="button" class="py-2 px-4 mt-4 mx-4">show backlogs</Button>
+                    </Card.Content>
+                </div>
+                <Card.Footer>
+                    Powered by <a href='{homepageUrl}'><u>Insight hunt</u></a>
+                </Card.Footer>
+            {/if}
+        </Card.Root>
+    </div>
 </div>
 {#if feedbackModalOpen}
     <FeedbackForm onSubmit={addFeedback} open={feedbackModalOpen} onClose={toggleFeedbackModal} email={sdk.getLoggedUser()?.email} />
@@ -56,12 +67,7 @@
 
 <style>
     .ih-container {
-        @apply absolute top-1/2 right-0 bg-white shadow-md z-40 flex flex-row ring-inset;
-        background-color: #e8eaf1;
-    }
-
-    .ih-button-container {
-        @apply right-0 p-4 cursor-pointer flex flex-col items-end z-50 ring-inset;
+        @apply absolute top-1/2 right-0 z-40 flex flex-row ring-inset h-auto;
     }
 
     .ih-button-text {
@@ -72,15 +78,6 @@
 
     .ih-item {
         @apply py-2 px-4 mt-4 mx-4;
-    }
-
-    .ih-action-button {
-        @apply border-2 bg-transparent;
-        border-color: #a8bdf1;
-    }
-
-    .ih-action-button-disabled {
-        @apply border-2 border-slate-700 bg-transparent cursor-not-allowed;
     }
 
     .ih-action-container {

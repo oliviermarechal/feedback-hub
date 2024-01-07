@@ -1,33 +1,27 @@
 import { Feedback, FeedbackStatus, Project } from '../../../model';
-import { DbKysely } from '../../../../adapters/primary/providers/db-provider';
+import { DbProvider } from '../../../../adapters/primary/providers/db-provider';
 import { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/postgres';
 
 export class ListVotingFeedbacksProjectQuery {
     async handle(project: Project) {
-        const rows = await DbKysely.selectFrom('feedbacks')
+        const rows = await DbProvider.selectFrom('feedbacks')
             .selectAll()
             .select((eb) => [
                 jsonArrayFrom(
                     eb
-                        .selectFrom('feedbacksTags')
+                        .selectFrom('tags')
+                        .innerJoin(
+                            'feedbacksTags',
+                            'tags.id',
+                            'feedbacksTags.tagId',
+                        )
                         .whereRef(
                             'feedbacksTags.feedbackId',
                             '=',
                             'feedbacks.id',
                         )
-                        .select((eb) => [
-                            jsonObjectFrom(
-                                eb
-                                    .selectFrom('tags')
-                                    .select(['id', 'label', 'projectId'])
-                                    .whereRef(
-                                        'tags.id',
-                                        '=',
-                                        'feedbacksTags.tagId',
-                                    ),
-                            ).as('tag'),
-                        ]),
-                ).as('feedbacksTags'),
+                        .selectAll(),
+                ).as('tag'),
                 jsonArrayFrom(
                     eb
                         .selectFrom('feedbackVotes')
@@ -68,7 +62,6 @@ export class ListVotingFeedbacksProjectQuery {
         return rows.map((row) => {
             const dbProps = {
                 ...row,
-                tags: row.feedbacksTags.map((ft) => ft.tag),
                 customersVote: row.feedbackVotes.map((fv) => fv.customer),
             };
             return Feedback.hydrateFromDb(dbProps);

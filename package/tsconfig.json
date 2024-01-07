@@ -10,7 +10,11 @@
     "jsx": "preserve",
     "declaration": true,
     "types": ["svelte", "node"],
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.svelte"],
   "exclude": ["node_modules"],

@@ -1,44 +1,46 @@
 import { UserRepositoryInterface } from '../../../hexagon/gateways/repository';
-import DbProvider from '../../primary/providers/db-provider';
-import { Project, User } from '../../../hexagon/model';
+import { DbProvider } from '../../primary/providers/db-provider';
+import { User } from '../../../hexagon/model';
 
 export class UserRepository implements UserRepositoryInterface {
-    private dbProvider = DbProvider;
-
     async find(id: string): Promise<User | null> {
-        const userRow = await this.dbProvider('users')
-            .where({ id: id })
-            .first();
+        const userRow = await DbProvider.selectFrom('users')
+            .where('id', '=', id)
+            .selectAll()
+            .executeTakeFirst();
 
         return userRow ? User.create(userRow) : null;
     }
 
     async findByEmail(email: string): Promise<User | null> {
-        const userRow = await this.dbProvider('users')
-            .where({ email: email })
-            .first();
+        const userRow = await DbProvider.selectFrom('users')
+            .where('email', '=', email)
+            .selectAll()
+            .executeTakeFirst();
 
         return userRow ? User.create(userRow) : null;
     }
 
     async save(user: User): Promise<User> {
-        const result = await this.dbProvider.raw(
-            'SELECT COUNT(id) as count FROM users WHERE id = ?',
-            [user.id],
-        );
+        const result = await DbProvider.selectFrom('users')
+            .where('id', '=', user.id)
+            .select('id')
+            .executeTakeFirst();
 
-        if (result.count > 0) {
-            const userRow = await this.dbProvider('users')
-                .where({ id: user.id })
-                .update({ ...user }, '*')
-                .first();
+        if (result) {
+            const userRow = await DbProvider.updateTable('users')
+                .set({ ...user })
+                .where('id', '=', user.id)
+                .returningAll()
+                .executeTakeFirst();
 
             return User.create(userRow);
         }
 
-        const userRow = (
-            await this.dbProvider('users').insert({ ...user }, '*')
-        )[0];
+        const userRow = await DbProvider.insertInto('users')
+            .values({ ...user })
+            .returningAll()
+            .executeTakeFirst();
 
         return User.create(userRow);
     }

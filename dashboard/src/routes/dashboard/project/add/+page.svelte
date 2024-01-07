@@ -2,7 +2,6 @@
     import apiClient from '../../../../api';
     import { goto } from '$app/navigation';
     import { writable } from 'svelte/store';
-    import {AppBar, AppShell} from '@skeletonlabs/skeleton';
     import Icon from '@iconify/svelte';
     import {project} from '../../../../stores/project.store';
 
@@ -48,14 +47,6 @@
     }
 </script>
 
-<AppShell>
-    <svelte:fragment slot="header">
-        <AppBar>
-            <svelte:fragment slot="lead">
-                <a href='/dashboard'><strong class="text-xl uppercase">Insight hunt</strong></a>
-            </svelte:fragment>
-        </AppBar>
-    </svelte:fragment>
     <div class="h-full mx-auto flex justify-center items-center">
         <div class="space-y-10 flex flex-col items-center">
             <h2 class="h2 text-center">Nouveau projet</h2>
@@ -90,5 +81,4 @@
             </div>
         </div>
     </div>
-</AppShell>
 

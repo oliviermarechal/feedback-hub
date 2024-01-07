@@ -1,9 +1,9 @@
-import { DbKysely } from '../../../../adapters/primary/providers/db-provider';
+import { DbProvider } from '../../../../adapters/primary/providers/db-provider';
 import { Project } from '../../../model';
 
 export class GetProjectQuery {
     async handle(projectId: string, userId: string) {
-        const project = await DbKysely.selectFrom('projects')
+        const project = await DbProvider.selectFrom('projects')
             .selectAll()
             .where('id', '=', projectId)
             .where('userId', '=', userId)

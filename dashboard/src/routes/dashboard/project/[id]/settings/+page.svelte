@@ -100,7 +100,7 @@
                 </div>
                 <div class='px-6 pt-5 pb-5 text-center'>
                     <button on:click={() => handleUpdateProject()} type="button" class="btn variant-ringed-primary mr-5">Valider</button>
-                    <button on:click={() => goto(`/dashboard/project/{$project.id}`)} type="button" class="btn variant-ringed-warning">Retour</button>
+                    <button on:click={() => goto(`/dashboard/project/${id}`)} type="button" class="btn variant-ringed-warning">Retour</button>
                 </div>
             </div>
         </div>

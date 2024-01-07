@@ -2,6 +2,9 @@
     import { authUser } from '../../../stores/user.store';
     import { goto } from '$app/navigation';
     import apiClient from '../../../api';
+    import { Button } from '$lib/components/ui/button';
+    import { Input } from '$lib/components/ui/input';
+    import { Label } from '$lib/components/ui/label';
 
     if ($authUser) {
         goto('/dashboard')
@@ -18,22 +21,39 @@
     }
 </script>
 
-<div class='card mx-auto w-3/4 md:w-2/4 top-36 relative'>
-    <h1 class='text-2xl pt-5 text-center'>Registration</h1>
-    <div class='px-10 py-5'>
-        <label class="label">
-            <span>Email</span>
-            <input class="input" bind:value={email} type="text" placeholder="Email" />
-        </label>
+<div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+    <div class="flex flex-col space-y-2 text-center">
+        <h1 class="text-2xl font-semibold tracking-tight">
+            Create account
+        </h1>
     </div>
-    <div class='px-10 pb-5'>
-        <label class="label">
-            <span>Password</span>
-            <input class="input" bind:value={password} type="password" placeholder="Password" />
-        </label>
-    </div>
-    <div class='px-10 pb-5'>
-        <button on:click={() => handleRegistration()} type="button" class="btn variant-filled">Submit</button>
-        Already have an account ? click <a class="anchor" href="/auth/login">here</a>
+    <div class={"grid gap-6"}>
+        <form>
+            <div class="grid gap-2">
+                <div class="grid gap-1">
+                    <Label class="sr-only" for="email">Email</Label>
+                    <Input
+                            id="email"
+                            placeholder="email"
+                            type="email"
+                            autocapitalize="none"
+                            autocomplete="email"
+                            autocorrect="off"
+                            bind:value={email}
+                    />
+                </div>
+                <div class="grid gap-1">
+                    <Label class="sr-only" for="password">Password</Label>
+                    <Input
+                            id="password"
+                            type="password"
+                            placeholder="password"
+                            autocorrect="off"
+                            bind:value={password}
+                    />
+                </div>
+                <Button type="button" on:click={handleRegistration()}>Registration</Button>
+            </div>
+        </form>
     </div>
 </div>

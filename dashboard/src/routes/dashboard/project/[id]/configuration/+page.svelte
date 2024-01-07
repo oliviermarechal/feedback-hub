@@ -3,7 +3,6 @@
     import apiClient from '../../../../../api';
     import { project } from '../../../../../stores/project.store';
     import { page } from '$app/stores';
-    import { CodeBlock } from '@skeletonlabs/skeleton';
     import { getCodeBlockConfigurationContent } from './code-block-content';
 
     const id = $page.params.id;

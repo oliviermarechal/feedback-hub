@@ -1,0 +1,31 @@
+/// <reference types="svelte" />
+import { Form as FormPrimitive, getFormField } from "formsnap";
+import * as RadioGroupComp from "$lib/components/ui/radio-group";
+import type { Writable } from "svelte/store";
+import Item from "./form-item.svelte";
+import Input from "./form-input.svelte";
+import Textarea from "./form-textarea.svelte";
+import Description from "./form-description.svelte";
+import Label from "./form-label.svelte";
+import Validation from "./form-validation.svelte";
+import Checkbox from "./form-checkbox.svelte";
+import Switch from "./form-switch.svelte";
+import NativeSelect from "./form-native-select.svelte";
+import RadioGroup from "./form-radio-group.svelte";
+import Select from "./form-select.svelte";
+import SelectTrigger from "./form-select-trigger.svelte";
+import Button from "./form-button.svelte";
+declare const Root: typeof FormPrimitive.Root;
+declare const Field: typeof FormPrimitive.Field;
+declare const Control: typeof FormPrimitive.Control;
+declare const RadioItem: typeof RadioGroupComp.Root;
+declare const NativeRadio: typeof FormPrimitive.Radio;
+declare const SelectContent: typeof RadioGroupComp.Root;
+declare const SelectLabel: typeof RadioGroupComp.Root;
+declare const SelectGroup: typeof import("bits-ui/dist/bits/select").Group;
+declare const SelectItem: typeof RadioGroupComp.Root;
+declare const SelectSeparator: typeof RadioGroupComp.Root;
+export type TextareaGetFormField = Omit<ReturnType<typeof getFormField>, "value"> & {
+    value: Writable<string>;
+};
+export { Root, Field, Control, Item, Input, Label, Button, Switch, Select, Checkbox, Textarea, Validation, RadioGroup, RadioItem, Description, SelectContent, SelectLabel, SelectGroup, SelectItem, SelectSeparator, SelectTrigger, NativeSelect, NativeRadio, Root as Form, Field as FormField, Control as FormControl, Item as FormItem, Input as FormInput, Textarea as FormTextarea, Description as FormDescription, Label as FormLabel, Validation as FormValidation, NativeSelect as FormNativeSelect, NativeRadio as FormNativeRadio, Checkbox as FormCheckbox, Switch as FormSwitch, RadioGroup as FormRadioGroup, RadioItem as FormRadioItem, Select as FormSelect, SelectContent as FormSelectContent, SelectLabel as FormSelectLabel, SelectGroup as FormSelectGroup, SelectItem as FormSelectItem, SelectSeparator as FormSelectSeparator, SelectTrigger as FormSelectTrigger, Button as FormButton };

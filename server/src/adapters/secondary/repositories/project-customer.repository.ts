@@ -1,22 +1,19 @@
 import { ProjectCustomerRepositoryInterface } from '../../../hexagon/gateways/repository';
 import { ProjectCustomer } from '../../../hexagon/model';
-import DbProvider from '../../primary/providers/db-provider';
+import { DbProvider } from '../../primary/providers/db-provider';
 
 export class ProjectCustomerRepository
     implements ProjectCustomerRepositoryInterface
 {
-    private dbProvider = DbProvider;
-
     async findByExternalId(
         externalId: string,
         projectId: string,
     ): Promise<ProjectCustomer | null> {
-        const customerRow = (
-            await this.dbProvider('project_customers').where({
-                externalId: externalId,
-                projectId: projectId,
-            })
-        )[0];
+        const customerRow = await DbProvider.selectFrom('projectCustomers')
+            .where('externalId', '=', externalId)
+            .where('projectId', '=', projectId)
+            .selectAll()
+            .executeTakeFirst();
 
         return customerRow ? ProjectCustomer.create(customerRow) : null;
     }
@@ -25,40 +22,36 @@ export class ProjectCustomerRepository
         ipAddress: string,
         projectId: string,
     ): Promise<ProjectCustomer | null> {
-        const customerRow = (
-            await this.dbProvider('project_customers')
-                .whereRaw('? = ANY(ip_address)', ipAddress)
-                .where({ projectId })
-        )[0];
+        const customerRow = await DbProvider.selectFrom('projectCustomers')
+            .where((eb) => eb(eb.val(ipAddress), '=', eb.fn.any('ipAddress')))
+            .where('projectId', '=', projectId)
+            .selectAll()
+            .executeTakeFirst();
 
         return customerRow ? ProjectCustomer.create(customerRow) : null;
     }
 
     async save(customer: ProjectCustomer): Promise<ProjectCustomer> {
-        const count = (
-            await this.dbProvider.raw(
-                'SELECT COUNT(id) as count FROM project_customers WHERE id = ?',
-                [customer.id],
-            )
-        ).rows[0].count;
+        const result = await DbProvider.selectFrom('projectCustomers')
+            .select('id')
+            .where('id', '=', customer.id)
+            .executeTakeFirst();
 
-        if (count > 0) {
-            const projectRow = (
-                await this.dbProvider('project_customers')
-                    .where({ id: customer.id })
-                    .update({ ...customer }, '*')
-            )[0];
+        if (result) {
+            const customerRow = await DbProvider.updateTable('projectCustomers')
+                .where('id', '=', customer.id)
+                .set({ ...customer })
+                .returningAll()
+                .executeTakeFirst();
 
-            return ProjectCustomer.create(projectRow);
+            return ProjectCustomer.create(customerRow);
         }
 
-        const projectRow = (
-            await this.dbProvider('project_customers').insert(
-                { ...customer },
-                '*',
-            )
-        )[0];
+        const customerRow = await DbProvider.insertInto('projectCustomers')
+            .values({ ...customer })
+            .returningAll()
+            .executeTakeFirst();
 
-        return ProjectCustomer.create(projectRow);
+        return ProjectCustomer.create(customerRow);
     }
 }

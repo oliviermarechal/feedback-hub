@@ -6,67 +6,53 @@
   <component name="ChangeListManager">
     <list default="true" id="21c438c7-35d3-41ca-bd89-42493ffbb9d3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/.vscode/settings.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/component/feedback/edit-feedback.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/feedback/edit-feedback.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/app.postcss" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/app.postcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/component/common/modal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/common/modal.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/component/project/row.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/project/row.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/auth/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/auth/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/auth/login/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/auth/login/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/auth/registration/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/auth/registration/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/configuration/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/configuration/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/configuration/code-block-content.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/configuration/code-block-content.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/settings/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/settings/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/add/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/add/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/feedback.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/feedback.store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/interfaces/feedback.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/interfaces/feedback.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/interfaces/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/interfaces/project.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/docs/+layout.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/docs/+page.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/docs/doc-navigation.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/svelte.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/svelte.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/tailwind.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/schema/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/schema/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/global-config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/global-config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.esm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.esm.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/global-config.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/global-config.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/package/src/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/package/src/main.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/dist/package/src/sdk.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/package/src/sdk.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/package/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/src/sdk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/sdk.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/src/views/component/modal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/component/modal.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/src/views/default-embed.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/default-embed.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env.dist" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/src/views/upvote-embed.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/upvote-embed.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/package/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/package/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/external.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/external.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/feedback.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/feedback.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/project.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/project.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/tag.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/tag.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/user.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/providers/db-provider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/providers/db-provider.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/feedback.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/feedback.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project-customer.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project-customer.repository.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/security/project.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/security/project.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/feedback-repository.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/feedback-repository.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/project-repository.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/project-repository.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/model/feedback.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/model/feedback.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/model/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/model/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/model/project.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/model/project.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.command.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.command.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.use-case.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.use-case.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project/create-project/create-project.use-case.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project/create-project/create-project.use-case.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/tag.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/tag.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/user.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/user.repository.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/feeback/list-feedback.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/feeback/list-feedback.query.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/get-project.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/get-project.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-user-project.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-user-project.query.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-voting-feedbacks-project.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-voting-feedbacks-project.query.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/tag/tag-autocomplete.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/tag/tag-autocomplete.query.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/user/me.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/user/me.query.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -160,7 +146,7 @@
       <workItem from="1702286291539" duration="5043000" />
       <workItem from="1702410667829" duration="35576000" />
       <workItem from="1702671207661" duration="44023000" />
-      <workItem from="1703077873644" duration="22873000" />
+      <workItem from="1703077873644" duration="52204000" />
     </task>
     <servers />
   </component>

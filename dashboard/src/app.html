@@ -7,13 +7,13 @@
 
 		%sveltekit.head%
 	</head>
-	<body data-sveltekit-preload-data="hover" data-theme="hamlindigo">
+	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents" class="h-full overflow-hidden">%sveltekit.body%</div>
 		<link rel="stylesheet" type="text/css" href="http://localhost:8081/bundle.css">
 		<script src="http://localhost:8081/bundle.js"></script>
 		<script>
 			async function init() {
-				await InsightHunt.init({projectApiKey: "45e229b0d2124dd444041c7d3c30f54f"});
+				await InsightHunt.init({projectApiKey: "3cb5659bbe9482f4b484531a5ca3cda2"});
 				InsightHunt.setUpFeedbackContainer();
 			}
 
