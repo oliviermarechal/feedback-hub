@@ -6,6 +6,14 @@
     import {project} from '../../../../../stores/project.store';
     import {page} from '$app/stores';
     import Icon from '@iconify/svelte';
+    import {Button} from '$lib/components/ui/button';
+    import {Label} from '$lib/components/ui/label';
+    import {Input} from '$lib/components/ui/input';
+    import * as Card from '$lib/components/ui/card';
+    import atomOneDark from "svelte-highlight/styles/atom-one-dark";
+    import { Highlight } from "svelte-highlight";
+    import { getCodeBlockConfigurationContent } from '../configuration/code-block-content';
+    import { typescript } from 'svelte-highlight/languages';
 
     let domainName: string = '';
     let domainError = writable<string>('');
@@ -19,6 +27,8 @@
             project.set(response.data);
         }
     });
+
+    $: code = getCodeBlockConfigurationContent($project?.apiKey);
 
     const handleAddDomain = () => {
         try {
@@ -54,6 +64,14 @@
         });
     }
 
+    const handleDeleteProject = async () => {
+        const response = await apiClient.delete(`/project/${$project.id}`);
+
+        if (response.status === 204) {
+            return goto('/dashboard');
+        }
+    }
+
     const handleUpdateProject = async () => {
         const response = await apiClient.put(`/project/${$project.id}`, {
             name: $project.name,
@@ -70,39 +88,67 @@
     }
 </script>
 
+<svelte:head>
+    {@html atomOneDark}
+</svelte:head>
+
+<div class="flex-1 space-y-4 p-8 pt-6">
+    <div class="flex flex-row justify-between">
+        <div class="flex flex-row justify-items-start">
+            <a class="text-xl mt-2" href="/dashboard">Dashboard</a>
+            <span class="text-xl mt-2">&nbsp;/&nbsp;</span>
+            <a class="text-xl mt-2" href="/dashboard/project/{id}">{$project?.name}</a>
+            <span class="text-xl mt-2">&nbsp;/&nbsp;</span>
+            <h2 class="text-2xl mt-2 font-bold">Settings</h2>
+        </div>
+    </div>
+</div>
 {#if $project}
-    <div class="h-full mx-auto flex justify-center items-center">
-        <div class="space-y-10 flex flex-col items-center">
-            <h2 class="h2 text-center">Update</h2>
-            <div class="card variant-glass p-4">
-                <div class='px-6 py-5'>
-                    <label class="label">
-                        <span>Nom</span>
-                        <input class="input" bind:value={$project.name} type="text" />
-                    </label>
-                </div>
-                <div class='px-6'>
-                    <label class="label">
-                        <span>Sites autorisés</span>
-                        <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] input{$domainError.length > 0 ? '-error' : ''}">
-                            <input bind:value={domainName} type="text" placeholder="https://domain.fr"  />
-                            <button class="variant-filled-primary" on:click={() => handleAddDomain()}><Icon icon="material-symbols:add" width="24" height="24" /></button>
+    <div class="items-start justify-center gap-6 rounded-lg p-8 md:grid lg:grid-cols-2 xl:grid-cols-3">
+        <div class="grid items-start gap-6 lg:col-span-1">
+            <div class="flex items-center justify-center [&>div]:w-full">
+                <Card.Root>
+                    <Card.Header class="space-y-1">
+                        <Card.Title class="text-2xl">Update project</Card.Title>
+                    </Card.Header>
+                    <Card.Content class="grid gap-4">
+                        <div class="grid gap-2">
+                            <Label for="project-name-input">Name</Label>
+                            <Input class="input" id="project-name-input" bind:value={$project.name} type="text" />
                         </div>
-                        <ol class="list pt-2">
-                            {#each $project.domainNames as domain}
-                                <li class='flex justify-between'>
-                                    <span>{domain}</span>
-                                    <button on:click={() => removeDomain(domain)}><Icon icon="mdi:trash" width="24" height="24" /></button>
-                                </li>
-                            {/each}
-                        </ol>
-                    </label>
-                </div>
-                <div class='px-6 pt-5 pb-5 text-center'>
-                    <button on:click={() => handleUpdateProject()} type="button" class="btn variant-ringed-primary mr-5">Valider</button>
-                    <button on:click={() => goto(`/dashboard/project/${id}`)} type="button" class="btn variant-ringed-warning">Retour</button>
-                </div>
+                        <div class="grid gap-2">
+                            <Label class="label">Allowed website</Label>
+                            <div class="flex w-full max-w-sm mb-2 items-center input{$domainError.length > 0 ? '-error' : ''}">
+                                <Input bind:value={domainName} type="text" placeholder="https://domain.fr"  />
+                                <Button variant="outline" on:click={() => handleAddDomain()}><Icon icon="material-symbols:add" width="24" height="24" /></Button>
+                            </div>
+                            <ol>
+                                {#each $project.domainNames as domain}
+                                    <li class="flex flex-row justify-between px-2">
+                                        <span>{domain}</span>
+                                        <button type="button" on:click={() => removeDomain(domain)}><Icon icon="mdi:trash" width="24" height="24" /></button>
+                                    </li>
+                                {/each}
+                            </ol>
+                        </div>
+                    </Card.Content>
+                    <Card.Footer>
+                        <Button on:click={() => handleUpdateProject()} type="button">Update</Button>
+                        <Button class="ml-4" variant="destructive" on:click={() => handleDeleteProject()} type="button">Delete project</Button>
+                    </Card.Footer>
+                </Card.Root>
+            </div>
+            <div class="flex items-center justify-center [&>div]:w-full">
+                <Card.Root>
+                    <Card.Header class="space-y-1">
+                        <Card.Title class="text-2xl">Configuration</Card.Title>
+                    </Card.Header>
+                    <Card.Content class="grid gap-4">
+                        <Highlight language={typescript} {code} />
+                    </Card.Content>
+                </Card.Root>
             </div>
         </div>
     </div>
 {/if}
+

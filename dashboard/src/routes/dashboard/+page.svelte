@@ -3,13 +3,17 @@
 	import apiClient from '../../api';
 	import { projects } from '../../stores/project.store';
 	import ProjectRow from '../../component/project/row.svelte';
+	import AddProject from '../../component/project/new-project.svelte';
 	import Icon from '@iconify/svelte';
 	import * as Card from '$lib/components/ui/card';
-	import { Button } from '$lib/components/ui/button';
+	import * as Drawer from '$lib/components/ui/drawer';
 
 	onMount(() => {
 		apiClient.get('/project').then(result => projects.set(result.data))
 	})
+
+	let openNewProjectDrawer = false;
+	const toggleDrawer = () => openNewProjectDrawer = !openNewProjectDrawer;
 </script>
 
 <div class="flex-1 space-y-4 p-8 pt-6">
@@ -49,14 +53,21 @@
 	<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
 		<Card.Root class="col-span-4">
 			<Card.Header>
-				<Card.Title>Projects</Card.Title>
+				<Card.Title class="flex flex-row justify-between">
+					<h3>Projects</h3>
+					<Drawer.Root bind:open={openNewProjectDrawer} onOutsideClick={toggleDrawer}>
+						<Drawer.Trigger asChild>
+							<button on:click={toggleDrawer}><Icon width="24" icon="zondicons:add-outline" /></button>
+						</Drawer.Trigger>
+						<Drawer.Content>
+							<AddProject onClose={() => toggleDrawer()} />
+						</Drawer.Content>
+					</Drawer.Root>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
 				{#if $projects.length === 0}
 					<p class="mb-4">To get started, create your first project</p>
-					<Button href='/dashboard/project/add' class="variant-ringed-primary">
-						<Icon width="24" icon="zondicons:add-outline" />
-					</Button>
 				{:else}
 					<div class="space-y-4">
 						{#each $projects as project}

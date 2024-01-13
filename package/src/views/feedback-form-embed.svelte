@@ -1,10 +1,9 @@
 <script lang='ts'>
     import Modal from './component/modal.svelte';
+    import PoweredEmber from './component/powered.svelte';
     import { Button } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input";
-    // @ts-ignore
     import { Label } from "$lib/components/ui/label";
-    // @ts-ignore
     import { Textarea } from "$lib/components/ui/textarea";
     import * as Select from "$lib/components/ui/select";
     import { Selected } from 'bits-ui';
@@ -79,7 +78,12 @@
         </form>
     </div>
     <div slot='footer'>
-        <Button variant="outline" class='ih-action-button' on:click={onClose}>Cancel</Button>
-        <Button class='ih-action-button' on:click={handleSubmit}>Send</Button>
+        <div class="flex-col flex space-y-2">
+            <div>
+                <Button variant="outline" class='ih-action-button' on:click={onClose}>Cancel</Button>
+                <Button class='ih-action-button' on:click={handleSubmit}>Send</Button>
+            </div>
+            <PoweredEmber />
+        </div>
     </div>
 </Modal>

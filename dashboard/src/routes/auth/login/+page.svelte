@@ -27,7 +27,7 @@
             Login
         </h1>
     </div>
-    <div class={"grid gap-6"}>
+    <div class="grid gap-6">
         <form>
             <div class="grid gap-2">
                 <div class="grid gap-1">

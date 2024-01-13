@@ -5,6 +5,11 @@
     import apiClient from '../../api';
     import {updateFeedback} from '../../stores/feedback.store';
     import Icon from '@iconify/svelte';
+    import { Button } from '$lib/components/ui/button';
+    import { Label } from '$lib/components/ui/label';
+    import { Textarea } from '$lib/components/ui/textarea';
+    import { Input } from '$lib/components/ui/input';
+    import { Badge } from '$lib/components/ui/badge';
 
     export let feedback: Feedback;
     export let open: boolean = false;
@@ -38,13 +43,13 @@
     }
 
     const handleTagKeydown = (e: any) => {
-        if (e.keyCode === 13 && tagTerm.length > 2) {
+        if (e.keyCode === 13 && tagTerm.length > 1) {
             addTag({label: tagTerm, projectId: feedback.projectId});
         }
     }
 
     const handleChangeTagInput = async () => {
-        if (tagTerm.length > 2) {
+        if (tagTerm.length > 1) {
             const result = await apiClient.get(`/tag/autocomplete?term=${tagTerm}&projectId=${feedback?.projectId}`)
             if (result.data?.length > 0) {
                 autocompleteResult = result.data;
@@ -73,50 +78,58 @@
     <Modal open={open} close={onClose}>
         <span class='w-full text-center' slot='header'><h3 class='h3'>Feedback</h3></span>
         <div slot='body' class='p-5'>
-            <div>From: {#if feedback.author} {feedback.author?.email}{:else} unknown {/if}</div>
+            <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Details</h4>
+            <div class="flex flex-row justify-between"><span>From</span> <span>{#if feedback.author} {feedback.author?.email}{:else} unknown {/if}</span></div>
             {#if feedback.type === FeedbackType.Bug}
-                <div>url: {feedback.url}</div>
-                <div>os: {feedback.os}</div>
-                <div>engine: {feedback.engine}</div>
-                <div>language: {feedback.language}</div>
-                <div>browser: {feedback.browser}</div>
+                <div class="flex flex-row justify-between"><span>url</span> <span>{feedback.url}</span></div>
+                <div class="flex flex-row justify-between"><span>os</span> <span>{feedback.os}</span></div>
+                <div class="flex flex-row justify-between"><span>engine</span> <span>{feedback.engine}</span></div>
+                <div class="flex flex-row justify-between"><span>language</span> <span>{feedback.language}</span></div>
+                <div class="flex flex-row justify-between"><span>browser</span> <span>{feedback.browser}</span></div>
             {/if}
-            <div class='mt-2 flex flex-row'>
+            <div class="grid gap-4 py-4">
+                <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Content</h4>
                 {#if editContent}
-                    <textarea class="input w-full" bind:value={feedback.content} on:keypress={handleKeypressContentInput}></textarea>
+                    <div class="items-center gap-4">
+                        <Textarea bind:value={feedback.content} on:keypress={handleKeypressContentInput} />
+                        <p class="text-sm text-muted-foreground">
+                            Press enter to valid.
+                        </p>
+                    </div>
                 {:else}
-                    <div>Content: {feedback.content}</div>
-                    <button on:click={() => editContent = true}>
-                        <Icon class="ml-4 cursor-pointer" icon="carbon:edit" />
-                    </button>
+                    <div class="flex flex-row justify-between">
+                        <span>{feedback.content}</span>
+                        {#if feedback.type === FeedbackType.Enhance}
+                            <button on:click={() => editContent = true}>
+                                <Icon class="ml-4 cursor-pointer" icon="carbon:edit" />
+                            </button>
+                        {/if}
+                    </div>
                 {/if}
+                <div class="items-center gap-4">
+                    <Label>Tags</Label>
+                    <Input class="input" bind:value={tagTerm} on:input={handleChangeTagInput} on:keydown={handleTagKeydown} autocomplete={'true'} />
+                    {#if autocompleteResult.length > 0}
+                        <ul class="overflow-hidden absolute w-1/3 bg-white border border-primary-500/30">
+                            {#each autocompleteResult as result, i}
+                                <li><button class="cursor-pointer p-2 px-4 w-full text-left z-auto" on:click={() => addTag(result)}>
+                                    {result.label}
+                                </button></li>
+                            {/each}
+                        </ul>
+                    {/if}
+                </div>
             </div>
-            <label class="label">
-	            <span>Tags</span>
-                <input class="input" bind:value={tagTerm} on:input={handleChangeTagInput} on:keydown={handleTagKeydown} autocomplete={'true'} />
-                {#if autocompleteResult.length > 0}
-                    <ul class="overflow-hidden absolute w-1/3 bg-surface-800 border border-primary-500/30">
-                        {#each autocompleteResult as result, i}
-                            <li><button class="cursor-pointer p-2 px-4 text-white hover:bg-primary-500 hover:text-black w-full text-left" on:click={() => addTag(result)}>
-                                {result.label}
-                            </button></li>
-                        {/each}
-                    </ul>
-                {/if}
-            </label>
             <div class='mt-2'>
                 {#if feedback.tags && feedback.tags?.length > 0}
                     {#each feedback.tags as tag}
-                        <button class="chip variant-filled-secondary mr-2 {tag.id}" on:click={() => removeTag(tag.id)}>
-                            <span>{tag.label}</span>
-                            <span>X</span>
-                        </button>
+                        <Badge class="space-x-1"><span>{tag.label}</span><button on:click={() => removeTag(tag.id)}><Icon icon="raphael:cross" width="20" height="20" /></button></Badge>
                     {/each}
                 {/if}
             </div>
         </div>
         <span class='w-full' slot='footer'>
-            <button class='btn variant-ringed-primary float-right' on:click={onClose}>Close</button>
+            <Button class='btn variant-ringed-primary float-right' on:click={onClose}>Close</Button>
         </span>
     </Modal>
 {/if}
