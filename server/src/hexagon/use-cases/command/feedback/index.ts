@@ -11,6 +11,7 @@ import { RemoveTagUseCase } from './remove-tag';
 import { FeedbackToUpvoteUseCase } from './feedback-to-upvote';
 import { UpdateFeedbackContentUseCase } from './update-feedback-content';
 import { UpvoteUseCase } from './upvote';
+import { DeleteFeedbackUseCase } from './delete-feedback';
 
 export * from './create-feedback';
 export * from './add-tag';
@@ -18,6 +19,7 @@ export * from './remove-tag';
 export * from './feedback-to-upvote';
 export * from './update-feedback-content';
 export * from './upvote';
+export * from './delete-feedback';
 
 export const FeedbackCommandUseCases: Provider[] = [
     {
@@ -102,6 +104,13 @@ export const FeedbackCommandUseCases: Provider[] = [
                 feedbackRepository,
                 projectCustomerRepository,
             );
+        },
+    },
+    {
+        inject: [FeedbackRepositoryInterface],
+        provide: DeleteFeedbackUseCase,
+        useFactory: (feedbackRepository: FeedbackRepositoryInterface) => {
+            return new DeleteFeedbackUseCase(feedbackRepository);
         },
     },
 ];

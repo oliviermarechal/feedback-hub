@@ -25,7 +25,7 @@ CREATE TABLE feedbacks (
     content TEXT NOT NULL,
     type VARCHAR ( 50 ) NOT NULL,
     project_id uuid NOT NULL,
-    author_id uuid NOT NULL,
+    author_id uuid NULL,
     url TEXT NULL,
     os VARCHAR ( 50 ) NULL,
     engine VARCHAR ( 50 ) NULL,

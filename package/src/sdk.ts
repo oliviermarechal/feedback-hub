@@ -20,6 +20,16 @@ export default class InsightHuntSDK {
         this.apiKey = config.projectApiKey;
     }
 
+    alreadyVoted(feedback: Feedback): boolean {
+        if (this.user) {
+            return !!feedback.customersVote.find(customer => customer.externalId === (this.user as IHUser).id);
+        }
+
+        return this.userIp ?
+            !!feedback.customersVote.find(customer => customer.ipAddress?.includes((this.userIp as string))) :
+            false
+    }
+
     async initCheck() {
         const result = await fetch(
             `${this.apiUrl}/external/project`,
@@ -29,6 +39,7 @@ export default class InsightHuntSDK {
             }
         );
         await result.json();
+
         if (result.ok) {
             this.project = result.body;
         } else {

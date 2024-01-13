@@ -3,10 +3,11 @@ import {
     IsEmail,
     IsEnum,
     IsOptional,
-    IsString, ValidateNested,
+    IsString,
+    ValidateNested,
 } from 'class-validator';
-import {FeedbackType} from '../../../../model';
-import {Type} from 'class-transformer';
+import { FeedbackStatus, FeedbackType } from '../../../../model';
+import { Type } from 'class-transformer';
 
 export class authorDto {
     @IsString()
@@ -41,7 +42,7 @@ export class CreateFeedbackDto {
     content: string;
 
     @ValidateNested({
-        groups: ['external']
+        groups: ['external'],
     })
     @Type(() => authorDto)
     author?: authorDto;
@@ -52,5 +53,10 @@ export class CreateFeedbackDto {
 
     @IsString()
     @IsOptional()
-    url: string;
+    url?: string;
+
+    @IsString()
+    @IsOptional()
+    @IsEnum(FeedbackStatus)
+    status: FeedbackStatus;
 }

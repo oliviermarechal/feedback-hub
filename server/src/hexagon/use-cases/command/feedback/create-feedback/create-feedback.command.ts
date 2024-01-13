@@ -1,4 +1,4 @@
-import { FeedbackType } from '../../../../model';
+import { FeedbackStatus, FeedbackType } from '../../../../model';
 
 export class CreateFeedbackCommand {
     constructor(
@@ -16,5 +16,6 @@ export class CreateFeedbackCommand {
         public readonly engine?: string,
         public readonly browser?: string,
         public readonly url?: string,
+        public readonly status?: FeedbackStatus,
     ) {}
 }

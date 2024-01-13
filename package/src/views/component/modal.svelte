@@ -1,13 +1,11 @@
 <script lang="ts">
     import * as Dialog from "$lib/components/ui/dialog";
-    import { Button } from "$lib/components/ui/button";
 
     export let open = false;
     export let onClose: () => any;
 </script>
 
 <Dialog.Root bind:open={open} onOpenChange={() => onClose()}>
-
     <Dialog.Content>
         <Dialog.Header>
             <Dialog.Title><slot name='header' /></Dialog.Title>

@@ -15,6 +15,8 @@ import {
     CreateFeedbackCommand,
     CreateFeedbackDto,
     CreateFeedbackUseCase,
+    DeleteFeedbackCommand,
+    DeleteFeedbackUseCase,
     FeedbackToUpvoteCommand,
     FeedbackToUpvoteUseCase,
     RemoveTagCommand,
@@ -37,6 +39,7 @@ export class FeedbackController {
         private readonly removeTag: RemoveTagUseCase,
         private readonly feedbackToUpvote: FeedbackToUpvoteUseCase,
         private readonly updateFeedbackContent: UpdateFeedbackContentUseCase,
+        private readonly deleteFeedback: DeleteFeedbackUseCase,
     ) {}
 
     @Post()
@@ -48,7 +51,12 @@ export class FeedbackController {
                 dto.type,
                 dto.content,
                 dto.language,
-                dto.author,
+                null,
+                null,
+                null,
+                null,
+                null,
+                dto.status,
             ),
         );
     }
@@ -90,6 +98,13 @@ export class FeedbackController {
         return this.updateFeedbackContent.handle(
             new UpdateFeedbackContentCommand(id, dto.content),
         );
+    }
+
+    @UseGuards(JwtGuard)
+    @Delete(':id')
+    @HttpCode(204)
+    async delete(@Param('id') id: string): Promise<void> {
+        await this.deleteFeedback.handle(new DeleteFeedbackCommand(id));
     }
 
     @Get(':projectId')

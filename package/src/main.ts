@@ -1,5 +1,7 @@
 import InsightHuntSDK, {IHUser} from './sdk';
 import DefaultEmbed from './views/default-embed.svelte';
+import UpvoteList from './views/component/upvote-list.svelte';
+import FeedbackFormExternal from './views/feedback-form-external.svelte';
 
 export * from './sdk';
 
@@ -21,6 +23,36 @@ export function setUpFeedbackContainer() {
     document.body.append(container)
 
     new DefaultEmbed({
+        target: container,
+        props: {
+            sdk,
+        }
+    });
+}
+
+export function showUpvote(containerId: string) {
+    const container = document.getElementById(containerId)
+
+    if (!container) {
+        throw new Error('DOM element with id ' + containerId + ' not found');
+    }
+
+    new UpvoteList({
+        target: container,
+        props: {
+            sdk,
+        }
+    });
+}
+
+export function showFeedbackForm(containerId: string) {
+    const container = document.getElementById(containerId)
+
+    if (!container) {
+        throw new Error('DOM element with id ' + containerId + ' not found');
+    }
+
+    new FeedbackFormExternal({
         target: container,
         props: {
             sdk,

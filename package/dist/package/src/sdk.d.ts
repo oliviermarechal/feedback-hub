@@ -12,6 +12,7 @@ export default class InsightHuntSDK {
     private userIp;
     private project;
     constructor(config: IHSdkConfiguration);
+    alreadyVoted(feedback: Feedback): boolean;
     initCheck(): Promise<void>;
     addFeedback(feedbackContentData: {
         content: string;

@@ -53,4 +53,43 @@ export class ProjectRepository implements ProjectRepositoryInterface {
 
         return Project.create(projectRow);
     }
+
+    async delete(id: string, owner: string): Promise<void> {
+        const feedbacks = await DbProvider.selectFrom('feedbacks')
+            .selectAll()
+            .where('feedbacks.projectId', '=', id)
+            .execute();
+
+        if (feedbacks.length > 0) {
+            await Promise.all([
+                DbProvider.deleteFrom('feedbackVotes')
+                    .where(
+                        'feedbackVotes.feedbackId',
+                        'in',
+                        feedbacks.map((f) => f.id),
+                    )
+                    .execute(),
+                DbProvider.deleteFrom('feedbacksTags')
+                    .where(
+                        'feedbacksTags.feedbackId',
+                        'in',
+                        feedbacks.map((f) => f.id),
+                    )
+                    .execute(),
+                DbProvider.deleteFrom('tags')
+                    .where('projectId', '=', id)
+                    .execute(),
+            ]);
+        }
+        await DbProvider.deleteFrom('feedbacks')
+            .where('projectId', '=', id)
+            .execute();
+        await DbProvider.deleteFrom('projectCustomers')
+            .where('projectId', '=', id)
+            .execute();
+        await DbProvider.deleteFrom('projects')
+            .where('id', '=', id)
+            .where('userId', '=', owner)
+            .execute();
+    }
 }

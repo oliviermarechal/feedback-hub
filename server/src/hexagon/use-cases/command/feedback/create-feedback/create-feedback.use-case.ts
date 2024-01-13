@@ -49,8 +49,8 @@ export class CreateFeedbackUseCase {
             Feedback.create({
                 ...command,
                 id: generateUuid(),
-                status: FeedbackStatus.New,
-                authorId: author.id,
+                status: command.status ? command.status : FeedbackStatus.New,
+                authorId: author?.id,
             }),
         );
     }

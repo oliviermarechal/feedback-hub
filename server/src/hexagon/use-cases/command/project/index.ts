@@ -4,10 +4,12 @@ import {
     ProjectRepositoryInterface,
     UserRepositoryInterface,
 } from '../../../gateways/repository';
-import {UpdateProjectUseCase} from './update-project';
+import { UpdateProjectUseCase } from './update-project';
+import { DeleteProjectUseCase } from './delete-project';
 
 export * from './create-project';
 export * from './update-project';
+export * from './delete-project';
 
 export const ProjectCommandUseCases: Provider[] = [
     {
@@ -28,6 +30,13 @@ export const ProjectCommandUseCases: Provider[] = [
             projectRepository: ProjectRepositoryInterface,
         ) => {
             return new UpdateProjectUseCase(userRepository, projectRepository);
+        },
+    },
+    {
+        inject: [ProjectRepositoryInterface],
+        provide: DeleteProjectUseCase,
+        useFactory: (projectRepository: ProjectRepositoryInterface) => {
+            return new DeleteProjectUseCase(projectRepository);
         },
     },
 ];

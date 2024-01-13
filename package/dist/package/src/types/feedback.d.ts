@@ -30,5 +30,6 @@ export interface Feedback {
         externalId: string;
         email: string;
         logoUrl?: string;
+        ipAddress?: string[];
     }[];
 }

@@ -16,7 +16,7 @@ export class FeedbackRepository implements FeedbackRepositoryInterface {
                 .returningAll()
                 .executeTakeFirst();
 
-            return Feedback.create(feedbackRow);
+            return Feedback.hydrateFromDb(feedbackRow);
         }
 
         const feedbackRow = await DbProvider.insertInto('feedbacks')
@@ -27,7 +27,7 @@ export class FeedbackRepository implements FeedbackRepositoryInterface {
             .returningAll()
             .executeTakeFirst();
 
-        return Feedback.create(feedbackRow);
+        return Feedback.hydrateFromDb(feedbackRow);
     }
 
     async find(id: string): Promise<Feedback | null> {
@@ -89,5 +89,19 @@ export class FeedbackRepository implements FeedbackRepositoryInterface {
                 .values({ feedbackId, customerId })
                 .execute(),
         ]);
+    }
+
+    async delete(feedbackId: string): Promise<void> {
+        await Promise.all([
+            DbProvider.deleteFrom('feedbackVotes')
+                .where('feedbackVotes.feedbackId', '=', feedbackId)
+                .execute(),
+            DbProvider.deleteFrom('feedbacksTags')
+                .where('feedbacksTags.feedbackId', '=', feedbackId)
+                .execute(),
+        ]);
+        await DbProvider.deleteFrom('feedbacks')
+            .where('id', '=', feedbackId)
+            .execute();
     }
 }

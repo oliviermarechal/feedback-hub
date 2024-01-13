@@ -12,6 +12,7 @@ export interface FeedbackRepositoryInterface {
         voteValue: number,
         customerId: string,
     ): Promise<void>;
+    delete(feedbackId: string): Promise<void>;
 }
 
 export const FeedbackRepositoryInterface = Symbol(

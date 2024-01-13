@@ -8,52 +8,50 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/app.postcss" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/app.postcss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/component/common/modal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/common/modal.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/component/project/row.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/project/row.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/component/feedback/edit-feedback.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/feedback/edit-feedback.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/component/feedback/feedback-panel.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/feedback/feedback-panel.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/component/feedback/voting-feedback-panel.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/component/feedback/voting-feedback-panel.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/auth/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/auth/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/auth/login/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/auth/login/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/auth/registration/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/auth/registration/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+layout.svelte" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/configuration/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/configuration/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/settings/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/settings/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/add/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/add/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/docs/+layout.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/docs/+page.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/docs/doc-navigation.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/svelte.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/svelte.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/tailwind.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/add/+page.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/stores/feedback.store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/stores/feedback.store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/static/favicon.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/schema/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/schema/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.css" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.esm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.esm.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/dist/bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/bundle.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/dist/package/src/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/package/src/main.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/dist/package/src/sdk.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/package/src/sdk.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/dist/package/src/types/feedback.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/dist/package/src/types/feedback.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/src/sdk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/sdk.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/src/types/feedback.ts" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/types/feedback.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/src/views/component/modal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/component/modal.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/src/views/default-embed.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/default-embed.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package/src/views/feedback-form.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/feedback-form-embed.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package/src/views/upvote-embed.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/package/src/views/upvote-embed.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/package/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/package/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/providers/db-provider.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/providers/db-provider.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/feedback.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/feedback.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/adapters/primary/controller/project.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/primary/controller/project.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/feedback.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/feedback.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project-customer.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project-customer.repository.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/project.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/tag.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/tag.repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/user.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/adapters/secondary/repositories/user.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/feedback-repository.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/feedback-repository.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/project-repository.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/gateways/repository/project-repository.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.command.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.command.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.use-case.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/create-feedback/create-feedback.use-case.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/feeback/list-feedback.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/feeback/list-feedback.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/get-project.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/get-project.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-user-project.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-user-project.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-voting-feedbacks-project.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/project/list-voting-feedbacks-project.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/tag/tag-autocomplete.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/tag/tag-autocomplete.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/user/me.query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/hexagon/use-cases/query/user/me.query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +79,7 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2XgHyKB4efQMVbLiXmdc0ZzlGXS" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -94,7 +92,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/oliviermarechal/www/insight-hunt/server/src/hexagon/model",
+    "last_opened_file_path": "/Users/oliviermarechal/www/insight-hunt/package/src/views/component",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -109,18 +107,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/server/src/hexagon/model" />
-      <recent name="$PROJECT_DIR$/server/src/adapters/primary/providers/database-types" />
-      <recent name="$PROJECT_DIR$/server/src/adapters/secondary/repositories" />
-      <recent name="$PROJECT_DIR$/package/src/views" />
+      <recent name="$PROJECT_DIR$/package/src/views/component" />
+      <recent name="$PROJECT_DIR$/server/src/hexagon/use-cases/command/feedback" />
+      <recent name="$PROJECT_DIR$/dashboard/src/stores/interfaces" />
+      <recent name="$PROJECT_DIR$/dashboard/src/component/feedback" />
       <recent name="$PROJECT_DIR$/server/src/hexagon/use-cases/command/project" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/package/src/views" />
       <recent name="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]" />
       <recent name="$PROJECT_DIR$/test-sdk/src/views/component" />
       <recent name="$PROJECT_DIR$/dashboard/src/routes/dashboard/project/[id]/feedbacks" />
       <recent name="$PROJECT_DIR$/iframe/src/routes" />
-      <recent name="$PROJECT_DIR$/iframe/routes" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -146,7 +144,9 @@
       <workItem from="1702286291539" duration="5043000" />
       <workItem from="1702410667829" duration="35576000" />
       <workItem from="1702671207661" duration="44023000" />
-      <workItem from="1703077873644" duration="52204000" />
+      <workItem from="1703077873644" duration="115529000" />
+      <workItem from="1704965838888" duration="202000" />
+      <workItem from="1704966596908" duration="21989000" />
     </task>
     <servers />
   </component>

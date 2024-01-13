@@ -46,6 +46,7 @@ export class ListFeedbackQuery {
             ])
             .where('feedbacks.projectId', '=', projectId)
             .where('feedbacks.status', '<>', FeedbackStatus.Archived)
+            .orderBy('feedbacks.createdAt', 'desc')
             .execute();
 
         return rows.map((dbProps) => {
