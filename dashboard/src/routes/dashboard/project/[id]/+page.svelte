@@ -6,25 +6,15 @@
     import VotingFeedbackPanel from '../../../../component/feedback/voting-feedback-panel.svelte'
     import { page } from '$app/stores';
     import { project } from '../../../../stores/project.store';
-    import { feedbacks } from '../../../../stores/feedback.store';
-    import { FeedbackStatus } from '../../../../stores/interfaces/feedback';
     import { Button } from '$lib/components/ui/button';
     import Icon from '@iconify/svelte';
 
     const id = $page.params.id;
 
     onMount(async () => {
-        const [response, feedbackListResponse] = await Promise.all([
-            apiClient.get(`/project/${id}`),
-            apiClient.get(`/feedback/${id}`)
-        ])
+        const response = await apiClient.get(`/project/${id}`);
+
         project.set(response.data);
-        feedbacks.set(feedbackListResponse.data.map((f: any) => {
-            return {
-                ...f,
-                createdAt: new Date(f.createdAt)
-            }
-        }));
     });
 </script>
 
@@ -46,10 +36,10 @@
             <Tabs.Trigger value="board" disabled>Public board <small>(coming soon...)</small></Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="feedbacks">
-            <FeedbackPanel feedbacks={$feedbacks.filter(f => f.status === FeedbackStatus.New)} />
+            <FeedbackPanel />
         </Tabs.Content>
         <Tabs.Content value="voting">
-            <VotingFeedbackPanel feedbacks={$feedbacks.filter(f => f.status === FeedbackStatus.Voting)} />
+            <VotingFeedbackPanel />
         </Tabs.Content>
         <Tabs.Content value="board">
             TODO

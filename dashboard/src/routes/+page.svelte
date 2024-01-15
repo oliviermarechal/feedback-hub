@@ -5,6 +5,8 @@
     import {Label} from '$lib/components/ui/label';
     import {Textarea} from '$lib/components/ui/textarea';
     import {Input} from '$lib/components/ui/input';
+    import { toast } from 'svelte-sonner';
+    import apiClient from '../api';
 
     const featureCards: {
         icon: string;
@@ -31,7 +33,7 @@
     const advantages = [
         {
             icon: 'icon-park-outline:archery',
-            text: 'Strategy managment',
+            text: 'Strategy management',
             subText: 'Manage your product(s) strategy with our tools',
         },
         {
@@ -46,12 +48,48 @@
         },
     ]
 
-    const scrollIntoView = ({ target }: { target: any}) => {
+    const scrollIntoView = ({ target, preventDefault }: { target: any, preventDefault: () => any}) => {
+        preventDefault();
         const el = document.querySelector(target.getAttribute('href'));
         if (!el) return;
         el.scrollIntoView({
             behavior: 'smooth'
         });
+    }
+
+    let email: string = '';
+    let content: string = '';
+
+    const handleEarlyAccess = async () => {
+        if (!email || !content) {
+            toast.error('Please fill all fields');
+            return;
+        }
+
+        try {
+            const res = await apiClient.post('/early-access',
+                {
+                    email,
+                    content,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            if (res.status === 201) {
+                toast.success('Your request has been sent');
+                email = '';
+                content = '';
+            } else {
+                toast.error('An error occurred!');
+            }
+        } catch (e) {
+            toast.error('An error occurred!');
+            return;
+        }
     }
 </script>
 
@@ -144,14 +182,14 @@
             <Card.Content class="space-y-4">
                 <div class="w-full px-3 mb-6 md:mb-0">
                     <Label for="email">Email</Label>
-                    <Input id="email" placeholder="email" type="email" />
+                    <Input bind:value={email} id="email" placeholder="email" type="email" />
                 </div>
                 <div class="w-full px-3 mb-6 md:mb-0">
                     <Label for="content">Why do you want access ?</Label>
-                    <Textarea id="content" placeholder="Talk about your product" />
+                    <Textarea id="content" bind:value={content} placeholder="Talk about your product" />
                 </div>
                 <div class="flex flex-row justify-end">
-                    <Button>Validate</Button>
+                    <Button on:click={handleEarlyAccess}>Validate</Button>
                 </div>
             </Card.Content>
         </Card.Root>

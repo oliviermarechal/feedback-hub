@@ -8,7 +8,8 @@
     import type {Selected} from 'bits-ui';
     import { page } from '$app/stores';
     import apiClient from '../../api';
-    import {feedbacks} from '../../stores/feedback.store';
+    import {listNewFeedback, listVotingFeedback} from '$lib/actions/feedback/get-list-feedback.action';
+    import {newFeedbacks, votingFeedbacks} from '../../stores/feedback.store';
 
     export let onClose: () => any;
     export let voting: boolean;
@@ -37,18 +38,14 @@
             voting ? {...body, status: 'voting'} : body
         );
 
-        feedbacks.update(feedbacks => {
-            return [
-                {
-                    ...result.data,
-                    createdAt: new Date(result.data.createdAt)
-                },
-                ...feedbacks,
-            ];
-        })
-
         if (result.status !== 201) {
             console.log('MANAGE ERROR')
+        }
+
+        if (voting) {
+            listVotingFeedback(id, $votingFeedbacks.limit, $votingFeedbacks.offset);
+        } else {
+            listNewFeedback(id, $newFeedbacks.limit, $newFeedbacks.offset)
         }
 
         onClose();

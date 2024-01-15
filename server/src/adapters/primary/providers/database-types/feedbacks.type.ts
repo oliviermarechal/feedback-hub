@@ -20,7 +20,7 @@ export interface FeedbackTable {
     browser: string;
     status: FeedbackStatus;
     vote: number;
-    createdAt: ColumnType<Date, string | undefined, never>;
+    createdAt: ColumnType<string, string | undefined, never>;
 }
 
 export type Feedback = Selectable<FeedbackTable>;

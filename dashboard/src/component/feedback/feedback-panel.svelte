@@ -4,16 +4,31 @@
     import EditFeedback from '../../component/feedback/edit-feedback.svelte';
     import FeedbackPanelToolbar from './feedback-panel-toolbar.svelte';
     import apiClient from '../../api';
-    import {filter, removeFeedback, updateFeedback} from '../../stores/feedback.store';
+    import {newFeedbacks, votingFeedbacks} from '../../stores/feedback.store';
     import Icon from '@iconify/svelte';
     import { Badge } from '$lib/components/ui/badge';
     import { Button } from '$lib/components/ui/button';
     import * as Card from '$lib/components/ui/card';
     import * as Table from '$lib/components/ui/table';
     import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-    import { getLocalTimeZone, CalendarDate } from "@internationalized/date";
+    import * as Pagination from "$lib/components/ui/pagination";
+    import {onMount} from 'svelte';
+    import { page } from '$app/stores';
+    import {listNewFeedback, listVotingFeedback} from '$lib/actions/feedback/get-list-feedback.action';
 
-    export let feedbacks: Feedback[];
+    const id = $page.params.id;
+
+    let limit: number = 10;
+    let offset: number = 0;
+
+    onMount(() => {
+        listNewFeedback(id, limit, offset)
+    });
+
+    const handlePaginate = (page: number) => {
+        offset = page - 1;
+        listNewFeedback(id, limit, offset)
+    }
 
     const displayPartialContent = (content: string) => {
         if (content.length > 60) {
@@ -25,36 +40,36 @@
 
     let feedback: Feedback | undefined;
     $: openFeedbackModal = (feedbackId: string) => {
-        feedback = feedbacks.find(f => f.id === feedbackId);
+        feedback = $newFeedbacks.feedbacks.find(f => f.id === feedbackId);
     }
 
     $: getCountDailyFeedback = () => {
-        if (feedbacks?.length > 0) {
+        if ($newFeedbacks.feedbacks?.length > 0) {
             let todayAtMidnight = new Date();
             todayAtMidnight.setHours(0, 0, 0, 0);
-            return feedbacks.filter((f) => f.createdAt.getTime() > todayAtMidnight.getTime()).length;
+            return $newFeedbacks.feedbacks.filter((f) => f.createdAt.getTime() > todayAtMidnight.getTime()).length;
         } else {
             return 0;
         }
     }
 
     $: getBugTypePercent = () => {
-        if (feedbacks?.length > 0) {
-            const total = feedbacks.length;
-            const bugs = feedbacks.filter((f) => f.type === FeedbackType.Bug).length;
+        if ($newFeedbacks.feedbacks?.length > 0) {
+            const total = $newFeedbacks.feedbacks.length;
+            const bugs = $newFeedbacks.feedbacks.filter((f) => f.type === FeedbackType.Bug).length;
             return Math.round((bugs / total) * 100);
         } else {
             return 0;
         }
     }
 
-    const handleDeleteFeedback = async (id: string) => {
-        const feedbackResult = await apiClient.delete(`feedback/${id}`);
+    const handleDeleteFeedback = async (feedbackId: string) => {
+        const feedbackResult = await apiClient.delete(`feedback/${feedbackId}`);
         if (feedbackResult.status !== 204) {
             // TODO Manage error
             throw new Error(feedbackResult.data.message);
         }
-        removeFeedback(id);
+        listNewFeedback(id, $newFeedbacks.limit, $newFeedbacks.offset);
     }
 
     const toUpvote = async (event: any, feedback: Feedback) => {
@@ -66,23 +81,11 @@
             throw new Error(feedbackResult.data.message);
         }
         feedback.status = FeedbackStatus.Voting;
-        updateFeedback(feedback);
-    }
 
-    $: filterFeedback = () => {
-        let filteredFeedbacks = feedbacks;
-        if ($filter.text?.length > 2) {
-            filteredFeedbacks = filteredFeedbacks.filter(f => f.content.search(new RegExp($filter.text, 'i')) !== -1)
-        }
-
-        if ($filter.rangeDate.start && $filter.rangeDate.end) {
-            filteredFeedbacks = filteredFeedbacks.filter((f) =>
-                f.createdAt.getTime() > ($filter.rangeDate.start as CalendarDate).toDate(getLocalTimeZone()).getTime() &&
-                f.createdAt.getTime() < ($filter.rangeDate.end as CalendarDate).toDate(getLocalTimeZone()).getTime()
-            )
-        }
-
-        return filteredFeedbacks;
+        await Promise.all([
+            listNewFeedback(id, $newFeedbacks.limit, $newFeedbacks.offset),
+            listVotingFeedback(id, $votingFeedbacks.limit, $votingFeedbacks.offset),
+        ]);
     }
 </script>
 
@@ -92,7 +95,7 @@
             <Card.Title class="text-sm font-medium">new feedbacks</Card.Title>
         </Card.Header>
         <Card.Content>
-            <div class="text-2xl font-bold">{feedbacks.length}</div>
+            <div class="text-2xl font-bold">{$newFeedbacks.feedbacks?.length}</div>
             <p class="text-xs text-muted-foreground">
                 +180.1% from last month
             </p>
@@ -130,12 +133,12 @@
                 </Table.Row>
             </Table.Header>
             <Table.Body>
-                {#if filterFeedback().length === 0}
+                {#if $newFeedbacks.feedbacks.length === 0}
                     <Table.Row>
                         <td>No feedbacks</td>
                     </Table.Row>
                 {:else}
-                    {#each filterFeedback() as feedback, i (feedback.id)}
+                    {#each $newFeedbacks.feedbacks as feedback, i (feedback.id)}
                         <Table.Row>
                             <Table.Cell>{feedback.createdAt.toLocaleDateString()}</Table.Cell>
                             <Table.Cell>{#if feedback.author && feedback.author.email } {feedback.author.email} {:else} Guest {/if}</Table.Cell>
@@ -179,6 +182,36 @@
             </Table.Body>
         </Table.Root>
     </div>
+
+    <Pagination.Root count={$newFeedbacks.total} perPage={limit} page={offset + 1} onPageChange={(page) => handlePaginate(page)} let:pages let:currentPage>
+        <Pagination.Content>
+            <Pagination.Item>
+                <Pagination.PrevButton>
+                    <Icon icon="material-symbols:chevron-left" class="h-4 w-4" />
+                    <span class="hidden sm:block">Previous</span>
+                </Pagination.PrevButton>
+            </Pagination.Item>
+            {#each pages as page (page.key)}
+                {#if page.type === "ellipsis"}
+                    <Pagination.Item>
+                        <Pagination.Ellipsis />
+                    </Pagination.Item>
+                {:else}
+                    <Pagination.Item>
+                        <Pagination.Link {page} isActive={currentPage === page.value}>
+                            {page.value}
+                        </Pagination.Link>
+                    </Pagination.Item>
+                {/if}
+            {/each}
+            <Pagination.Item>
+                <Pagination.NextButton>
+                    <span class="hidden sm:block">Next</span>
+                    <Icon icon="material-symbols:chevron-right" class="h-4 w-4" />
+                </Pagination.NextButton>
+            </Pagination.Item>
+        </Pagination.Content>
+    </Pagination.Root>
 </div>
 
 {#if feedback}

@@ -21,8 +21,8 @@
   "type": "module",
   "scripts": {
     "dev": "npm-run-all --parallel watch serve",
-    "build": "rollup -c",
-    "watch": "rollup -c -w",
+    "build": "rollup -c --environment NODE_ENV:production",
+    "watch": "rollup -c -w --environment NODE_ENV:development",
     "serve": "serve dist -p 8081 --cors"
   },
   "dependencies": {

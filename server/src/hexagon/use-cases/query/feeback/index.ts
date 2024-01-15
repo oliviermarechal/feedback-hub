@@ -1,7 +1,7 @@
 import { Provider } from '@nestjs/common';
-import { ListFeedbackQuery } from './list-feedback.query';
+import { ListFeedbackQuery } from './list-feedback';
 
-export * from './list-feedback.query';
+export * from './list-feedback';
 
 export const FeedbackQueryProviders: Provider[] = [
     {

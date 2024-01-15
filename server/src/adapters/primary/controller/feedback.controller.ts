@@ -6,6 +6,7 @@ import {
     HttpCode,
     Param,
     Post,
+    Query,
     UseGuards,
 } from '@nestjs/common';
 import {
@@ -25,7 +26,10 @@ import {
     UpdateFeedbackContentDto,
     UpdateFeedbackContentUseCase,
 } from '../../../hexagon/use-cases/command';
-import { ListFeedbackQuery } from '../../../hexagon/use-cases/query';
+import {
+    ListFeedbackDto,
+    ListFeedbackQuery,
+} from '../../../hexagon/use-cases/query';
 import { JwtGuard } from '../../secondary';
 import { CurrentUser } from '../../secondary/decorator';
 import { Feedback, User } from '../../../hexagon/model';
@@ -111,8 +115,9 @@ export class FeedbackController {
     @UseGuards(JwtGuard)
     async list(
         @Param('projectId') projectId: string,
+        @Query() dto: ListFeedbackDto,
         @CurrentUser() user: User,
     ) {
-        return this.listFeedback.handle(user, projectId);
+        return this.listFeedback.handle(user, projectId, dto);
     }
 }

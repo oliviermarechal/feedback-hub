@@ -10,7 +10,6 @@ export enum FeedbackType {
 export enum FeedbackStatus {
     New = 'new',
     Voting = 'voting',
-    Archived = 'archived',
 }
 
 export interface FeedbackProps {
@@ -38,7 +37,7 @@ export interface FeedbackDatabaseProps {
     author?: ProjectCustomerProps;
     vote: number;
     customersVote?: ProjectCustomerProps[];
-    createdAt: Date;
+    createdAt: string;
     os?: string;
     engine?: string;
     language?: string;
@@ -100,7 +99,7 @@ export class Feedback {
             browser: dbProps.browser,
             customersVote: dbProps.customersVote,
             url: dbProps.url,
-            createdAt: dbProps.createdAt,
+            createdAt: new Date(dbProps.createdAt),
             tags:
                 dbProps.tags?.length > 0
                     ? dbProps.tags.map((tag) => Tag.hydrateFromDb(tag))

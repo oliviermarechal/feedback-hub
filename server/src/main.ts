@@ -17,6 +17,8 @@ async function bootstrap() {
     useContainer(app.select(AppModule), { fallbackOnErrors: true });
     app.useGlobalPipes(
         new ValidationPipe({
+            transform: true,
+            transformOptions: { enableImplicitConversion: true },
             exceptionFactory: (errors) => new BadRequestException(errors),
         }),
     );

@@ -138,16 +138,35 @@
                     </Card.Footer>
                 </Card.Root>
             </div>
-            <div class="flex items-center justify-center [&>div]:w-full">
-                <Card.Root>
-                    <Card.Header class="space-y-1">
-                        <Card.Title class="text-2xl">Configuration</Card.Title>
-                    </Card.Header>
-                    <Card.Content class="grid gap-4">
-                        <Highlight language={typescript} {code} />
-                    </Card.Content>
-                </Card.Root>
-            </div>
+        </div>
+    </div>
+    <div class="flex flex-row space-x-3 p-8">
+        <div>
+            <Card.Root>
+                <Card.Header class="space-y-1">
+                    <Card.Title class="text-2xl">Installation</Card.Title>
+                </Card.Header>
+                <Card.Content class="grid gap-4">
+                    <Highlight language={typescript} {code} />
+                </Card.Content>
+            </Card.Root>
+        </div>
+        <div>
+            <Card.Root>
+                <Card.Header class="space-y-1">
+                    <Card.Title class="text-2xl">Authenticated user</Card.Title>
+                </Card.Header>
+                <Card.Content class="grid gap-4">
+                    <h3 class="text-xl">Set your authenticated user</h3>
+                    <Highlight language={typescript} code={`InsightHunt.userLogged({
+    id: 'XXX',
+    email: 'Dummy@gmail.com',
+    logoUrl: '...' // Optional,
+})`} />
+                    <h3 class="text-xl">Clear user</h3>
+                    <Highlight language={typescript} code={`InsightHunt.disconnectUser()`} />
+                </Card.Content>
+            </Card.Root>
         </div>
     </div>
 {/if}

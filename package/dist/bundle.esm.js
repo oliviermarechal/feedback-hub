@@ -32832,7 +32832,7 @@ function create_default_slot_5(ctx) {
 		c: function create() {
 			span = element("span");
 			span.textContent = "FEEDBACK";
-			attr_dev(span, "class", "ih-button-text svelte-uh4c37");
+			attr_dev(span, "class", "ih-button-text svelte-1qzpjdj");
 			add_location(span, file$1, 30, 8, 872);
 		},
 		m: function mount(target, anchor) {
@@ -33366,7 +33366,7 @@ function create_fragment$1(ctx) {
 			t2 = space();
 			if (if_block1) if_block1.c();
 			if_block1_anchor = empty();
-			attr_dev(div, "class", "ih-container svelte-uh4c37");
+			attr_dev(div, "class", "ih-container svelte-1qzpjdj");
 			add_location(div, file$1, 28, 0, 713);
 		},
 		l: function claim(nodes) {

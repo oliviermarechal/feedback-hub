@@ -87,3 +87,10 @@ CREATE TABLE feedback_votes (
         FOREIGN KEY (customer_id)
             REFERENCES project_customers(id)
 );
+
+CREATE TABLE early_access (
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    email VARCHAR ( 100 ) NOT NULL,
+    content TEXT NOT NULL,
+    PRIMARY KEY(id)
+);
