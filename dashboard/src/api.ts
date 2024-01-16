@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { goto } from '$app/navigation';
+import { PUBLIC_API_URL } from '$env/static/public'
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:3005',
+    baseURL: PUBLIC_API_URL,
 })
 
 apiClient.interceptors.request.use(function (config) {
