@@ -12,9 +12,6 @@ export class ListFeedbackQuery {
             .select('id')
             .executeTakeFirst();
 
-        console.log('PASSE');
-        console.log(user ? 'User logged' : 'Not user');
-        console.log(projectId);
         if (!project) {
             throw new AccessDeniedException();
         }

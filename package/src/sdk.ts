@@ -1,5 +1,5 @@
 import { IHSdkConfiguration } from './main';
-import { getApiUrl } from '../../global-config';
+import { getApiUrl } from './global-config';
 import DefaultEmbed from './views/default-embed.svelte';
 import {Feedback} from './types/feedback';
 

@@ -1,5 +1,5 @@
 <script>
-    import { getHomepage } from "../../../../global-config.js";
+    import { getHomepage } from "../../global-config.ts";
 
     const homepageUrl = getHomepage(process.env.NODE_ENV ? process.env.NODE_ENV : 'production');
 </script>
