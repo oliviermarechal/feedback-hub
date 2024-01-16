@@ -52,7 +52,7 @@
                             bind:value={password}
                     />
                 </div>
-                <Button type="button" on:click={handleRegistration()}>Registration</Button>
+                <Button type="button" on:click={handleRegistration}>Registration</Button>
             </div>
         </form>
     </div>
