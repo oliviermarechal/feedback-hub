@@ -20,6 +20,20 @@ CREATE TABLE projects (
             REFERENCES users(id)
 );
 
+
+CREATE TABLE project_customers (
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    project_id uuid NOT NULL,
+    external_id VARCHAR ( 50 ) NULL,
+    email VARCHAR ( 100 ) NOT NULL,
+    ip_address text[] DEFAULT ARRAY[]::text[],
+    logo_url VARCHAR ( 100 ) NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT fk_project_project_customers
+       FOREIGN KEY (project_id)
+           REFERENCES projects(id)
+);
+
 CREATE TABLE feedbacks (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
     content TEXT NOT NULL,
@@ -62,19 +76,6 @@ CREATE TABLE feedbacks_tags (
     CONSTRAINT fk_feedback_tag_feedback
         FOREIGN KEY (feedback_id)
             REFERENCES feedbacks(id)
-);
-
-CREATE TABLE project_customers (
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    project_id uuid NOT NULL,
-    external_id VARCHAR ( 50 ) NULL,
-    email VARCHAR ( 100 ) NOT NULL,
-    ip_address text[] DEFAULT ARRAY[]::text[],
-    logo_url VARCHAR ( 100 ) NULL,
-    PRIMARY KEY(id),
-    CONSTRAINT fk_project_project_customers
-        FOREIGN KEY (project_id)
-            REFERENCES projects(id)
 );
 
 CREATE TABLE feedback_votes (
