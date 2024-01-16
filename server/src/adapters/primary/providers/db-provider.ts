@@ -17,6 +17,7 @@ export const DbProvider = new Kysely<Database>({
             password: AppConfig.database.password,
             port: 5432,
             max: 10,
+            ssl: process.env.NODE_ENV === 'production',
         }),
     }),
     plugins: [new CamelCasePlugin(), new ParseJSONResultsPlugin()],
