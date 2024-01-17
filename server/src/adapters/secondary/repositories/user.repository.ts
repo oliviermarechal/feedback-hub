@@ -21,6 +21,13 @@ export class UserRepository implements UserRepositoryInterface {
         return userRow ? User.create(userRow) : null;
     }
 
+    async setLastLogin(id: string): Promise<void> {
+        await DbProvider.updateTable('users')
+            .set({ lastLogin: new Date() })
+            .where('id', '=', id)
+            .execute();
+    }
+
     async save(user: User): Promise<User> {
         const result = await DbProvider.selectFrom('users')
             .where('id', '=', user.id)

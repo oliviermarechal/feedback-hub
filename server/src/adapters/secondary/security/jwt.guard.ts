@@ -29,7 +29,10 @@ export class JwtGuard implements CanActivate {
                 secret: process.env.SECRET,
             });
 
-            const user = await this.userRepository.find(payload.id);
+            const [user] = await Promise.all([
+                this.userRepository.find(payload.id),
+                this.userRepository.setLastLogin(payload.id),
+            ]);
 
             if (!user) {
                 throw new UnauthorizedException();
@@ -38,7 +41,6 @@ export class JwtGuard implements CanActivate {
             request.user = user;
             return !!user;
         } catch (e) {
-            console.log(e.message);
             throw new UnauthorizedException();
         }
     }
