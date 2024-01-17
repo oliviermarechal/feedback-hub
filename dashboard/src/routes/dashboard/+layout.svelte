@@ -2,6 +2,7 @@
     import {authUser} from '../../stores/user.store';
     import {goto} from '$app/navigation';
     import apiClient from '../../api';
+    import {userLogged, disconnectUser} from 'insight-hunt';
 
     if (!$authUser) {
         if (typeof localStorage !== 'undefined') {
@@ -12,10 +13,10 @@
                 apiClient.get('/me').then(result => {
                     if (result.status === 200) {
                         authUser.set(result.data);
-                        // @ts-ignore
-                        InsightHunt.userLogged({id: result.data.id, email: result.data.email});
+                        userLogged({id: result.data.id, email: result.data.email});
                     } else {
                         localStorage.removeItem('token');
+                        disconnectUser();
                         goto('/auth/login');
                     }
                 })

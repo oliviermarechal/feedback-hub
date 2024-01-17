@@ -16,7 +16,15 @@ export async function init(config: IHSdkConfiguration) {
     await sdk.initCheck();
 }
 
+const checkSsr = () => {
+    return typeof window === 'undefined';
+}
+
 export function setUpFeedbackContainer() {
+    if (checkSsr()) {
+        return;
+    }
+
     const container = document.createElement('div')
     container.setAttribute('id', 'insight-hunt-container')
 
@@ -31,6 +39,10 @@ export function setUpFeedbackContainer() {
 }
 
 export function showUpvote(containerId: string) {
+    if (checkSsr()) {
+        return;
+    }
+
     const container = document.getElementById(containerId)
 
     if (!container) {
@@ -46,6 +58,10 @@ export function showUpvote(containerId: string) {
 }
 
 export function showFeedbackForm(containerId: string) {
+    if (checkSsr()) {
+        return;
+    }
+
     const container = document.getElementById(containerId)
 
     if (!container) {

@@ -43,7 +43,8 @@ export default class InsightHuntSDK {
         if (result.ok) {
             this.project = result.body;
         } else {
-            throw new Error('Project not found');
+            console.error('[Insight hunt] Project not found');
+            return;
         }
 
         const response = await fetch(

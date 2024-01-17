@@ -1,4 +1,19 @@
 {
+  "name": "insight-hunt",
+  "version": "0.0.8",
+  "types": "dist/main.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "main": "dist/bundle.esm.js",
+  "module": "dist/bundle.esm.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npm-run-all --parallel watch serve",
+    "build": "rollup -c --environment NODE_ENV:production",
+    "watch": "rollup -c -w --environment NODE_ENV:development",
+    "serve": "serve dist -p 8081 --cors"
+  },
   "devDependencies": {
     "@types/node": "^20.10.4",
     "autoprefixer": "^10.4.16",
@@ -15,15 +30,6 @@
     "svelte-preprocess": "^5.1.1",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.2"
-  },
-  "main": "dist/bundle.js",
-  "module": "dist/bundle.esm.js",
-  "type": "module",
-  "scripts": {
-    "dev": "npm-run-all --parallel watch serve",
-    "build": "rollup -c --environment NODE_ENV:production",
-    "watch": "rollup -c -w --environment NODE_ENV:development",
-    "serve": "serve dist -p 8081 --cors"
   },
   "dependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
