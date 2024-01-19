@@ -7,6 +7,7 @@
     import {Input} from '$lib/components/ui/input';
     import { toast } from 'svelte-sonner';
     import apiClient from '../api';
+    import {authUser} from '../stores/user.store';
 
     const featureCards: {
         icon: string;
@@ -47,64 +48,42 @@
             subText: 'Manage all your projects in one place',
         },
     ]
-
-    const scrollIntoView = ({ target, preventDefault }: { target: any, preventDefault: () => any}) => {
-        preventDefault();
-        const el = document.querySelector(target.getAttribute('href'));
-        if (!el) return;
-        el.scrollIntoView({
-            behavior: 'smooth'
-        });
-    }
-
-    let email: string = '';
-    let content: string = '';
-
-    const handleEarlyAccess = async () => {
-        if (!email || !content) {
-            toast.error('Please fill all fields');
-            return;
-        }
-
-        try {
-            const res = await apiClient.post('/early-access',
-                {
-                    email,
-                    content,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-
-            if (res.status === 201) {
-                toast.success('Your request has been sent');
-                email = '';
-                content = '';
-            } else {
-                toast.error('An error occurred!');
-            }
-        } catch (e) {
-            toast.error('An error occurred!');
-            return;
-        }
-    }
 </script>
 
+<div class="h-full flex-1 flex-col space-y-8 p-8 md:flex">
+    <div class="flex items-center justify-between space-y-2">
+        <div>
+            <h1 class="text-4xl font-bold tracking-tight">Insight hunt</h1>
+            <p class="text-muted-foreground">Hunt your insight in user feedback !</p>
+        </div>
+        <div class="flex items-center justify-around space-x-2">
+            <Button variant="outline" href="documentation">
+                Documentation
+            </Button>
+            {#if $authUser}
+                <Button href="dashboard">
+                    Dashboard
+                </Button>
+            {:else}
+                <Button href="auth/login">
+                    Sign in
+                </Button>
+            {/if}
+        </div>
+    </div>
+</div>
 <section class="container flex flex-col gap-4 pb-12 pt-4 text-center lg:items-center lg:gap-8 lg:py-20">
     <div class="flex flex-1 flex-col items-center gap-4 text-center lg:gap-8">
         <div class="space-y-4">
-            <h1 class="text-4xl font-bold lg:text-6xl">
-                Insight hunt
-            </h1>
-            <h2 class="text-lg font-light text-muted-foreground lg:text-3xl">
-                Hunt your insight in user feedback
+            <h2 class="text-3xl font-bold tracking-tight">
+                Build your product strategy with user feedbacks
             </h2>
+            <h4 class="text-xl font-light text-muted-foreground">
+                For IndieMaker and startup
+            </h4>
         </div>
-        <Button href="#early-access" on:click={scrollIntoView} class='w-[10rem]'>
-            Early access
+        <Button href="auth/registration" class='w-[10rem]'>
+            Get started
         </Button>
     </div>
     <div class="flex flex-1 justify-center lg:justify-end">
@@ -167,31 +146,5 @@
                 </div>
             {/each}
         </div>
-    </div>
-</section>
-<section class="bg-slate-50 dark:bg-slate-900">
-    <div class="container space-y-8 py-12 lg:py-20 flex flex-col items-center">
-        <div class='space-y-2'>
-            <h1 class="text-3xl font-bold text-primary lg:text-4xl text-center" id="early-access">
-                Early access
-            </h1>
-            <p>The current version is private beta for testing</p>
-        </div>
-        <Card.Root class="w-1/2">
-            <Card.Header class="text-center">Ask your early access</Card.Header>
-            <Card.Content class="space-y-4">
-                <div class="w-full px-3 mb-6 md:mb-0">
-                    <Label for="email">Email</Label>
-                    <Input bind:value={email} id="email" placeholder="email" type="email" />
-                </div>
-                <div class="w-full px-3 mb-6 md:mb-0">
-                    <Label for="content">Why do you want access ?</Label>
-                    <Textarea id="content" bind:value={content} placeholder="Talk about your product" />
-                </div>
-                <div class="flex flex-row justify-end">
-                    <Button on:click={handleEarlyAccess}>Validate</Button>
-                </div>
-            </Card.Content>
-        </Card.Root>
     </div>
 </section>
