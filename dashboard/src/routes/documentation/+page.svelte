@@ -40,10 +40,12 @@
     {@html atomOneDark}
 </svelte:head>
 
-<div class="h-full flex-1 flex-col space-y-8 p-8 md:flex">
-    <div class="flex items-center justify-between space-y-2">
-        <div>
-            <h1 class="text-4xl font-bold tracking-tight"><a href="/">Insight hunt</a><small>&nbsp;Docs</small></h1>
+<header class="container z-40 bg-background">
+    <div class="flex h-20 items-center justify-between py-6">
+        <div class="flex gap-6 md:gap-10">
+            <a href="/" class="items-center space-x-2 md:flex">
+                <span class="font-bold sm:inline-block">Insight hunt &nbsp;doc</span>
+            </a>
         </div>
         <div class="flex items-center justify-around space-x-2">
             {#if $authUser && $projects.length > 0}
@@ -61,14 +63,14 @@
                     Dashboard
                 </Button>
             {:else}
-                <Button href="auth/login">
+                <Button variant="secondary" href="auth/login">
                     Sign in
                 </Button>
             {/if}
         </div>
     </div>
-</div>
-<Separator class="my-6" />
+</header>
+<Separator class="" />
 <div class="space-y-6 p-10 pb-16 md:block">
     <div class="flex space-y-8 flex-row lg:space-x-12 lg:space-y-0">
         <aside class="mx-2 lg:w-1/5">

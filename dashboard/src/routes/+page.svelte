@@ -50,28 +50,31 @@
     ]
 </script>
 
-<div class="h-full flex-1 flex-col space-y-8 p-8 md:flex">
-    <div class="flex items-center justify-between space-y-2">
-        <div>
-            <h1 class="text-4xl font-bold tracking-tight">Insight hunt</h1>
-            <p class="text-muted-foreground">Hunt your insight in user feedback !</p>
-        </div>
-        <div class="flex items-center justify-around space-x-2">
-            <Button variant="outline" href="documentation">
+<header class="container z-40 bg-background">
+    <div class="flex h-20 items-center justify-between py-6">
+        <div class="flex gap-6 md:gap-10">
+        <a href="/" class="items-center space-x-2 md:flex">
+            <span class="font-bold sm:inline-block">Insight hunt</span>
+        </a>
+        <nav class="gap-6 md:flex">
+            <a href="documentation" class="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60">
                 Documentation
-            </Button>
+            </a>
+        </nav>
+            </div>
+        <div class="flex items-center justify-around space-x-2">
             {#if $authUser}
-                <Button href="dashboard">
+                <Button variant="secondary" href="dashboard">
                     Dashboard
                 </Button>
             {:else}
-                <Button href="auth/login">
+                <Button variant="secondary" href="auth/login">
                     Sign in
                 </Button>
             {/if}
         </div>
     </div>
-</div>
+</header>
 <section class="container flex flex-col gap-4 pb-12 pt-4 text-center lg:items-center lg:gap-8 lg:py-20">
     <div class="flex flex-1 flex-col items-center gap-4 text-center lg:gap-8">
         <div class="space-y-4">
