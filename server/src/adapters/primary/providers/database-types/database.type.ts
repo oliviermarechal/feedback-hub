@@ -5,7 +5,6 @@ import { TagTable } from './tags.type';
 import { FeedbacksTagsTable } from './feedbacks-tags.type';
 import { ProjectCustomerTable } from './project-customer.type';
 import { FeedbackVoteTable } from './feedback-vote.type';
-import { EarlyAccessTable } from './early_access.type';
 
 export interface Database {
     users: UserTable;
@@ -15,5 +14,4 @@ export interface Database {
     feedbacksTags: FeedbacksTagsTable;
     projectCustomers: ProjectCustomerTable;
     feedbackVotes: FeedbackVoteTable;
-    earlyAccess: EarlyAccessTable;
 }

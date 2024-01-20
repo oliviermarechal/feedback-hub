@@ -10,9 +10,6 @@
     import {Label} from '$lib/components/ui/label';
     import {Input} from '$lib/components/ui/input';
     import * as Card from '$lib/components/ui/card';
-    import atomOneDark from "svelte-highlight/styles/atom-one-dark";
-    import { Highlight } from "svelte-highlight";
-    import { typescript } from 'svelte-highlight/languages';
 
     let domainName: string = '';
     let domainError = writable<string>('');
@@ -84,10 +81,6 @@
         // Manage error
     }
 </script>
-
-<svelte:head>
-    {@html atomOneDark}
-</svelte:head>
 
 <div class="flex-1 space-y-4 p-8 pt-6">
     <div class="flex flex-row justify-between">

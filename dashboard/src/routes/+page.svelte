@@ -2,11 +2,7 @@
     import { Button } from "$lib/components/ui/button";
     import * as Card from "$lib/components/ui/card";
     import Icon from '@iconify/svelte';
-    import {Label} from '$lib/components/ui/label';
-    import {Textarea} from '$lib/components/ui/textarea';
-    import {Input} from '$lib/components/ui/input';
-    import { toast } from 'svelte-sonner';
-    import apiClient from '../api';
+    import { authUser } from '../stores/user.store';
 
     const featureCards: {
         icon: string;
@@ -16,182 +12,163 @@
         {
             text: 'Multi project',
             subtext: 'Manage feedbacks for multiple projects',
-            icon: 'material-symbols:list',
+            icon: 'heroicons:arrows-pointing-in-16-solid',
         },
         {
             text: 'Collect feedback easily',
             subtext: 'Installation ready to use in your website',
-            icon: 'solar:user-speak-bold'
+            icon: 'heroicons:chat-bubble-oval-left-ellipsis-solid'
         },
         {
             text: 'Upvote',
             subtext: 'Select the most important feedbacks',
-            icon: 'bx:upvote',
+            icon: 'heroicons:chevron-double-up',
         },
     ]
-
-    const advantages = [
-        {
-            icon: 'icon-park-outline:archery',
-            text: 'Strategy management',
-            subText: 'Manage your product(s) strategy with our tools',
-        },
-        {
-            icon: 'mingcute:time-line',
-            text: 'Win time',
-            subText: 'With duplicate suggestion and auto classification',
-        },
-        {
-            icon: 'formkit:group',
-            text: 'Many projects, one platform',
-            subText: 'Manage all your projects in one place',
-        },
-    ]
-
-    const scrollIntoView = ({ target, preventDefault }: { target: any, preventDefault: () => any}) => {
-        preventDefault();
-        const el = document.querySelector(target.getAttribute('href'));
-        if (!el) return;
-        el.scrollIntoView({
-            behavior: 'smooth'
-        });
-    }
-
-    let email: string = '';
-    let content: string = '';
-
-    const handleEarlyAccess = async () => {
-        if (!email || !content) {
-            toast.error('Please fill all fields');
-            return;
-        }
-
-        try {
-            const res = await apiClient.post('/early-access',
-                {
-                    email,
-                    content,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-
-            if (res.status === 201) {
-                toast.success('Your request has been sent');
-                email = '';
-                content = '';
-            } else {
-                toast.error('An error occurred!');
-            }
-        } catch (e) {
-            toast.error('An error occurred!');
-            return;
-        }
-    }
 </script>
 
-<section class="container flex flex-col gap-4 pb-12 pt-4 text-center lg:items-center lg:gap-8 lg:py-20">
-    <div class="flex flex-1 flex-col items-center gap-4 text-center lg:gap-8">
-        <div class="space-y-4">
-            <h1 class="text-4xl font-bold lg:text-6xl">
-                Insight hunt
-            </h1>
-            <h2 class="text-lg font-light text-muted-foreground lg:text-3xl">
-                Hunt your insight in user feedback
-            </h2>
+<header class="container z-40 bg-background">
+    <div class="flex h-20 items-center justify-between py-6">
+        <div class="flex gap-6 md:gap-10">
+            <a href="/" class="items-center space-x-2 md:flex">
+                <span class="font-bold sm:inline-block">Insight hunt</span>
+            </a>
+            <nav class="gap-6 md:flex">
+                <a href="documentation" class="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60">
+                    Documentation
+                </a>
+            </nav>
         </div>
-        <Button href="#early-access" on:click={scrollIntoView} class='w-[10rem]'>
-            Early access
+        <div class="flex items-center justify-around space-x-2">
+            {#if $authUser}
+                <Button variant="secondary" href="dashboard">
+                    Dashboard
+                </Button>
+            {:else}
+                <Button variant="secondary" href="auth/registration">
+                    Sign up
+                </Button>
+            {/if}
+        </div>
+    </div>
+</header>
+<section class="container flex flex-col gap-4 pb-12 pt-4 text-center lg:items-center lg:gap-8 lg:py-20">
+    <div class="flex flex-1 flex-col items-center gap-4 text-center lg:gap-8 mb-8">
+        <div class="flex flex-col space-y-4">
+            <h2 class="text-5xl font-bold tracking-tight">
+                Evolve your products with user feedback
+            </h2>
+            <span class="text-xl font-light text-muted-foreground">
+                Collect user feedback. Submits feedback to upvote. Build roadmap.
+            </span>
+        </div>
+        <Button href="auth/registration" class='w-[10rem]'>
+            Signup for free
         </Button>
     </div>
     <div class="flex flex-1 justify-center lg:justify-end">
         <img
-            src='image/lp-header.jpg'
-            width={500}
-            height={500}
+            class="border-secondary border-2 rounded-xl shadow-xl"
+            src='image/dashboard.png'
+            width={900}
             alt="Header"
         />
     </div>
 </section>
 
 <section class="bg-slate-50 dark:bg-slate-900">
-    <div class="container space-y-8 py-12 text-center lg:py-20">
-        <div class='space-y-2'>
-            <h1 class="text-3xl font-bold text-primary lg:text-4xl">
-                Features
-            </h1>
-        </div>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {#each featureCards as cards}
-                <Card.Root
-                    class="flex flex-grow flex-col items-center justify-between gap-4 p-8 dark:bg-secondary"
-                >
-                    <div class="flex">
-                        <Icon icon={cards.icon} class="h-[6rem] w-[6rem]" />
-                    </div>
-                    <div class="space-y-2">
-                        <Card.Title>{cards.text}</Card.Title>
-                        <Card.Content>{cards.subtext}</Card.Content>
-                    </div>
-                </Card.Root>
-            {/each}
+    <div class="py-12 flex flex-row px-20">
+        <img
+            class="rounded-xl"
+            src='image/implement.png'
+            width={500}
+            alt="Install"
+        />
+        <div class="flex flex-col justify-start mt-16 ml-4">
+            <span class="text-3xl font-bold text-primary">
+                Quick and easy installation
+            </span>
+            <ul class="list-disc ml-4 mt-4 space-y-1">
+                <li>Use default embed in one line</li>
+                <li>display the feedback form or upvote anywhere you want</li>
+                <li>Associate your own user to feedback and vote</li>
+            </ul>
         </div>
     </div>
 </section>
+
 <section class="container space-y-8 py-12 lg:py-20" id="features">
+    <div class="flex flex-row px-20">
+        <div class="flex flex-col justify-start mt-16 mr-6">
+            <span class="text-3xl font-bold text-primary">
+                Simple form for your users
+            </span>
+            <ul class="list-disc ml-4 mt-4 space-y-1">
+                <li>Give your users a voice</li>
+                <li>Collect ideas and bugs found by your users</li>
+            </ul>
+        </div>
+
+        <img
+            class="rounded-xl"
+            src='image/feedback-form.png'
+            width={500}
+            alt="feedback form image"
+        />
+    </div>
+</section>
+
+<section class="bg-slate-50 dark:bg-slate-900">
+    <div class="py-12 flex flex-row px-20">
+        <img
+                class="rounded-xl"
+                src='image/upvote.png'
+                width={500}
+                alt="Install"
+        />
+        <div class="flex flex-col justify-start mt-16 ml-4">
+            <span class="text-3xl font-bold text-primary">
+                Upvote
+            </span>
+            <ul class="list-disc ml-4 mt-4 space-y-1">
+                <li>Let your users vote for these favorite features</li>
+                <li>Build your roadmap with this feedback and vote</li>
+                <li>iterate endlessly with your users</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="container space-y-8 py-12 text-center lg:py-20">
     <div class='space-y-2'>
-        <h1 class="text-3xl font-bold text-primary lg:text-4xl text-center">
-            Why Insight hunt ?
+        <h1 class="text-3xl font-bold text-primary lg:text-4xl">
+            Features
         </h1>
     </div>
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div class="grid grid-cols-1 gap-8">
-            {#each advantages as advantage}
-                <div
-                    class="flex flex-col items-center gap-2 text-center md:flex-row md:gap-8 md:text-left"
-                >
-                    <div class="flex">
-                        <Icon icon={advantage.icon} class="h-[6rem] w-[6rem]" />
-                    </div>
-                    <div class="flex-1">
-                        <p class="md:text4xl text-2xl font-semibold">
-                            {advantage.text}
-                        </p>
-                        <p class="font-light text-muted-foreground md:text-lg">
-                            {advantage.subText}
-                        </p>
-                    </div>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {#each featureCards as cards}
+            <Card.Root
+                class="flex flex-grow flex-col items-center justify-between gap-4 p-8 bg-slate-50 dark:bg-slate-900"
+            >
+                <div class="flex">
+                    <Icon icon={cards.icon} class="h-[2rem] w-[2rem]" color="#5e61e4" />
                 </div>
-            {/each}
-        </div>
+                <div class="space-y-2">
+                    <Card.Title>{cards.text}</Card.Title>
+                    <Card.Content>{cards.subtext}</Card.Content>
+                </div>
+            </Card.Root>
+        {/each}
     </div>
 </section>
+
 <section class="bg-slate-50 dark:bg-slate-900">
-    <div class="container space-y-8 py-12 lg:py-20 flex flex-col items-center">
-        <div class='space-y-2'>
-            <h1 class="text-3xl font-bold text-primary lg:text-4xl text-center" id="early-access">
-                Early access
-            </h1>
-            <p>The current version is private beta for testing</p>
+    <div class="py-12 flex flex-row justify-around px-20 w-full align-middle">
+        <div class="text-xl w-1/2">
+            You'll have unlimited time to explore Insight Hunt. It's free to use for as long as you want.
         </div>
-        <Card.Root class="w-1/2">
-            <Card.Header class="text-center">Ask your early access</Card.Header>
-            <Card.Content class="space-y-4">
-                <div class="w-full px-3 mb-6 md:mb-0">
-                    <Label for="email">Email</Label>
-                    <Input bind:value={email} id="email" placeholder="email" type="email" />
-                </div>
-                <div class="w-full px-3 mb-6 md:mb-0">
-                    <Label for="content">Why do you want access ?</Label>
-                    <Textarea id="content" bind:value={content} placeholder="Talk about your product" />
-                </div>
-                <div class="flex flex-row justify-end">
-                    <Button on:click={handleEarlyAccess}>Validate</Button>
-                </div>
-            </Card.Content>
-        </Card.Root>
+        <Button href="auth/registration" class='w-[10rem]'>
+            Signup for free
+        </Button>
     </div>
 </section>
