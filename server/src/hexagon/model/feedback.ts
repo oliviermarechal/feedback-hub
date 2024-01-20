@@ -1,6 +1,7 @@
 import { Project } from './project';
 import { Tag, TagDatabaseProps } from './tag';
 import { ProjectCustomer, ProjectCustomerProps } from './project-customer';
+import { FeedbackVote } from './feedback-vote';
 
 export enum FeedbackType {
     Bug = 'bug',
@@ -56,6 +57,7 @@ export class Feedback {
     authorId: string;
     author?: ProjectCustomer;
     vote: number;
+    votes?: FeedbackVote[];
     os?: string;
     engine: string;
     createdAt: Date;
@@ -109,6 +111,12 @@ export class Feedback {
 
     loadTags(tags: Tag[]): Feedback {
         this.tags = tags;
+
+        return this;
+    }
+
+    loadVotes(votes: FeedbackVote[]): Feedback {
+        this.votes = votes;
 
         return this;
     }

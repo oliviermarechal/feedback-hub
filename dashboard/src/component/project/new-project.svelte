@@ -6,6 +6,8 @@
     import { Label } from '$lib/components/ui/label';
     import { Input } from '$lib/components/ui/input';
     import { Button } from '$lib/components/ui/button';
+    import {projects} from '../../stores/project.store';
+    import { toast } from 'svelte-sonner';
 
     let name: string;
     let domainNames = writable<string[]>([]);
@@ -26,6 +28,7 @@
 
             domainName = '';
         } catch (e) {
+            toast.error('Invalid url');
             domainError.set('Invalid url');
             setTimeout(() => {
                 domainError.set('');
@@ -42,13 +45,19 @@
     }
 
     const handleCreateProject = async () => {
-        const response = await apiClient.post('/project', {name, domainNames: $domainNames});
-        if (response.status === 201) {
+        const result = await apiClient.post('/project', {name, domainNames: $domainNames});
+        if (result.status === 201) {
+            projects.update(projects => {
+                return [
+                    ...projects,
+                    result.data,
+                ]
+            });
             onClose()
             return;
         }
 
-        console.log('MANAGE ERROR');
+        toast.error(result.data.message.map((m) => Object.keys(m.constraints).map((k) => m.constraints[k]).join(', ')).join(', '));
     }
 </script>
 

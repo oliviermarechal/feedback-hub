@@ -1,6 +1,7 @@
 import { FeedbackRepositoryInterface } from '../../../hexagon/gateways/repository';
 import { DbProvider } from '../../primary/providers/db-provider';
-import { Feedback, FeedbackStatus } from '../../../hexagon/model';
+import { Feedback, FeedbackStatus, FeedbackVote } from '../../../hexagon/model';
+import { jsonObjectFrom } from 'kysely/helpers/postgres';
 
 export class FeedbackRepository implements FeedbackRepositoryInterface {
     async save(feedback: Feedback): Promise<Feedback> {
@@ -73,6 +74,31 @@ export class FeedbackRepository implements FeedbackRepositoryInterface {
             .executeTakeFirst();
 
         return Feedback.create(feedbackRow);
+    }
+
+    async loadVotes(feedback: Feedback): Promise<Feedback> {
+        const votes = await DbProvider.selectFrom('feedbackVotes')
+            .selectAll()
+            .select((eb) => [
+                jsonObjectFrom(
+                    eb
+                        .selectFrom('projectCustomers')
+                        .selectAll()
+                        .whereRef(
+                            'projectCustomers.id',
+                            '=',
+                            'feedbackVotes.customerId',
+                        ),
+                ).as('author'),
+            ])
+            .where('feedbackId', '=', feedback.id)
+            .execute();
+
+        feedback.loadVotes(
+            votes.map((vote) => FeedbackVote.hydrateFromDb(vote)),
+        );
+
+        return feedback;
     }
 
     async upvote(

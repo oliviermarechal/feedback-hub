@@ -7,6 +7,7 @@ export interface FeedbackRepositoryInterface {
     removeFeedbackTag(feedbackId: string, tagId: string): Promise<void>;
     toUpvote(feedbackId: string): Promise<Feedback>;
     updateContent(feedbackId: string, content: string): Promise<Feedback>;
+    loadVotes(feedback: Feedback): Promise<Feedback>;
     upvote(
         feedbackId: string,
         voteValue: number,
