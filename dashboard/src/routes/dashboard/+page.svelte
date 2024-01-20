@@ -9,7 +9,9 @@
 	import * as Drawer from '$lib/components/ui/drawer';
 
 	onMount(() => {
-		apiClient.get('/project').then(result => projects.set(result.data))
+		if ($projects?.length === 0) {
+			apiClient.get('/project').then(result => projects.set(result.data))
+		}
 	})
 
 	let openNewProjectDrawer = false;

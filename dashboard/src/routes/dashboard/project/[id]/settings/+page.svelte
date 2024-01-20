@@ -10,10 +10,6 @@
     import {Label} from '$lib/components/ui/label';
     import {Input} from '$lib/components/ui/input';
     import * as Card from '$lib/components/ui/card';
-    import atomOneDark from "svelte-highlight/styles/atom-one-dark";
-    import { Highlight } from "svelte-highlight";
-    import { getCodeBlockConfigurationContent } from '../configuration/code-block-content';
-    import { typescript } from 'svelte-highlight/languages';
 
     let domainName: string = '';
     let domainError = writable<string>('');
@@ -27,8 +23,6 @@
             project.set(response.data);
         }
     });
-
-    $: code = getCodeBlockConfigurationContent($project?.apiKey);
 
     const handleAddDomain = () => {
         try {
@@ -88,10 +82,6 @@
     }
 </script>
 
-<svelte:head>
-    {@html atomOneDark}
-</svelte:head>
-
 <div class="flex-1 space-y-4 p-8 pt-6">
     <div class="flex flex-row justify-between">
         <div class="flex flex-row justify-items-start">
@@ -138,35 +128,6 @@
                     </Card.Footer>
                 </Card.Root>
             </div>
-        </div>
-    </div>
-    <div class="flex flex-row space-x-3 p-8">
-        <div>
-            <Card.Root>
-                <Card.Header class="space-y-1">
-                    <Card.Title class="text-2xl">Installation</Card.Title>
-                </Card.Header>
-                <Card.Content class="grid gap-4">
-                    <Highlight language={typescript} {code} />
-                </Card.Content>
-            </Card.Root>
-        </div>
-        <div>
-            <Card.Root>
-                <Card.Header class="space-y-1">
-                    <Card.Title class="text-2xl">Authenticated user</Card.Title>
-                </Card.Header>
-                <Card.Content class="grid gap-4">
-                    <h3 class="text-xl">Set your authenticated user</h3>
-                    <Highlight language={typescript} code={`InsightHunt.userLogged({
-    id: 'XXX',
-    email: 'Dummy@gmail.com',
-    logoUrl: '...' // Optional,
-})`} />
-                    <h3 class="text-xl">Clear user</h3>
-                    <Highlight language={typescript} code={`InsightHunt.disconnectUser()`} />
-                </Card.Content>
-            </Card.Root>
         </div>
     </div>
 {/if}

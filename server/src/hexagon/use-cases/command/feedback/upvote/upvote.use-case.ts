@@ -6,6 +6,7 @@ import {
 import { ForbiddenException } from '@nestjs/common';
 import { ProjectCustomer } from '../../../../model';
 import { generateUuid } from '../../../../../adapters/secondary';
+import { AlreadyVotedException } from '../../../../exception';
 
 export class UpvoteUseCase {
     constructor(
@@ -14,7 +15,7 @@ export class UpvoteUseCase {
     ) {}
 
     async handle(command: UpvoteCommand) {
-        const feedback = await this.feedbackRepository.find(command.feedbackId);
+        let feedback = await this.feedbackRepository.find(command.feedbackId);
         if (feedback.projectId !== command.projectId) {
             throw new ForbiddenException();
         }
@@ -40,7 +41,12 @@ export class UpvoteUseCase {
             });
             customer = await this.projectCustomerRepository.save(customer);
         } else {
-            // TODO: Check already voted
+            feedback = await this.feedbackRepository.loadVotes(feedback);
+            if (
+                feedback.votes.find((vote) => vote.customerId === customer.id)
+            ) {
+                throw new AlreadyVotedException();
+            }
         }
 
         return this.feedbackRepository.upvote(

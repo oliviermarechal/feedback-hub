@@ -1,5 +1,5 @@
-import {FeedbackToUpvoteCommand} from './feedback-to-upvote.command';
-import {FeedbackRepositoryInterface} from '../../../../gateways/repository';
+import { FeedbackToUpvoteCommand } from './feedback-to-upvote.command';
+import { FeedbackRepositoryInterface } from '../../../../gateways/repository';
 
 export class FeedbackToUpvoteUseCase {
     constructor(
@@ -7,6 +7,6 @@ export class FeedbackToUpvoteUseCase {
     ) {}
 
     async handle(command: FeedbackToUpvoteCommand) {
-        return this.feedbackRepository.toUpvote(command.feedbackId)
+        return this.feedbackRepository.toUpvote(command.feedbackId);
     }
 }

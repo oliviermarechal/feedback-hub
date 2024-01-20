@@ -12,6 +12,10 @@
     const id = $page.params.id;
 
     onMount(async () => {
+        if ($project && $project.id === id) {
+            return;
+        }
+
         const response = await apiClient.get(`/project/${id}`);
 
         project.set(response.data);
