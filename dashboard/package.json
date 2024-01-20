@@ -39,7 +39,6 @@
     "axios": "^1.6.0",
     "bits-ui": "^0.14.0",
     "clsx": "^2.1.0",
-    "insight-hunt": "0.0.8",
     "lucide-svelte": "^0.306.0",
     "mode-watcher": "^0.1.2",
     "svelte-highlight": "^7.4.8",
