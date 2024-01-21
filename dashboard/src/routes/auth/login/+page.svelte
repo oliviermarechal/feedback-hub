@@ -5,6 +5,7 @@
     import { Button } from '$lib/components/ui/button';
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
+    import {toast} from 'svelte-sonner';
 
     if ($authUser) {
         goto('/dashboard')
@@ -15,9 +16,14 @@
 
     const handleLogin = async () => {
         const result = await apiClient.post('/login', {email, password});
-        authUser.set(result.data.user);
-        localStorage.setItem('token', result.data.token);
-        await goto('/dashboard');
+        if (result.status === 200) {
+            authUser.set(result.data.user);
+            localStorage.setItem('token', result.data.token);
+            await goto('/dashboard');
+        } else {
+            password = '';
+            toast.error('Bad credentials');
+        }
     }
 </script>
 

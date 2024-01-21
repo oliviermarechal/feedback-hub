@@ -4,6 +4,7 @@ import { User } from '../../../../model';
 import { generateUuid } from '../../../../../adapters/secondary';
 import { EncrypterInterface } from '../../../../gateways/encrypter';
 import { JwtTokenGeneratorInterface } from '../../../../gateways/generator';
+import { EmailAlreadyUseException } from '../../../../exception';
 
 export class RegistrationUseCase {
     constructor(
@@ -15,6 +16,11 @@ export class RegistrationUseCase {
     async handle(
         command: RegistrationCommand,
     ): Promise<{ user: Partial<User>; token: string }> {
+        const exist = await this.userRepository.findByEmail(command.email);
+        if (exist) {
+            throw new EmailAlreadyUseException();
+        }
+
         const userData = User.create({
             id: generateUuid(),
             email: command.email,

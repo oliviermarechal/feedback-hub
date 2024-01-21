@@ -5,6 +5,7 @@
     import { Button } from '$lib/components/ui/button';
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
+    import {toast} from 'svelte-sonner';
 
     if ($authUser) {
         goto('/dashboard')
@@ -15,9 +16,17 @@
 
     const handleRegistration = async () => {
         const result = await apiClient.post('/registration', {email, password});
-        authUser.set(result.data.user);
-        localStorage.setItem('token', result.data.token);
-        await goto('/dashboard');
+        if (result.status === 201) {
+            authUser.set(result.data.user);
+            localStorage.setItem('token', result.data.token);
+            await goto('/onboarding');
+        } else {
+            if (Array.isArray(result.data.message)) {
+                toast.error(result.data.message.map((m) => Object.keys(m.constraints).map((k) => m.constraints[k]).join(', ')).join(', '));
+            } else {
+                toast.error(result.data.message);
+            }
+        }
     }
 </script>
 

@@ -7,6 +7,8 @@
 	import Icon from '@iconify/svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Drawer from '$lib/components/ui/drawer';
+	import {Button} from '$lib/components/ui/button';
+	import ToggleMode from '../../component/common/toggle-mode.svelte';
 
 	onMount(() => {
 		if ($projects?.length === 0) {
@@ -19,7 +21,16 @@
 </script>
 
 <div class="flex-1 space-y-4 p-8 pt-6">
-	<h2 class="text-3xl font-bold tracking-tight mt-2">Dashboard</h2>
+	<div class="flex flex-row justify-between align-middle">
+		<h2 class="text-3xl font-bold tracking-tight mt-2">Dashboard</h2>
+
+		<div class="flex flex-row space-x-2 align-middle">
+			<ToggleMode />
+			<Button variant="secondary" href="/documentation">
+				Documentation
+			</Button>
+		</div>
+	</div>
 	<div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
 		<Card.Root>
 			<Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -62,7 +73,12 @@
 							<button on:click={toggleDrawer}><Icon width="24" icon="zondicons:add-outline" /></button>
 						</Drawer.Trigger>
 						<Drawer.Content>
-							<AddProject onClose={() => toggleDrawer()} />
+							<div class="mx-auto w-full max-w-sm">
+								<Drawer.Header>
+									<Drawer.Title>Add project</Drawer.Title>
+								</Drawer.Header>
+								<AddProject onClose={() => toggleDrawer()} />
+							</div>
 						</Drawer.Content>
 					</Drawer.Root>
 				</Card.Title>

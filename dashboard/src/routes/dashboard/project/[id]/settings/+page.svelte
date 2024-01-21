@@ -10,6 +10,7 @@
     import {Label} from '$lib/components/ui/label';
     import {Input} from '$lib/components/ui/input';
     import * as Card from '$lib/components/ui/card';
+    import {toast} from 'svelte-sonner';
 
     let domainName: string = '';
     let domainError = writable<string>('');
@@ -26,21 +27,40 @@
 
     const handleAddDomain = () => {
         try {
-            const domain = new URL(domainName).host;
-            if (domain.length === 0) {
-                throw new Error('Invalid url');
+            if (domainName.startsWith('http://')) {
+                domainName = domainName.replace('http://', '');
             }
-            project.update(project => {
+
+            if (domainName.startsWith('https://')) {
+                domainName = domainName.replace('https://', '');
+            }
+
+            if (domainName.startsWith('www.')) {
+                domainName = domainName.replace('www.', '');
+            }
+
+            const domain = new URL(`https://${domainName}`).host;
+            if ($project?.domainNames.includes(domain)) {
+                toast.error('Domain already added');
+                domainName = '';
+                return;
+            }
+
+            project?.update(project => {
+                if (!project) {
+                    return;
+                }
+
                 project.domainNames = [
                     ...project.domainNames,
-                    domain
-                ]
-
+                    domain,
+                ];
                 return project;
             });
 
             domainName = '';
         } catch (e) {
+            toast.error('Invalid url');
             domainError.set('Invalid url');
             setTimeout(() => {
                 domainError.set('');
@@ -50,16 +70,18 @@
 
     const removeDomain = (name: string) => {
         project.update(project => {
-            project.domainNames = [
-                ...project.domainNames.filter(d => d !== name),
-            ]
+            if (project) {
+                project.domainNames = [
+                    ...project.domainNames.filter(d => d !== name),
+                ]
 
-            return project;
+                return project;
+            }
         });
     }
 
     const handleDeleteProject = async () => {
-        const response = await apiClient.delete(`/project/${$project.id}`);
+        const response = await apiClient.delete(`/project/${$project?.id}`);
 
         if (response.status === 204) {
             return goto('/dashboard');
@@ -67,13 +89,13 @@
     }
 
     const handleUpdateProject = async () => {
-        const response = await apiClient.put(`/project/${$project.id}`, {
-            name: $project.name,
-            domainNames: $project.domainNames
+        const response = await apiClient.put(`/project/${$project?.id}`, {
+            name: $project?.name,
+            domainNames: $project?.domainNames
         });
 
         if (response.status === 200) {
-            await goto(`/dashboard/project/${$project.id}`);
+            await goto(`/dashboard/project/${$project?.id}`);
             return;
         }
 

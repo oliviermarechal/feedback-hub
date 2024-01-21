@@ -8,17 +8,37 @@
     import { Button } from '$lib/components/ui/button';
     import {projects} from '../../stores/project.store';
     import { toast } from 'svelte-sonner';
+    import {Badge} from '$lib/components/ui/badge';
 
     let name: string;
     let domainNames = writable<string[]>([]);
     let domainName: string = '';
     let domainError = writable<string>('');
 
+    export let cancellable = true;
     export let onClose: () => any;
 
     const handleAddDomain = () => {
         try {
-            const domain = new URL(domainName).host;
+            if (domainName.startsWith('http://')) {
+                domainName = domainName.replace('http://', '');
+            }
+
+            if (domainName.startsWith('https://')) {
+                domainName = domainName.replace('https://', '');
+            }
+
+            if (domainName.startsWith('www.')) {
+                domainName = domainName.replace('www.', '');
+            }
+
+            const domain = new URL(`https://${domainName}`).host;
+            if ($domainNames.includes(domain)) {
+                toast.error('Domain already added');
+                domainName = '';
+                return;
+            }
+
             domainNames.update(domains => {
                 return [
                     ...domains,
@@ -61,36 +81,33 @@
     }
 </script>
 
-<div class="mx-auto w-full max-w-sm">
-    <Drawer.Header>
-        <Drawer.Title>Add project</Drawer.Title>
-    </Drawer.Header>
-    <div class="grid gap-4">
-        <div class="grid gap-2">
-            <Label for="project-name-input">Name</Label>
-            <Input class="input" id="project-name-input" bind:value={name} type="text" />
+
+<div class="grid gap-4">
+    <div class="grid gap-2">
+        <Label for="project-name-input">Name</Label>
+        <Input class="input" id="project-name-input" bind:value={name} type="text" />
+    </div>
+    <div class="grid gap-2">
+        <Label class="label">Allowed website</Label>
+        <div class="flex w-full max-w-sm mb-2 items-center input{$domainError.length > 0 ? '-error' : ''}">
+            <Input bind:value={domainName} type="text" placeholder="domain.fr"  />
+            <Button variant="outline" on:click={() => handleAddDomain()}><Icon icon="material-symbols:add" width="24" height="24" /></Button>
         </div>
-        <div class="grid gap-2">
-            <Label class="label">Allowed website</Label>
-            <div class="flex w-full max-w-sm mb-2 items-center input{$domainError.length > 0 ? '-error' : ''}">
-                <Input bind:value={domainName} type="text" placeholder="https://domain.fr"  />
-                <Button variant="outline" on:click={() => handleAddDomain()}><Icon icon="material-symbols:add" width="24" height="24" /></Button>
-            </div>
-            <ol>
-                {#each $domainNames as domain}
-                    <li class="flex flex-row justify-between px-2">
-                        <span>{domain}</span>
-                        <button type="button" on:click={() => removeDomain(domain)}><Icon icon="mdi:trash" width="24" height="24" /></button>
-                    </li>
-                {/each}
-            </ol>
-        </div>
-        <div class="grid gap-1">
-            <Button on:click={() => handleCreateProject()} type="button">Create</Button>
-        </div>
+        <ol>
+            {#each $domainNames as domain}
+                <li class="flex flex-row justify-between px-2">
+                    <Badge variant="secondary" class="px-2 py-1"><span>{domain}</span><button on:click={() => removeDomain(domain)}><Icon icon="raphael:cross" width="20" height="20" /></button></Badge>
+                </li>
+            {/each}
+        </ol>
+    </div>
+    <div class="grid gap-1">
+        <Button on:click={() => handleCreateProject()} type="button">Create</Button>
+    </div>
+    {#if cancellable}
         <div class="grid gap-1 mb-4">
             <Button on:click={() => onClose()} type="button" variant="outline">Cancel</Button>
         </div>
-    </div>
+    {/if}
 </div>
 

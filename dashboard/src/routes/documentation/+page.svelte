@@ -59,7 +59,7 @@
                         {/each}
                     </Select.Content>
                 </Select.Root>
-                <Button href="dashboard">
+                <Button variant="secondary" href="dashboard">
                     Dashboard
                 </Button>
             {:else}

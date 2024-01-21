@@ -3,6 +3,7 @@
     import * as Card from "$lib/components/ui/card";
     import Icon from '@iconify/svelte';
     import { authUser } from '../stores/user.store';
+    import ToggleMode from '../component/common/toggle-mode.svelte';
 
     const featureCards: {
         icon: string;
@@ -40,6 +41,7 @@
             </nav>
         </div>
         <div class="flex items-center justify-around space-x-2">
+            <ToggleMode />
             {#if $authUser}
                 <Button variant="secondary" href="dashboard">
                     Dashboard
@@ -47,6 +49,9 @@
             {:else}
                 <Button variant="secondary" href="auth/registration">
                     Sign up
+                </Button>
+                <Button href="auth/login">
+                    Sign in
                 </Button>
             {/if}
         </div>

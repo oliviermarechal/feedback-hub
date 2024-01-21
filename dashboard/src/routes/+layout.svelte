@@ -7,6 +7,7 @@
     import { PUBLIC_PROJECT_ID } from  '$env/static/public';
     import {authUser} from '../stores/user.store';
     import apiClient from '../api';
+    import { ModeWatcher } from "mode-watcher";
 
     onMount(async () => {
         await init({ projectApiKey: PUBLIC_PROJECT_ID });
@@ -31,4 +32,5 @@
 </script>
 
 <slot />
+<ModeWatcher defaultMode="light" />
 <Toaster />

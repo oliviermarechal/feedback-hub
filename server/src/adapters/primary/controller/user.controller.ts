@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    HttpCode,
+    Post,
+    UseGuards,
+} from '@nestjs/common';
 import {
     LoginCommand,
     LoginDto,
@@ -28,6 +35,7 @@ export class UserController {
     }
 
     @Post('login')
+    @HttpCode(200)
     async login(@Body() dto: LoginDto) {
         return this.loginUseCase.handle(
             new LoginCommand(dto.email, dto.password),
@@ -35,6 +43,7 @@ export class UserController {
     }
 
     @Get('me')
+    @HttpCode(200)
     @UseGuards(JwtGuard)
     async getUser(@CurrentUser() user: User) {
         return this.me.handle(user.id);
