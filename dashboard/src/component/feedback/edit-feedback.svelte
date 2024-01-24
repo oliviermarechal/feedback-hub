@@ -10,6 +10,7 @@
     import { Textarea } from '$lib/components/ui/textarea';
     import { Input } from '$lib/components/ui/input';
     import { Badge } from '$lib/components/ui/badge';
+    import {Separator} from '$lib/components/ui/separator';
 
     export let feedback: Feedback;
     export let open: boolean = false;
@@ -73,22 +74,45 @@
         }
     }
 </script>
-
+<style>
+    .font-9 {
+        font-size: 0.9rem;
+    }
+</style>
 {#if feedback}
     <Modal open={open} close={onClose}>
         <span class='w-full text-center' slot='header'><h3 class='h3'>Feedback</h3></span>
         <div slot='body' class='p-5'>
-            <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Details</h4>
-            <div class="flex flex-row justify-between"><span>From</span> <span>{#if feedback.author} {feedback.author?.email}{:else} unknown {/if}</span></div>
-            {#if feedback.type === FeedbackType.Bug}
-                <div class="flex flex-row justify-between"><span>url</span> <span>{feedback.url}</span></div>
-                <div class="flex flex-row justify-between"><span>os</span> <span>{feedback.os}</span></div>
-                <div class="flex flex-row justify-between"><span>engine</span> <span>{feedback.engine}</span></div>
-                <div class="flex flex-row justify-between"><span>language</span> <span>{feedback.language}</span></div>
-                <div class="flex flex-row justify-between"><span>browser</span> <span>{feedback.browser}</span></div>
-            {/if}
-            <div class="grid gap-4 py-4">
-                <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Content</h4>
+            <h4 class="mb-4 text-xl font-bold tracking-tight">Details</h4>
+            <div class="space-y-2">
+                <div class="flex flex-row items-center">
+                    <span class="font-semibold w-1/5">From</span> <span class="font-9 text-muted-foreground w-4/5">{#if feedback.author} {feedback.author?.email}{:else} unknown {/if}</span>
+                </div>
+                {#if feedback.type === FeedbackType.Bug}
+                    <div class="flex flex-row items-center">
+                        <span class="font-semibold w-1/5">URL</span> <span class="font-9 text-muted-foreground w-4/5">{feedback.url}</span>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <div class="flex flex-row items-center">
+                            <span class="font-semibold w-1/2">Language</span> <span class="font-9 text-muted-foreground w-1/2">{feedback.language}</span>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <span class="font-semibold w-1/2">Browser</span> <span class="font-9 text-muted-foreground w-1/2">{feedback.browser}</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <div class="flex flex-row items-center">
+                            <span class="font-semibold w-1/2">Os</span> <span class="font-9 text-muted-foreground w-1/2">{feedback.os}</span>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <span class="font-semibold w-1/2">Engine</span> <span class="font-9 text-muted-foreground w-1/2">{feedback.engine}</span>
+                        </div>
+                    </div>
+                {/if}
+            </div>
+            <Separator orientation="horizontal" class="my-4" />
+            <div class="space-y-3">
+                <h4 class="mb-3 text-xl font-bold tracking-tight">Content</h4>
                 {#if editContent}
                     <div class="items-center gap-4">
                         <Textarea bind:value={feedback.content} on:keypress={handleKeypressContentInput} />
@@ -106,6 +130,7 @@
                         {/if}
                     </div>
                 {/if}
+                <Separator orientation="horizontal" class="my-4" />
                 <div class="items-center gap-4">
                     <Label>Tags</Label>
                     <Input class="input" bind:value={tagTerm} on:input={handleChangeTagInput} on:keydown={handleTagKeydown} autocomplete={'true'} />

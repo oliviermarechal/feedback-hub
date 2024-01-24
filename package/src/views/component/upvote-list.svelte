@@ -4,6 +4,7 @@
     import {Feedback} from '../../types/feedback';
     import * as Table from '$lib/components/ui/table';
     import PoweredEmber from './powered.svelte';
+    import {locale, t} from '$lib/i18n/i18n';
 
     export let sdk: InsightHuntSDK;
     export let displayPowered = true;
@@ -49,15 +50,15 @@
         <Table.Root>
             <Table.Header>
                 <Table.Row>
-                    <Table.Head class="text-center">Date</Table.Head>
-                    <Table.Head class="text-center">Content</Table.Head>
-                    <Table.Head class="text-center">Vote</Table.Head>
+                    <Table.Head class="text-center">{t('date')}</Table.Head>
+                    <Table.Head class="text-center">{t('content')}</Table.Head>
+                    <Table.Head class="text-center">{t('vote')}</Table.Head>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
                 {#each feedbacks as feedback (feedback.id)}
                     <Table.Row>
-                        <Table.Cell>{(new Date(feedback.createdAt)).toLocaleDateString()}</Table.Cell>
+                        <Table.Cell>{(new Date(feedback.createdAt)).toLocaleDateString($locale)}</Table.Cell>
                         <Table.Cell>{feedback.content}</Table.Cell>
                         <Table.Cell class="flex flex-col justify-center">
                             <span class="flex flex-row justify-center">

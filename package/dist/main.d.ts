@@ -1,7 +1,9 @@
 import { IHUser } from './sdk';
 export * from './sdk';
+export type SupportedLanguage = 'en' | 'fr';
 export interface IHSdkConfiguration {
     projectApiKey: string;
+    language?: SupportedLanguage;
 }
 export declare function init(config: IHSdkConfiguration): Promise<void>;
 export declare function setUpFeedbackContainer(): void;

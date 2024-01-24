@@ -7,6 +7,7 @@
     import * as Card from "$lib/components/ui/card";
     import '../app.pcss';
     import PoweredEmber from './component/powered.svelte';
+    import {t} from '$lib/i18n/i18n';
 
     export let sdk: InsightHuntSDK;
     let embedContainerOpen = false;
@@ -34,8 +35,8 @@
         {#if embedContainerOpen}
             <div in:fly={{ x: 100, duration: 500 }}>
                 <Card.Content class="flex-col flex p-4">
-                    <Button on:click={toggleFeedbackModal} type="button" class="py-2 px-4 mt-4 mx-4">Add feedback</Button>
-                    <Button on:click={toggleUpvoteModal} type="button" class="py-2 px-4 mt-4 mx-4">upvote</Button>
+                    <Button on:click={toggleFeedbackModal} type="button" class="py-2 px-4 mt-4 mx-4">{t('add_feedback')}</Button>
+                    <Button on:click={toggleUpvoteModal} type="button" class="py-2 px-4 mt-4 mx-4">{t('upvote')}</Button>
                 </Card.Content>
             </div>
             <Card.Footer>
@@ -60,13 +61,5 @@
         @apply mb-2 block;
         writing-mode: vertical-rl;
         text-orientation: upright;
-    }
-
-    .ih-item {
-        @apply py-2 px-4 mt-4 mx-4;
-    }
-
-    .ih-action-container {
-        @apply flex flex-col;
     }
 </style>

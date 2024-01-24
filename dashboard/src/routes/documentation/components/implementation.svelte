@@ -17,7 +17,8 @@
 // import style if you want to use default style
 import 'insight-hunt/dist/bundle.css';
 
-await init({ projectApiKey: '${$project?.apiKey || 'YourProjectApiKey'}' });
+// Language is optional, default is 'en'. Available values are 'en' and 'fr'.
+await init({ projectApiKey: '${$project?.apiKey || 'YourProjectApiKey'}', language: 'en' });
 setUpFeedbackContainer();
 `} />
         <h5 class="mt-4">Custom implementation</h5>
