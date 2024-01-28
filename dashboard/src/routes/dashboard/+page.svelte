@@ -37,10 +37,10 @@
 				<Card.Title class="text-sm font-medium">Total feedbacks</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<div class="text-2xl font-bold">109 274</div>
-				<p class="text-xs text-muted-foreground">
+				<div class="text-2xl font-bold">...</div>
+				<!--<p class="text-xs text-muted-foreground">
 					+180.1% from last month
-				</p>
+				</p>-->
 			</Card.Content>
 		</Card.Root>
 		<Card.Root>
@@ -48,7 +48,7 @@
 				<Card.Title class="text-sm font-medium">Feedbacks in upvote</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<div class="text-2xl font-bold">24</div>
+				<div class="text-2xl font-bold">...</div>
 			</Card.Content>
 		</Card.Root>
 		<Card.Root>
@@ -56,10 +56,10 @@
 				<Card.Title class="text-sm font-medium">Total votes</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<div class="text-2xl font-bold">436</div>
-				<p class="text-xs text-muted-foreground">
+				<div class="text-2xl font-bold">...</div>
+				<!--<p class="text-xs text-muted-foreground">
 					+180.1% from last month
-				</p>
+				</p>-->
 			</Card.Content>
 		</Card.Root>
 	</div>

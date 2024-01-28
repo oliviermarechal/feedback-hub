@@ -29,6 +29,12 @@
     {@html atomOneDark}
 </svelte:head>
 
+<style>
+    .w-45rem {
+        width: 45rem;
+    }
+</style>
+
 <div class="container relative h-[800px] flex-col items-center justify-center lg:max-w-none">
 </div>
 <Modal
@@ -40,7 +46,7 @@
 >
     <div slot="header">
     </div>
-    <div slot="body">
+    <div slot="body" class="w-45rem">
         {#if step === 0}
             <div>
                 <p class="text-xl">Welcome to our platform!</p>
@@ -73,7 +79,7 @@
             </div>
         {/if}
     </div>
-    <div slot="footer" class="flex flex-row justify-end space-x-2">
+    <div slot="footer" class="flex flex-row justify-end space-x-2 w-45rem">
         {#if step === 3}
             <Button variant="secondary" on:click={previous}>Previous</Button>
             <Button on:click={goToDashboard}>Dashboard</Button>

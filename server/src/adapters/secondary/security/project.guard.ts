@@ -34,8 +34,6 @@ export class ProjectGuard implements CanActivate {
         }
 
         const domain = new URL(request.headers.origin).host.replace('www.', '');
-        console.log('domain');
-        console.log(domain);
         if (!project.domainNames.includes(domain)) {
             throw new ForbiddenException();
         }

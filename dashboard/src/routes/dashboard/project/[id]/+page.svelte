@@ -68,7 +68,7 @@
     <Tabs.Root value="feedbacks" class="h-full space-y-6">
         <Tabs.List>
             <Tabs.Trigger value="feedbacks">Feedbacks</Tabs.Trigger>
-            <Tabs.Trigger value="voting">Voting feedbacks</Tabs.Trigger>
+            <Tabs.Trigger value="voting">Upvote</Tabs.Trigger>
             <Tabs.Trigger value="board" disabled>Public board <small>(coming soon...)</small></Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="feedbacks">

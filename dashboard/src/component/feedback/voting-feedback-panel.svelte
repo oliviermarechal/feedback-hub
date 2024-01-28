@@ -60,6 +60,11 @@
     }
 </script>
 
+<Card.Root class="mb-5">
+    <Card.Content class="p-3">
+        <p>You can manage the feedback submitted for upvoting</p>
+    </Card.Content>
+</Card.Root>
 <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
     <Card.Root>
         <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">

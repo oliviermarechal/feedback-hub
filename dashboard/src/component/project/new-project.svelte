@@ -77,7 +77,7 @@
             return;
         }
 
-        toast.error(result.data.message.map((m) => Object.keys(m.constraints).map((k) => m.constraints[k]).join(', ')).join(', '));
+        toast.error(result.data.message.map((m: any) => Object.keys(m.constraints).map((k) => m.constraints[k]).join(', ')).join(', '));
     }
 </script>
 
@@ -89,6 +89,7 @@
     </div>
     <div class="grid gap-2">
         <Label class="label">Allowed website</Label>
+        <small>You can add <i>localhost:xxxx</i> for local testing</small>
         <div class="flex w-full max-w-sm mb-2 items-center input{$domainError.length > 0 ? '-error' : ''}">
             <Input bind:value={domainName} type="text" placeholder="domain.fr"  />
             <Button variant="outline" on:click={() => handleAddDomain()}><Icon icon="material-symbols:add" width="24" height="24" /></Button>

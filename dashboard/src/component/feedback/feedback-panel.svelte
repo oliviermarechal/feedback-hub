@@ -89,6 +89,11 @@
     }
 </script>
 
+<Card.Root class="mb-5">
+    <Card.Content class="p-3">
+        <p>You can manage all your feedbacks here! show details, send to upvote, edit, delete...</p>
+    </Card.Content>
+</Card.Root>
 <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
     <Card.Root>
         <Card.Header class="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -96,9 +101,9 @@
         </Card.Header>
         <Card.Content>
             <div class="text-2xl font-bold">{$newFeedbacks.feedbacks?.length}</div>
-            <p class="text-xs text-muted-foreground">
+            <!--<p class="text-xs text-muted-foreground">
                 +180.1% from last month
-            </p>
+            </p>-->
         </Card.Content>
     </Card.Root>
     <Card.Root>
