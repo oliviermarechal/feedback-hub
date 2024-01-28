@@ -1,6 +1,6 @@
 {
   "name": "insight-hunt",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "types": "dist/main.d.ts",
   "files": [
     "/dist"

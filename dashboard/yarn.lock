@@ -1035,10 +1035,10 @@ inherits@2:
   resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-insight-hunt@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/insight-hunt/-/insight-hunt-0.0.8.tgz#75f818f59a43355bf4b0d5d79148f2d49b6bf876"
-  integrity sha512-+ejQjvnlYIyQcojJb4bsKZQYhbxsMYbG1RFnLLV8y5q4U3WPdELMjvBViloJUgEqoG+kp/PSq3wY6obeGbi4vQ==
+insight-hunt@0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/insight-hunt/-/insight-hunt-0.0.10.tgz#ad8490ec6f9fe01aeecd9cd1ae2b78809662eaba"
+  integrity sha512-MBIr2BTMu5eVpG8uBGhXZMvgzV/SDw1ggAarjQXId+pig1YFPDnF5AhMIvCQpufruey0MMN5WxmCwsp5IVrZ8A==
   dependencies:
     "@rollup/plugin-commonjs" "^25.0.7"
     "@rollup/plugin-node-resolve" "^15.2.3"

@@ -46,7 +46,7 @@
     }
 </script>
 <div class="space-y-4">
-    <div class="rounded-md border bg-white">
+    <div class="rounded-md border">
         <Table.Root>
             <Table.Header>
                 <Table.Row>
