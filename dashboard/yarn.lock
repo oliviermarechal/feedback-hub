@@ -572,10 +572,10 @@ bits-ui@^0.13.3:
     "@melt-ui/svelte" "0.67.0"
     nanoid "^5.0.4"
 
-bits-ui@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.npmjs.org/bits-ui/-/bits-ui-0.14.0.tgz"
-  integrity sha512-S1LNwp/Sge1Ro1g0iJ+msIUeJYmoNhXBFShnLDOUOKQe3JG1wd027KxZnVd7db6UWr1IqlJdd4/bbB7NYXeYDw==
+bits-ui@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/bits-ui/-/bits-ui-0.16.0.tgz#263ceb70926f9cf9c1d3b7c5945c74f2ed7d629a"
+  integrity sha512-HEkuVDyUG9dTWtKujKpdDsGOe9GRmuYOEF9yGbjVwNazxMQDQa9deUX8vM3ofGBWaJgr1cEu88p38kP5Z5gQ8w==
   dependencies:
     "@internationalized/date" "^3.5.1"
     "@melt-ui/svelte" "0.68.0"

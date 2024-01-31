@@ -1,9 +1,8 @@
 <script lang="ts">
+    import Header from './header.svelte';
     import { Button } from "$lib/components/ui/button";
     import * as Card from "$lib/components/ui/card";
     import Icon from '@iconify/svelte';
-    import { authUser } from '../stores/user.store';
-    import ToggleMode from '../component/common/toggle-mode.svelte';
 
     const featureCards: {
         icon: string;
@@ -28,43 +27,15 @@
     ]
 </script>
 
-<header class="container z-40 bg-background">
-    <div class="flex h-20 items-center justify-between py-6">
-        <div class="flex gap-6 md:gap-10">
-            <a href="/" class="items-center space-x-2 md:flex">
-                <span class="font-bold sm:inline-block">Insight hunt</span>
-            </a>
-            <nav class="gap-6 md:flex">
-                <a href="documentation" class="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm text-foreground/60">
-                    Documentation
-                </a>
-            </nav>
-        </div>
-        <div class="flex items-center justify-around space-x-2">
-            <ToggleMode />
-            {#if $authUser}
-                <Button variant="secondary" href="dashboard">
-                    Dashboard
-                </Button>
-            {:else}
-                <Button variant="secondary" href="auth/registration">
-                    Sign up
-                </Button>
-                <Button href="auth/login">
-                    Sign in
-                </Button>
-            {/if}
-        </div>
-    </div>
-</header>
-<section class="container flex flex-col gap-4 pb-12 pt-4 text-center lg:items-center lg:gap-8 lg:py-20">
+<Header />
+<section class="container flex flex-col gap-4 pb-12 pt-4 text-center lg:items-center lg:gap-8 lg:py-20 max-w-screen-md">
     <div class="flex flex-1 flex-col items-center gap-4 text-center lg:gap-8 mb-8">
         <div class="flex flex-col space-y-4">
             <h2 class="text-5xl font-bold tracking-tight">
-                Evolve your products with user feedback
+                Convert user insights into actionable features.
             </h2>
             <span class="text-xl font-light text-muted-foreground">
-                Collect user feedback. Submits feedback to upvote. Build roadmap.
+                Efficiently collect and analyze feedback, while leveraging in-app upvoting to ensure you're delivering the features your users truly desire.
             </span>
         </div>
         <Button href="auth/registration" class='w-[10rem]'>
@@ -81,15 +52,15 @@
     </div>
 </section>
 
-<section class="bg-slate-50 dark:bg-slate-900">
-    <div class="py-12 flex flex-row px-20">
+<section class="flex flex-col items-center bg-slate-50 dark:bg-slate-900">
+    <div class="py-12 flex flex-row px-20 space-x-12">
         <img
             class="rounded-xl"
             src='image/implement.png'
             width={500}
             alt="Install"
         />
-        <div class="flex flex-col justify-start mt-16 ml-4">
+        <div class="flex flex-col justify-start mt-16">
             <span class="text-3xl font-bold text-primary">
                 Quick and easy installation
             </span>
@@ -102,9 +73,9 @@
     </div>
 </section>
 
-<section class="container space-y-8 py-12 lg:py-20" id="features">
-    <div class="flex flex-row px-20">
-        <div class="flex flex-col justify-start mt-16 mr-6">
+<section class="flex flex-col items-center space-y-8 py-12 lg:py-20" id="features">
+    <div class="flex flex-row px-20 space-x-12">
+        <div class="flex flex-col justify-start mt-16">
             <span class="text-3xl font-bold text-primary">
                 Simple form for your users
             </span>
@@ -123,15 +94,15 @@
     </div>
 </section>
 
-<section class="bg-slate-50 dark:bg-slate-900">
-    <div class="py-12 flex flex-row px-20">
+<section class="flex flex-col items-center bg-slate-50 dark:bg-slate-900">
+    <div class="py-12 flex flex-row px-20 space-x-12">
         <img
                 class="rounded-xl"
                 src='image/upvote.png'
                 width={500}
                 alt="Install"
         />
-        <div class="flex flex-col justify-start mt-16 ml-4">
+        <div class="flex flex-col justify-start mt-16">
             <span class="text-3xl font-bold text-primary">
                 Upvote
             </span>
