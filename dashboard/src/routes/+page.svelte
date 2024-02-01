@@ -61,7 +61,7 @@
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 px-20">
         <Card.Root class="flex flex-grow flex-col items-start gap-4 p-8">
             <div class="flex justify-center w-full">
-                <Icon icon="heroicons:user-group-solid" width="72" height="72" color="#5e61e4" />
+                <Icon icon="heroicons:user-group-solid" width="54" height="54" color="#5e61e4" />
             </div>
             <div class="space-y-6">
                 <Card.Title class="text-center">User Empowerment</Card.Title>
@@ -73,7 +73,7 @@
         </Card.Root>
         <Card.Root class="flex flex-grow flex-col items-start gap-4 p-8">
             <div class="flex justify-center w-full">
-                <Icon icon="heroicons:list-bullet-16-solid" width="72" height="72" color="#5e61e4" />
+                <Icon icon="heroicons:list-bullet-16-solid" width="54" height="54" color="#5e61e4" />
             </div>
             <div class="space-y-6">
                 <Card.Title class="text-center">Feature Prioritization</Card.Title>
@@ -84,7 +84,7 @@
         </Card.Root>
         <Card.Root class="flex flex-grow flex-col items-start gap-4 p-8">
             <div class="flex justify-center w-full">
-                <Icon icon="heroicons:arrow-trending-up-solid" width="72" height="72" color="#5e61e4" />
+                <Icon icon="heroicons:arrow-trending-up-solid" width="54" height="54" color="#5e61e4" />
             </div>
             <div class="space-y-6">
                 <Card.Title class="text-center">Increase engagement</Card.Title>
