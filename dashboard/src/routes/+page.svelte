@@ -32,7 +32,7 @@
     <div class="flex flex-1 flex-col items-center gap-4 text-center lg:gap-8 mb-8">
         <div class="flex flex-col space-y-4">
             <h2 class="text-5xl font-bold tracking-tight">
-                Convert user insights into actionable features.
+                Build the product offer people can't say no to
             </h2>
             <span class="text-xl font-light text-muted-foreground">
                 Efficiently collect and analyze feedback, while leveraging in-app upvoting to ensure you're delivering the features your users truly desire.
@@ -52,7 +52,52 @@
     </div>
 </section>
 
-<section class="flex flex-col items-center bg-slate-50 dark:bg-slate-900">
+<section class="flex flex-col items-center bg-slate-50 dark:bg-slate-900 space-y-8 py-12 lg:py-20">
+    <div class='space-y-2'>
+        <h1 class="text-3xl font-bold text-primary lg:text-4xl">
+            Why Insight Hunt ?
+        </h1>
+    </div>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 px-20">
+        <Card.Root class="flex flex-grow flex-col items-start gap-4 p-8">
+            <div class="flex justify-center w-full">
+                <Icon icon="heroicons:user-group-solid" width="72" height="72" color="#5e61e4" />
+            </div>
+            <div class="space-y-6">
+                <Card.Title class="text-center">User Empowerment</Card.Title>
+                <Card.Content class="text-center">
+                    Insight Hunt gives your users the power to actively contribute to the development of your product.
+                    This creates a sense of belonging and involvement, strengthening the relationship between you and your users.
+                </Card.Content>
+            </div>
+        </Card.Root>
+        <Card.Root class="flex flex-grow flex-col items-start gap-4 p-8">
+            <div class="flex justify-center w-full">
+                <Icon icon="heroicons:list-bullet-16-solid" width="72" height="72" color="#5e61e4" />
+            </div>
+            <div class="space-y-6">
+                <Card.Title class="text-center">Feature Prioritization</Card.Title>
+                <Card.Content class="text-center">
+                    Insight Hunt makes it simple to identify expected features and shine a light on priorities, ensuring your resources are directed toward user-desired improvements.
+                </Card.Content>
+            </div>
+        </Card.Root>
+        <Card.Root class="flex flex-grow flex-col items-start gap-4 p-8">
+            <div class="flex justify-center w-full">
+                <Icon icon="heroicons:arrow-trending-up-solid" width="72" height="72" color="#5e61e4" />
+            </div>
+            <div class="space-y-6">
+                <Card.Title class="text-center">Increase engagement</Card.Title>
+                <Card.Content class="text-center">
+                    Significantly increase the participation rate by integrating comments and upvoting into the application.
+                    Insight Hunt ensures continuous engagement, which results in a constant flow of valuable information.
+                </Card.Content>
+            </div>
+        </Card.Root>
+    </div>
+</section>
+
+<section class="flex flex-col items-center">
     <div class="py-12 flex flex-row px-20 space-x-12">
         <img
             class="rounded-xl"
@@ -73,7 +118,7 @@
     </div>
 </section>
 
-<section class="flex flex-col items-center space-y-8 py-12 lg:py-20" id="features">
+<section class="flex flex-col items-center space-y-8 py-12 lg:py-20 bg-slate-50 dark:bg-slate-900">
     <div class="flex flex-row px-20 space-x-12">
         <div class="flex flex-col justify-start mt-16">
             <span class="text-3xl font-bold text-primary">
@@ -94,7 +139,7 @@
     </div>
 </section>
 
-<section class="flex flex-col items-center bg-slate-50 dark:bg-slate-900">
+<section class="flex flex-col items-center">
     <div class="py-12 flex flex-row px-20 space-x-12">
         <img
                 class="rounded-xl"
@@ -115,16 +160,16 @@
     </div>
 </section>
 
-<section class="container space-y-8 py-12 text-center lg:py-20">
+<section class="container space-y-8 py-12 text-center lg:py-20 bg-slate-50 dark:bg-slate-900">
     <div class='space-y-2'>
         <h1 class="text-3xl font-bold text-primary lg:text-4xl">
             Features
         </h1>
     </div>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 px-20 ">
         {#each featureCards as cards}
             <Card.Root
-                class="flex flex-grow flex-col items-center justify-between gap-4 p-8 bg-slate-50 dark:bg-slate-900"
+                class="flex flex-grow flex-col items-center justify-between gap-4 p-8"
             >
                 <div class="flex">
                     <Icon icon={cards.icon} class="h-[2rem] w-[2rem]" color="#5e61e4" />
@@ -138,7 +183,7 @@
     </div>
 </section>
 
-<section class="bg-slate-50 dark:bg-slate-900">
+<section class="container space-y-8 py-12 text-center lg:py-20">
     <div class="py-12 flex flex-row justify-around px-20 w-full align-middle">
         <div class="text-xl w-1/2">
             You'll have unlimited time to explore Insight Hunt. It's free to use for as long as you want.
