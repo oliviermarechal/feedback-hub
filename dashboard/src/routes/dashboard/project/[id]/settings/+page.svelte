@@ -3,6 +3,7 @@
     import {goto} from '$app/navigation';
     import {onMount} from 'svelte';
     import apiClient from '../../../../../api';
+    import ConfirmationDialog from '../../../../../component/common/confirm-dialog.svelte';
     import {project} from '../../../../../stores/project.store';
     import {page} from '$app/stores';
     import Icon from '@iconify/svelte';
@@ -14,6 +15,12 @@
 
     let domainName: string = '';
     let domainError = writable<string>('');
+    let openDropProjectConfirmationDialog = false;
+
+    const toggleDropProjectConfirmationDialog = () => {
+        console.log('passe');
+        openDropProjectConfirmationDialog = !openDropProjectConfirmationDialog;
+    }
 
     const id: string = $page.params.id;
 
@@ -146,11 +153,17 @@
                     </Card.Content>
                     <Card.Footer>
                         <Button on:click={() => handleUpdateProject()} type="button">Update</Button>
-                        <Button class="ml-4" variant="destructive" on:click={() => handleDeleteProject()} type="button">Delete project</Button>
+                        <Button class="ml-4" variant="destructive" on:click={() => toggleDropProjectConfirmationDialog()} type="button">Delete project</Button>
                     </Card.Footer>
                 </Card.Root>
             </div>
         </div>
     </div>
 {/if}
+<ConfirmationDialog
+    open={openDropProjectConfirmationDialog}
+    description="Do you want to permanently delete this project and all associated feedback ?"
+    onClose={toggleDropProjectConfirmationDialog}
+    onValid={handleDeleteProject}
+/>
 

@@ -37,7 +37,7 @@
     "@internationalized/date": "^3.5.1",
     "@sveltejs/adapter-node": "^1.0.0-next.106",
     "axios": "^1.6.0",
-    "bits-ui": "^0.16.0",
+    "bits-ui": "^0.17.0",
     "clsx": "^2.1.0",
     "insight-hunt": "0.0.10",
     "lucide-svelte": "^0.306.0",

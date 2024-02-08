@@ -9,6 +9,7 @@
     <div class="flex h-20 items-center justify-between py-6">
         <div class="flex gap-6 md:gap-10">
             <a href="/" class="items-center space-x-2 md:flex">
+                <img src="image/logo.png" width="64" alt="logo" />
                 <span class="font-bold sm:inline-block">Insight hunt</span>
                 <Icon icon="clarity:beta-solid" width="46" height="46" />
             </a>

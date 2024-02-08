@@ -5,7 +5,8 @@
     import { Button } from '$lib/components/ui/button';
     import { Input } from '$lib/components/ui/input';
     import { Label } from '$lib/components/ui/label';
-    import {toast} from 'svelte-sonner';
+    import { AlertCircle } from "lucide-svelte";
+    import * as Alert from "$lib/components/ui/alert";
 
     if ($authUser) {
         goto('/dashboard')
@@ -13,6 +14,14 @@
 
     let email: string;
     let password: string;
+    let badCredError = false;
+
+    const handleBadCredError = () => {
+        badCredError = true;
+        setTimeout(() => {
+            badCredError = false;
+        }, 3000);
+    }
 
     const handleLogin = async () => {
         const result = await apiClient.post('/login', {email, password});
@@ -21,8 +30,8 @@
             localStorage.setItem('token', result.data.token);
             await goto('/dashboard');
         } else {
+            handleBadCredError();
             password = '';
-            toast.error('Bad credentials');
         }
     }
 </script>
@@ -58,6 +67,13 @@
                         bind:value={password}
                     />
                 </div>
+                {#if badCredError}
+                    <Alert.Root variant="destructive">
+                        <AlertCircle class="h-4 w-4" />
+                        <Alert.Title>Error</Alert.Title>
+                        <Alert.Description>Bad credential</Alert.Description>
+                    </Alert.Root>
+                {/if}
                 <Button type="button" on:click={handleLogin}>Login</Button>
             </div>
         </form>

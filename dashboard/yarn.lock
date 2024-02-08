@@ -258,10 +258,10 @@
     focus-trap "^7.5.2"
     nanoid "^4.0.2"
 
-"@melt-ui/svelte@0.68.0":
-  version "0.68.0"
-  resolved "https://registry.npmjs.org/@melt-ui/svelte/-/svelte-0.68.0.tgz"
-  integrity sha512-/QvA98hnYEodZtHJ71+ocum/WWp30hVNt3F8uiZKnNYwZDaiQYjlyR9AaGKYcZLCe6R68op1mfCzc0kTzJilyA==
+"@melt-ui/svelte@0.71.2":
+  version "0.71.2"
+  resolved "https://registry.yarnpkg.com/@melt-ui/svelte/-/svelte-0.71.2.tgz#82c51e94578362ec28e95c301a2fe4582b046835"
+  integrity sha512-GDUErhAphEoEOLpcBjQ84BgzRR6M3344fQE4QYFffwT7aedWak7CvNsECgeig1Y5xvfDmeEaFnGlOQXIBucJYw==
   dependencies:
     "@floating-ui/core" "^1.3.1"
     "@floating-ui/dom" "^1.4.5"
@@ -572,13 +572,13 @@ bits-ui@^0.13.3:
     "@melt-ui/svelte" "0.67.0"
     nanoid "^5.0.4"
 
-bits-ui@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/bits-ui/-/bits-ui-0.16.0.tgz#263ceb70926f9cf9c1d3b7c5945c74f2ed7d629a"
-  integrity sha512-HEkuVDyUG9dTWtKujKpdDsGOe9GRmuYOEF9yGbjVwNazxMQDQa9deUX8vM3ofGBWaJgr1cEu88p38kP5Z5gQ8w==
+bits-ui@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/bits-ui/-/bits-ui-0.17.0.tgz#b252e72eae6696ff2c8c627cce7815a9241e1d2f"
+  integrity sha512-K73jjco1qPmvGXMQtTkZG6K36UmNrPR21u+C1jzoRWmF3NnUfDP4hPJnAci0LosUycfvOxtaHB1M4awvLvQXyQ==
   dependencies:
     "@internationalized/date" "^3.5.1"
-    "@melt-ui/svelte" "0.68.0"
+    "@melt-ui/svelte" "0.71.2"
     nanoid "^5.0.4"
 
 brace-expansion@^1.1.7:

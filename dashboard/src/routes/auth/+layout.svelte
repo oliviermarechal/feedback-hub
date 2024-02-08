@@ -6,7 +6,7 @@
 </script>
 
 <div
-    class="container relative h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+    class="relative min-h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
 >
     {#if $page.url.pathname === '/auth/login'}
         <Button
