@@ -12,6 +12,7 @@ import { FeedbackToUpvoteUseCase } from './feedback-to-upvote';
 import { UpdateFeedbackContentUseCase } from './update-feedback-content';
 import { UpvoteUseCase } from './upvote';
 import { DeleteFeedbackUseCase } from './delete-feedback';
+import { FileStorageInterface } from '../../../gateways/storage';
 
 export * from './create-feedback';
 export * from './add-tag';
@@ -26,15 +27,18 @@ export const FeedbackCommandUseCases: Provider[] = [
         inject: [
             FeedbackRepositoryInterface,
             ProjectCustomerRepositoryInterface,
+            FileStorageInterface,
         ],
         provide: CreateFeedbackUseCase,
         useFactory: (
             feedbackRepository: FeedbackRepositoryInterface,
             projectCustomerRepository: ProjectCustomerRepositoryInterface,
+            fileStorage: FileStorageInterface,
         ) => {
             return new CreateFeedbackUseCase(
                 feedbackRepository,
                 projectCustomerRepository,
+                fileStorage,
             );
         },
     },

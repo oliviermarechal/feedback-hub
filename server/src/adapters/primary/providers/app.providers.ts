@@ -5,8 +5,9 @@ import {
     Argon2Encrypter,
     ProjectGuard,
     JwtTokenGenerator,
+    StorageProviders,
+    RepositoriesProviders,
 } from '../../secondary';
-import { RepositoriesProviders } from '../../secondary/repositories';
 import { JwtTokenGeneratorInterface } from '../../../hexagon/gateways/generator';
 import { EncrypterInterface } from '../../../hexagon/gateways/encrypter';
 import { JwtService } from '@nestjs/jwt';
@@ -15,6 +16,7 @@ export const AppProviders: Provider[] = [
     ...CommandUseCases,
     ...QueryUseCases,
     ...RepositoriesProviders,
+    ...StorageProviders,
     {
         provide: EncrypterInterface,
         useClass: Argon2Encrypter,

@@ -5,11 +5,13 @@ import {
     FeedbackRepositoryInterface,
     ProjectCustomerRepositoryInterface,
 } from '../../../../gateways/repository';
+import { FileStorageInterface } from '../../../../gateways/storage';
 
 export class CreateFeedbackUseCase {
     constructor(
         private readonly feedbackRepository: FeedbackRepositoryInterface,
         private readonly projectCustomerRepository: ProjectCustomerRepositoryInterface,
+        private readonly fileStorage: FileStorageInterface,
     ) {}
 
     async handle(command: CreateFeedbackCommand) {
@@ -43,6 +45,11 @@ export class CreateFeedbackUseCase {
             }
 
             author = await this.projectCustomerRepository.save(author);
+        }
+
+        if (command.file) {
+            const filePath = await this.fileStorage.uploadFile(command.file);
+            // Add file path to feedback;
         }
 
         return this.feedbackRepository.save(

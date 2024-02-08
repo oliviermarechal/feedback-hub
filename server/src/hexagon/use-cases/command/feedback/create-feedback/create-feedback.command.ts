@@ -17,5 +17,6 @@ export class CreateFeedbackCommand {
         public readonly browser?: string,
         public readonly url?: string,
         public readonly status?: FeedbackStatus,
+        public readonly file?: Express.Multer.File,
     ) {}
 }
